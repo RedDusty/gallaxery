@@ -1,0 +1,86 @@
+.SideBar {
+  position: fixed;
+  background: var(--mainBg);
+  border-right: 4px solid var(--border1);
+  min-width: 250px;
+  height: 100vh;
+  overflow: auto;
+  grid-area: sideBarSection;
+}
+
+.searchSection {
+  margin: 5px;
+  .searchPanel {
+    display: flex;
+    .inputSearchDiv {
+      width: 240px;
+      background: var(--inputBg);
+      border-radius: 15px;
+      display: grid;
+      grid-template-columns: 210px 20px;
+      grid-template-rows: 1fr;
+      gap: 0px 0px;
+      grid-template-areas: "edit button";
+      align-items: center;
+      .inputSearchEdit {
+        grid-area: edit;
+        background: none;
+        max-width: 210px;
+        max-height: 100px;
+        margin: 5px;
+        text-align: left;
+        border: none;
+        outline: none;
+        overflow-y: auto;
+        overflow-x: hidden;
+        word-break: break-all;
+        word-wrap: break-word;
+      }
+      .inputSearchEdit[contentEditable="true"]:empty:not(:focus)::before {
+        content: attr(data-placeholder);
+        cursor: text;
+      }
+      .inputSearchEdit[contentEditable="true"]:empty:before {
+        content: attr(placeholder);
+      }
+      .searchBtn {
+        background: url("../../images/sideBar/searchIcon.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        grid-area: button;
+        border: none;
+        outline: none;
+        padding: 0;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+  .tagsPanel {
+    margin: 5px;
+    .tagDiv {
+      display: flex;
+      align-items: center;
+      background-color: var(--tagBg);
+      width: max-content;
+      padding: 1px 3px 1px 3px;
+      border-radius: 15px;
+      .tagRemove {
+        background: url("../../images/sideBar/tagRemove.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 15px;
+        height: 15px;
+        margin-left: 5px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        border-radius: 15px;
+        &:hover {
+          background-color: var(--tagRemoveBg);
+        }
+      }
+    }
+  }
+}
