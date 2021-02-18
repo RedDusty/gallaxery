@@ -2,20 +2,14 @@ import react from "react";
 import "./gallery.scss";
 
 function Gallery(props) {
-  const imagesBlocks = props.functions.imagesBlocks;
+  const imagesBlocks = props.functions.imageBlocks;
   const loadingElementRef = props.functions.loadingElementRef;
+  const checker = props.functions.checker;
 
   return (
     <section className="Gallery">
       {imagesBlocks}
-      <div className="loading" ref={loadingElementRef}>
-        <div className="lds-ellipsis">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
+      {checker(loadingElementRef)}
     </section>
   );
 }

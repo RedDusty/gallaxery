@@ -2,7 +2,8 @@ import react, { useRef } from "react";
 import "./sidebar.scss";
 
 function SideBar(props) {
-  const tagParserOnInput = props.functions.tagParserOnInput;
+  // const tagParserOnInput = props.functions.tagParserOnInput;
+  // const tagParserOnPaste = props.functions.tagParserOnPaste;
   const textInput = useRef(null);
 
   return (
@@ -15,7 +16,8 @@ function SideBar(props) {
               className="inputSearchEdit"
               placeholder="Search..."
               ref={textInput}
-              onKeyDown={tagParserOnInput}
+              // onInput={tagParserOnInput}
+              // onPaste={tagParserOnPaste}
             />
             <button className="searchBtn"></button>
           </div>
