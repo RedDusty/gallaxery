@@ -2,7 +2,7 @@
   position: fixed;
   background: var(--mainBg);
   border-right: 4px solid var(--border1);
-  min-width: 250px;
+  max-width: 250px;
   height: 100vh;
   overflow: auto;
   grid-area: sideBarSection;
@@ -66,6 +66,11 @@
       width: max-content;
       padding: 1px 3px 1px 3px;
       border-radius: 15px;
+      float: left;
+      margin: 5px 0 0 5px;
+      &:nth-child(1) {
+        margin: 5px 0 0 0;
+      }
       .tagRemove {
         background: url("../../images/sideBar/tagRemove.png");
         background-size: contain;

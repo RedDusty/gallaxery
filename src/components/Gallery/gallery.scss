@@ -1,9 +1,10 @@
 .Gallery {
   grid-area: gallerySection;
+  overflow-x: hidden;
 }
 
 .imageSrc {
-  width: 25%;
+  width: 80%;
   height: auto;
 }
 

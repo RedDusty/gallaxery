@@ -2,9 +2,11 @@ import react, { useRef } from "react";
 import "./sidebar.scss";
 
 function SideBar(props) {
-  // const tagParserOnInput = props.functions.tagParserOnInput;
-  // const tagParserOnPaste = props.functions.tagParserOnPaste;
-  const textInput = useRef(null);
+  const tagParserOnKeyDown = props.functions.tagParserOnKeyDown;
+  const tagParserOnKeyUp = props.functions.tagParserOnKeyUp;
+  const tagParserOnPaste = props.functions.tagParserOnPaste;
+  const queryTags = props.vars.queryTags;
+  console.log(queryTags);
 
   return (
     <section className="SideBar">
@@ -15,19 +17,14 @@ function SideBar(props) {
               type="text"
               className="inputSearchEdit"
               placeholder="Search..."
-              ref={textInput}
-              // onInput={tagParserOnInput}
-              // onPaste={tagParserOnPaste}
+              onKeyDown={tagParserOnKeyDown}
+              onKeyUp={tagParserOnKeyUp}
+              onPaste={tagParserOnPaste}
             />
             <button className="searchBtn"></button>
           </div>
         </div>
-        <div className="tagsPanel">
-          <div className="tagDiv">
-            <div className="tagText">Лес</div>
-            <button className="tagRemove"></button>
-          </div>
-        </div>
+        <div className="tagsPanel">{queryTags}</div>
       </div>
     </section>
   );
