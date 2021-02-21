@@ -1,10 +1,14 @@
 :root {
   // --imageColor: #262626; //color for images
+  // --imageColorRed: #CC2727; //color for images
+  // --imageColorBlue: #1E18D9; //color for images
+  // --imageColorGreen: #1cc916; //color for images
   --mainBg: #8ea0d9;
   --border1: #677bb4;
   --inputBg: #eeeeee;
   --tagBg: #b3ffec;
-  --tagRemoveBg: rgb(255, 175, 175);
+  --tagRemoveBg: #ffafaf;
+  --transparentBg: rgba(0, 0, 0, 0);
 }
 
 body {

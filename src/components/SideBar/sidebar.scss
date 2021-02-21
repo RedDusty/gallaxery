@@ -44,9 +44,10 @@
         content: attr(placeholder);
       }
       .searchBtn {
-        background: url("../../images/sideBar/searchIcon.png");
+        background-image: url("../../images/sideBar/searchIcon.png");
         background-repeat: no-repeat;
         background-size: contain;
+        background-color: var(--transparentBg);
         grid-area: button;
         border: none;
         outline: none;
@@ -54,6 +55,9 @@
         width: 20px;
         height: 20px;
         cursor: pointer;
+        &:hover {
+          background-image: url("../../images/sideBar/searchIconHover.png");
+        }
       }
     }
   }
@@ -71,10 +75,10 @@
       &:nth-child(1) {
         margin: 5px 0 0 0;
       }
-      .tagRemove {
-        background: url("../../images/sideBar/tagRemove.png");
+      .tagBtn {
         background-size: contain;
         background-repeat: no-repeat;
+        background-color: var(--transparentBg);
         width: 15px;
         height: 15px;
         margin-left: 5px;
@@ -82,8 +86,23 @@
         outline: none;
         cursor: pointer;
         border-radius: 15px;
-        &:hover {
-          background-color: var(--tagRemoveBg);
+        &Delete {
+          background-image: url("../../images/sideBar/tagDelete.png");
+          &:hover {
+            background-image: url("../../images/sideBar/tagDeleteHover.png");
+          }
+        }
+        &Remove {
+          background-image: url("../../images/sideBar/tagRemove.png");
+          &:hover {
+            background-image: url("../../images/sideBar/tagRemoveHover.png");
+          }
+        }
+        &Add {
+          background-image: url("../../images/sideBar/tagAdd.png");
+          &:hover {
+            background-image: url("../../images/sideBar/tagAddHover.png");
+          }
         }
       }
     }

@@ -20,7 +20,8 @@ function SideBarContainer(props) {
     return (
       <div className="tagDiv" data-tag={tag} key={index}>
         <div className="tagText">{tag}</div>
-        <button className="tagRemove"></button>
+        <button className="tagBtnDelete tagBtn"></button>
+        <button className="tagBtnRemove tagBtn"></button>
       </div>
     );
   });
