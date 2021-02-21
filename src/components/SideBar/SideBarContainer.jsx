@@ -1,39 +1,19 @@
 import react, { useState } from "react";
+import { connect } from "react-redux";
+import { tagParserOnKeyDown, tagParserOnKeyUp } from "../../redux/actions";
 import SideBar from "./SideBar";
 
 function SideBarContainer(props) {
   const [query, setQuery] = useState([]);
 
-  function tagParserOnKeyDown(e) {
-    if (e.key === "Space" || e.key === 32 || e.key === " ") {
-      const val = e.target.value.match(/[^ -][^ ]*$/);
-      if (val !== null && val !== undefined && val !== "" && val !== " ") {
-        setQuery(() => {
-          return [...new Set(query.concat(val))];
-        });
-      }
-    }
+  function btnOnKeyDown(e) {
+    props.tagParserOnKeyDown(e);
+    setQuery(props.searchTags);
   }
 
-  function tagParserOnKeyUp(e, action) {
-    if (e.key === "Space" || e.key === 32 || e.key === " ") {
-      e.target.value = "";
-    }
-    if (action === "clear") {
-      e.target.value = "";
-    }
-  }
-
-  function tagParserOnPaste(e) {
-    setTimeout(() => {
-      const val = e.target.value.match(/[^ -][^ ]*/g);
-      if (val !== null && val !== undefined && val !== "" && val !== " ") {
-        setQuery(() => {
-          return [...new Set(query.concat(val))];
-        });
-      }
-      tagParserOnKeyUp(e, "clear");
-    }, 1);
+  function btnOnKeyUp(e, action) {
+    props.tagParserOnKeyUp(e, action);
+    setQuery(props.searchTags);
   }
 
   const queryTags = query.map((tag, index) => {
@@ -49,12 +29,23 @@ function SideBarContainer(props) {
     queryTags,
   };
   const functions = {
-    tagParserOnKeyDown,
-    tagParserOnKeyUp,
-    tagParserOnPaste,
+    btnOnKeyDown,
+    btnOnKeyUp,
   };
 
   return <SideBar vars={vars} functions={functions} />;
 }
 
-export default SideBarContainer;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    searchTags: state.searchReducer.tags,
+  };
+};
+
+const mapDispatchToProps = {
+  tagParserOnKeyDown,
+  tagParserOnKeyUp,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBarContainer);

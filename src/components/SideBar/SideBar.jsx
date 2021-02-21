@@ -2,11 +2,9 @@ import react, { useRef } from "react";
 import "./sidebar.scss";
 
 function SideBar(props) {
-  const tagParserOnKeyDown = props.functions.tagParserOnKeyDown;
-  const tagParserOnKeyUp = props.functions.tagParserOnKeyUp;
-  const tagParserOnPaste = props.functions.tagParserOnPaste;
+  const btnOnKeyDown = props.functions.btnOnKeyDown;
+  const btnOnKeyUp = props.functions.btnOnKeyUp;
   const queryTags = props.vars.queryTags;
-  console.log(queryTags);
 
   return (
     <section className="SideBar">
@@ -17,9 +15,8 @@ function SideBar(props) {
               type="text"
               className="inputSearchEdit"
               placeholder="Search..."
-              onKeyDown={tagParserOnKeyDown}
-              onKeyUp={tagParserOnKeyUp}
-              onPaste={tagParserOnPaste}
+              onKeyDown={btnOnKeyDown}
+              onKeyUp={btnOnKeyUp}
             />
             <button className="searchBtn"></button>
           </div>
