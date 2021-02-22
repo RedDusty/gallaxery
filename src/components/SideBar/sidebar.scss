@@ -44,7 +44,7 @@
         content: attr(placeholder);
       }
       .searchBtn {
-        background-image: url("../../images/sideBar/searchIcon.png");
+        background-image: url("../../images/sideBar/searchIcon.svg");
         background-repeat: no-repeat;
         background-size: contain;
         background-color: var(--transparentBg);
@@ -56,7 +56,7 @@
         height: 20px;
         cursor: pointer;
         &:hover {
-          background-image: url("../../images/sideBar/searchIconHover.png");
+          background-image: url("../../images/sideBar/searchIconHover.svg");
         }
       }
     }
@@ -66,7 +66,6 @@
     .tagDiv {
       display: flex;
       align-items: center;
-      background-color: var(--tagBg);
       width: max-content;
       padding: 1px 3px 1px 3px;
       border-radius: 15px;
@@ -87,24 +86,30 @@
         cursor: pointer;
         border-radius: 15px;
         &Delete {
-          background-image: url("../../images/sideBar/tagDelete.png");
+          background-image: url("../../images/sideBar/tagDelete.svg");
           &:hover {
-            background-image: url("../../images/sideBar/tagDeleteHover.png");
+            background-image: url("../../images/sideBar/tagDeleteHover.svg");
           }
         }
         &Remove {
-          background-image: url("../../images/sideBar/tagRemove.png");
+          background-image: url("../../images/sideBar/tagRemove.svg");
           &:hover {
-            background-image: url("../../images/sideBar/tagRemoveHover.png");
+            background-image: url("../../images/sideBar/tagRemoveHover.svg");
           }
         }
         &Add {
-          background-image: url("../../images/sideBar/tagAdd.png");
+          background-image: url("../../images/sideBar/tagAdd.svg");
           &:hover {
-            background-image: url("../../images/sideBar/tagAddHover.png");
+            background-image: url("../../images/sideBar/tagAddHover.svg");
           }
         }
       }
+    }
+    .tagNotRemoved {
+      background-color: var(--tagNRBg);
+    }
+    .tagRemoved {
+      background-color: var(--tagRBg);
     }
   }
 }

@@ -1,4 +1,3 @@
-import react, { useRef } from "react";
 import "./sidebar.scss";
 
 function SideBar(props) {
