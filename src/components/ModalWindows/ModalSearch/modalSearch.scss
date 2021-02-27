@@ -1,0 +1,191 @@
+.ms {
+  grid-area: search;
+  position: fixed;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: none;
+  &-close {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: var(--ms);
+    transition: 0.25s ease;
+    &:hover {
+      opacity: 0.5;
+    }
+    &:hover ~ .ms-window {
+      opacity: 0.5;
+    }
+  }
+  &-window {
+    position: fixed;
+    background-color: var(--msWindow);
+    border: 3px solid var(--border1);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: max-content;
+    min-width: 550px;
+    height: max-content;
+    margin-top: 40px;
+    padding-top: 8px;
+    transition: 0.25s ease;
+  }
+  &-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 5px;
+  }
+  &-label {
+    display: flex;
+    align-items: center;
+    background-color: var(--button);
+    padding: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid var(--button-border);
+    transition: 0.25s ease;
+    &-blue {
+      &:hover {
+        border-color: var(--blueBg);
+        color: var(--blueBg);
+      }
+      &-toggle {
+        border-color: var(--blueBrdL);
+        background: var(--blueBgL);
+        &::after {
+          border-color: var(--blueBgL) !important;
+        }
+        &:checked {
+          background: var(--blueBg);
+          border-color: var(--blueBrd);
+        }
+      }
+    }
+    &-red {
+      &:hover {
+        border-color: var(--redBg);
+        color: var(--redBg);
+      }
+      &-toggle {
+        border-color: var(--redBrdL);
+        background: var(--redBgL);
+        &::after {
+          border-color: var(--redBgL) !important;
+        }
+        &:checked {
+          background: var(--redBg);
+          border-color: var(--redBrd);
+        }
+      }
+    }
+    &-green {
+      &:hover {
+        border-color: var(--greenBg);
+        color: var(--greenBg);
+      }
+      &-toggle {
+        border-color: var(--greenBrdL);
+        background: var(--greenBgL);
+        &::after {
+          border-color: var(--greenBgL) !important;
+        }
+        &:checked {
+          background: var(--greenBg);
+          border-color: var(--greenBrd);
+        }
+      }
+    }
+    &-text {
+      user-select: none;
+      font-weight: 400;
+      color: var(--textInactive);
+    }
+    &-toggle {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      height: 21px;
+      width: 21px;
+      outline: none;
+      position: relative;
+      margin: 0;
+      border: 1px solid;
+      border-radius: 7px;
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+      cursor: pointer;
+      &::after {
+        content: '';
+        position: absolute;
+        width: 5px;
+        height: 9px;
+        border: 2px solid;
+        border-top: 0;
+        border-left: 0;
+        left: 6px;
+        top: 3px;
+        transform: rotate(20deg);
+        opacity: 0;
+      }
+      &:checked {
+        &::after {
+          opacity: 1;
+          transform: rotate(43deg);
+        }
+      }
+    }
+  }
+  &-labels {
+    display: flex;
+    flex-flow: column;
+    &-text {
+      font-weight: 500;
+    }
+    &-include {
+      display: flex;
+      align-items: center;
+      background-color: var(--tagsCol);
+      margin: 5px;
+      padding: 5px;
+      border-radius: 5px;
+      label {
+        margin: 0 3px 0 3px;
+      }
+    }
+  }
+  &-tags {
+    &-panel {
+      margin: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+    &-col {
+      background-color: var(--tagsCol);
+      display: flex;
+      flex-flow: column;
+      border-radius: 10px;
+      min-width: 85px;
+      width: 90%;
+      &[open] .ms-tags-text {
+        border-radius: 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        user-select: none;
+      }
+    }
+    &-text {
+      cursor: pointer;
+      border-radius: 10px;
+      background-color: var(--tagsText);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      outline: none;
+    }
+    &-query {
+      margin: 2px 5px 2px 5px;
+    }
+  }
+}

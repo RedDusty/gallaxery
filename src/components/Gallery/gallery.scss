@@ -1,8 +1,3 @@
-.Gallery {
-  grid-area: gallerySection;
-  overflow-x: hidden;
-}
-
 .imageSrc {
   width: 80%;
   height: auto;
@@ -52,7 +47,7 @@
   align-items: center;
   margin: 5px;
   &-icon {
-    background-image: url("../../images/gallery/dataLoaded.png");
+    background-image: url('../../images/gallery/dataLoaded.png');
     background-repeat: no-repeat;
     background-size: contain;
     width: 50px;

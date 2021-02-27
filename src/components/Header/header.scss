@@ -1,0 +1,125 @@
+.Header {
+  background-color: var(--main);
+  border-bottom: 3px solid var(--border1);
+  box-shadow: 0 0 4px 2px var(--border1);
+  z-index: 15;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas: 'icons search auth';
+  height: 40px;
+  position: fixed;
+  width: 100%;
+  margin: 0;
+}
+
+.icons {
+  grid-area: icons;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
+  &-ico {
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    outline: none;
+    border: none;
+    background-color: var(--transparent);
+    cursor: pointer;
+  }
+  &-React {
+    background-image: url('../../images/header/React.png');
+    background-size: 40px 40px;
+    background-position: -5px -5px;
+    border-radius: 100%;
+    &:hover {
+      box-shadow: 0 0 6px 3px #359bee;
+    }
+  }
+  &-GitHub {
+    background-image: url('../../images/header/GitHubNight.png');
+    border-radius: 100%;
+    &:hover {
+      box-shadow: 0 0 6px 3px #6b6b6b;
+    }
+  }
+  &-FireBase {
+    background-image: url('../../images/header/FireBase.png');
+    border-radius: 100%;
+    background-size: 40px 40px;
+    background-position: -5px -5px;
+    &:hover {
+      box-shadow: 0 0 6px 3px #ff8f25;
+    }
+  }
+  &-Vercel {
+    background-image: url('../../images/header/Vercel.png');
+    background-size: 31px 100%;
+    border-radius: 5px;
+    &:hover {
+      box-shadow: 0 0 6px 3px #6b6b6b;
+    }
+  }
+}
+
+.actions {
+  grid-area: auth;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.search {
+  grid-area: search;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  &-div {
+    display: grid;
+    grid-template-columns: 1fr 31px;
+    grid-template-areas: 'input icon';
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--button);
+    width: 50%;
+    min-width: 250px;
+    height: 25px;
+    border: 1.5px solid var(--button-border);
+    border-radius: 15px;
+  }
+  &-input {
+    grid-area: input;
+    background-color: var(--transparent);
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 0 0 0 5px;
+    text-align: left;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-right: 1px solid var(--button-border);
+    &:hover .search-icon {
+      background-image: url('../../images/sideBar/searchIconHover.svg');
+    }
+    &::placeholder {
+      user-select: none;
+    }
+  }
+  &-icon {
+    grid-area: icon;
+    background-image: url('../../images/sideBar/searchIcon.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: var(--transparent);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0 3px 0 8px;
+    &:hover {
+      background-image: url('../../images/sideBar/searchIconHover.svg');
+    }
+  }
+}

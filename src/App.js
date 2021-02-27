@@ -1,12 +1,13 @@
-import "./App.scss";
-import GalleryContainer from "./components/Gallery/GalleryContainer";
-import SideBarContainer from "./components/SideBar/SideBarContainer";
+import { Route } from 'react-router-dom';
+import './App.scss';
+import GalleryContainer from './components/Gallery/GalleryContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
 
 function App() {
   return (
     <div className="App">
-      <SideBarContainer />
-      <GalleryContainer />
+      <HeaderContainer />
+      <Route component={GalleryContainer} exact path="/" />
     </div>
   );
 }
