@@ -1,27 +1,51 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import ModalSearchContainer from '../ModalWindows/ModalSearch/ModalSearchContainer';
+import Context from '../../context';
+
+import { NavLink, Route } from 'react-router-dom';
+import { logOut, signInWithGoogle } from '../../firebase';
 
 function Header(props) {
   const setModalSearchIsOpen = props.vars.setModalSearchIsOpen;
   const modalSearchIsOpen = props.vars.modalSearchIsOpen;
-  const searches = props.vars.searches;
-  const userAllowed = props.vars.userAllowed;
   const btnOnKeyDown = props.functions.btnOnKeyDown;
   const btnOnKeyUp = props.functions.btnOnKeyUp;
+
+  const { user } = useContext(Context);
+
+  function checkLocation() {
+    if (window.location.pathname !== '/') {
+      return 'Back';
+    } else {
+      return 'Reload';
+    }
+  }
 
   return (
     <section className="Header">
       <div className="icons">
-        <a className="icons-React icons-ico" href="https://reactjs.org/"></a>
-        <a className="icons-GitHub icons-ico"></a>
+        <a
+          className="icons-React icons-ico"
+          href="https://reactjs.org/"
+          tabIndex="1"
+        ></a>
+        <a className="icons-GitHub icons-ico" tabIndex="2"></a>
         <a
           className="icons-FireBase icons-ico"
           href="https://firebase.google.com/"
+          tabIndex="3"
         ></a>
-        <a className="icons-Vercel icons-ico"></a>
+        <a className="icons-Vercel icons-ico" tabIndex="4"></a>
       </div>
       <div className="search">
         <div className="search-div">
+          <button
+            className="search-icon search-icon-extended btn"
+            tabIndex="5"
+            onClick={() => {
+              setModalSearchIsOpen(!modalSearchIsOpen);
+            }}
+          ></button>
           <input
             type="text"
             className="search-input search-btn"
@@ -29,23 +53,60 @@ function Header(props) {
             onKeyDown={btnOnKeyDown}
             onKeyUp={btnOnKeyUp}
             onClick={() => {
-              setModalSearchIsOpen(!modalSearchIsOpen);
+              setModalSearchIsOpen(true);
             }}
+            tabIndex="6"
           ></input>
-          <div className="search-icon"></div>
+          <button
+            className="search-icon search-icon-magnifier btn"
+            tabIndex="7"
+          ></button>
         </div>
       </div>
       <div className="actions">
-        <button className="actions-btnUpload actions-btn btn">
+        <Route path="*">
+          <NavLink className="btn btn-link" to="/" tabIndex="8">
+            {checkLocation()}
+          </NavLink>
+        </Route>
+        <button className="actions-btnUpload actions-btn btn" tabIndex="9">
           Upload image
         </button>
-        <button className="actions-btnAuth actions-btn btn">Sign in</button>
+        {user ? (
+          <>
+            <NavLink
+              className="actions-btnAuth actions-btn btn btn-link"
+              to="/profile"
+              tabIndex="10"
+            >
+              Profile
+            </NavLink>
+            <button
+              className="actions-btnAuth actions-btn btn"
+              onClick={() => {
+                logOut();
+                window.location.reload();
+              }}
+              tabIndex="11"
+            >
+              Log out
+            </button>
+          </>
+        ) : (
+          <button
+            className="actions-btnAuth actions-btn btn"
+            onClick={() => {
+              signInWithGoogle();
+            }}
+            tabIndex="10"
+          >
+            Sign in
+          </button>
+        )}
       </div>
       <ModalSearchContainer
         isOpen={modalSearchIsOpen}
         setIsOpen={setModalSearchIsOpen}
-        searches={searches}
-        userAllowed={userAllowed}
       />
     </section>
   );

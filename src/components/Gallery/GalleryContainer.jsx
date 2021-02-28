@@ -41,7 +41,6 @@ const GalleryContainer = (props) => {
             imageLinks.push(url);
           });
         }
-        console.log(imageLinks);
 
         const data = snapshot.docs[i].data();
         newConfirmedImages.push({

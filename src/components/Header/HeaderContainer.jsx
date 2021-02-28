@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Header from './Header';
 import './header.scss';
+import Context from '../../context';
 
 import { connect } from 'react-redux';
 import { tagParserOnKeyDown, tagParserOnKeyUp } from '../../redux/actions';
@@ -14,6 +15,8 @@ function HeaderContainer(props) {
   const [userImages, setUserImages] = useState(false);
   const [anonymousImages, setAnonymousImages] = useState(false);
   const [query, setQuery] = useState([]);
+
+  const { user } = useContext(Context);
 
   function queryUpdater(e = '') {
     setQuery(props.searchTags);
@@ -48,12 +51,15 @@ function HeaderContainer(props) {
     setAnonymousImages,
   };
 
+  const searchParams = {
+    searches,
+    userAllowed,
+  };
+
   const vars = {
     setModalSearchIsOpen,
     modalSearchIsOpen,
     query,
-    searches,
-    userAllowed,
   };
 
   const functions = {
@@ -61,7 +67,11 @@ function HeaderContainer(props) {
     btnOnKeyUp,
   };
 
-  return <Header vars={vars} functions={functions} />;
+  return (
+    <Context.Provider value={{ searchParams, user }}>
+      <Header vars={vars} functions={functions} />
+    </Context.Provider>
+  );
 }
 
 const mapStateToProps = (state) => {

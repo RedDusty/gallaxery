@@ -17,6 +17,7 @@ const SearchLabel = (props) => {
           setState(!state);
         }}
         defaultChecked={state}
+        tabIndex={props.tabIndex}
       />
     </label>
   );

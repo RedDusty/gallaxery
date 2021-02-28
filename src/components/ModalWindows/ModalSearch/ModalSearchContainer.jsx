@@ -13,8 +13,6 @@ import './modalSearch.scss';
 function ModalSearchContainer(props) {
   const setIsOpen = props.setIsOpen;
   const isOpen = props.isOpen;
-  const searches = props.searches;
-  const userAllowed = props.userAllowed;
   const [query, setQuery] = useState([]);
 
   function queryUpdater(e = '') {
@@ -73,8 +71,6 @@ function ModalSearchContainer(props) {
     queryTags,
     setIsOpen,
     isOpen,
-    searches,
-    userAllowed,
   };
   const functions = {};
 

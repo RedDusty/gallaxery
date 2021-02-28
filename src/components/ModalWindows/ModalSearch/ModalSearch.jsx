@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useContext } from 'react';
 import Modal from '../../Modal';
 import SearchLabel from './SearchLabel';
 import TagsCol from './TagsCol';
+import Context from '../../../context';
 
 function ModalSearch(props) {
   //   const querySearchTags = props.vars.querySearchTags;
@@ -15,10 +16,12 @@ function ModalSearch(props) {
   const lastTags = [];
   const popularTags = [];
 
+  const { searchParams } = useContext(Context);
+  const searches = searchParams.searches;
+  const userAllowed = searchParams.userAllowed;
+
   const setIsOpen = props.vars.setIsOpen;
   const isOpen = props.vars.isOpen;
-  const searches = props.vars.searches;
-  const userAllowed = props.vars.userAllowed;
 
   if (!isOpen) return null;
 
@@ -41,18 +44,21 @@ function ModalSearch(props) {
                   color={'blue'}
                   state={userAllowed.confirmedImages}
                   setState={userAllowed.setConfirmedImages}
+                  tabIndex="20"
                 ></SearchLabel>
                 <SearchLabel
                   searchEngine={'User images'}
                   color={'green'}
                   state={userAllowed.userImages}
                   setState={userAllowed.setUserImages}
+                  tabIndex="21"
                 ></SearchLabel>
                 <SearchLabel
                   searchEngine={'Anonymous images'}
                   color={'red'}
                   state={userAllowed.anonymousImages}
                   setState={userAllowed.setAnonymousImages}
+                  tabIndex="22"
                 ></SearchLabel>
               </div>
               <div className="ms-labels-include">
@@ -62,18 +68,21 @@ function ModalSearch(props) {
                   color={'blue'}
                   state={searches.searchGoogle}
                   setState={searches.setSearchGoogle}
+                  tabIndex="23"
                 />
                 <SearchLabel
                   searchEngine={'pinterest'}
                   color={'red'}
                   state={searches.searchPinterest}
                   setState={searches.setSearchPinterest}
+                  tabIndex="24"
                 />
                 <SearchLabel
                   searchEngine={'imgur'}
                   color={'green'}
                   state={searches.searchImgur}
                   setState={searches.setSearchImgur}
+                  tabIndex="25"
                 />
               </div>
             </div>
@@ -82,16 +91,33 @@ function ModalSearch(props) {
               onClick={() => {
                 setIsOpen(false);
               }}
+              tabIndex="26"
             >
               Close
             </button>
           </div>
           <div className="ms-tags-panel">
-            <TagsCol tagsText={'Search'} queryTags={querySearchTags} />
-            <TagsCol tagsText={'Exclude'} queryTags={queryExcludeTags} />
-            <TagsCol tagsText={'Official'} queryTags={officialTags} />
-            <TagsCol tagsText={'Last'} queryTags={lastTags} />
-            <TagsCol tagsText={'Popular'} queryTags={popularTags} />
+            <TagsCol
+              tagsText={'Search'}
+              queryTags={querySearchTags}
+              tabIndex="27"
+            />
+            <TagsCol
+              tagsText={'Exclude'}
+              queryTags={queryExcludeTags}
+              tabIndex="28"
+            />
+            <TagsCol
+              tagsText={'Official'}
+              queryTags={officialTags}
+              tabIndex="29"
+            />
+            <TagsCol tagsText={'Last'} queryTags={lastTags} tabIndex="30" />
+            <TagsCol
+              tagsText={'Popular'}
+              queryTags={popularTags}
+              tabIndex="31"
+            />
           </div>
         </div>
       </section>

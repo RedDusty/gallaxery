@@ -11,6 +11,7 @@
   position: fixed;
   width: 100%;
   margin: 0;
+  top: 0;
 }
 
 .icons {
@@ -41,6 +42,8 @@
   &-GitHub {
     background-image: url('../../images/header/GitHubNight.png');
     border-radius: 100%;
+    background-position: 0px;
+    background-size: 32px 32px;
     &:hover {
       box-shadow: 0 0 6px 3px #6b6b6b;
     }
@@ -78,8 +81,8 @@
   justify-content: flex-start;
   &-div {
     display: grid;
-    grid-template-columns: 1fr 31px;
-    grid-template-areas: 'input icon';
+    grid-template-columns: 31px 1fr 31px;
+    grid-template-areas: 'extended input icon';
     align-items: center;
     justify-content: space-between;
     background-color: var(--button);
@@ -98,19 +101,18 @@
     border: none;
     padding: 0 0 0 5px;
     text-align: left;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+    border-left: 1px solid var(--button-border);
     border-right: 1px solid var(--button-border);
-    &:hover .search-icon {
-      background-image: url('../../images/sideBar/searchIconHover.svg');
-    }
     &::placeholder {
       user-select: none;
     }
+    &:focus {
+      box-shadow: 0px 0px 0px 2px var(--focusWithinBorder);
+      border-left: none;
+      border-right: none;
+    }
   }
   &-icon {
-    grid-area: icon;
-    background-image: url('../../images/sideBar/searchIcon.svg');
     background-repeat: no-repeat;
     background-size: contain;
     background-color: var(--transparent);
@@ -118,8 +120,23 @@
     height: 20px;
     cursor: pointer;
     margin: 0 3px 0 8px;
+    border: none;
     &:hover {
-      background-image: url('../../images/sideBar/searchIconHover.svg');
+      background-color: var(--transparent);
+    }
+    &-extended {
+      grid-area: extended;
+      background-image: url('../../images/search/searchExtended.svg');
+      &:hover {
+        background-image: url('../../images/search/searchExtendedHover.svg');
+      }
+    }
+    &-magnifier {
+      grid-area: icon;
+      background-image: url('../../images/search/searchIcon.svg');
+      &:hover {
+        background-image: url('../../images/search/searchIconHover.svg');
+      }
     }
   }
 }
