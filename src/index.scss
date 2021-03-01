@@ -15,6 +15,10 @@ code {
     monospace;
 }
 
+#root {
+  height: 100%;
+}
+
 #modal {
   display: flex;
   justify-content: center;
@@ -34,7 +38,7 @@ html {
   cursor: pointer;
   font-weight: 600;
   user-select: none;
-  color: var(--button-border);
+  color: var(--button-text);
   padding: 1px 6px;
   margin: 0 3px;
   text-align: center;
@@ -42,6 +46,11 @@ html {
   box-sizing: border-box;
   &:hover {
     background-color: var(--button-hover);
+    box-shadow: 0px 0px 3px 1px var(--button-border);
+  }
+  &:focus:not(:focus-visible) {
+    background-color: var(--button-hover);
+    box-shadow: 0px 0px 3px 1px var(--button-border);
   }
 }
 
@@ -49,6 +58,25 @@ html {
   text-decoration: none;
   display: flex;
   align-items: center;
+}
+
+.btn-icon {
+  &:hover {
+    background-color: none;
+    box-shadow: none;
+  }
+  &:focus:not(:focus-visible) {
+    background-color: none;
+    box-shadow: none;
+  }
+}
+
+.btn-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--button-text);
+  cursor: pointer;
 }
 
 button,
@@ -63,8 +91,18 @@ summary {
 button,
 a,
 input,
-summary {
+summary,
+div {
   &:focus-visible {
     box-shadow: 0 0 0 3px var(--focusWithinBorder);
+  }
+}
+
+div {
+  &:focus-visible {
+    outline: none;
+  }
+  &:focus:not(:focus-visible) {
+    outline: none;
   }
 }

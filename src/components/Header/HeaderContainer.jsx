@@ -14,9 +14,19 @@ function HeaderContainer(props) {
   const [confirmedImages, setConfirmedImages] = useState(true);
   const [userImages, setUserImages] = useState(false);
   const [anonymousImages, setAnonymousImages] = useState(false);
+
+  const [reloadBtnText, setReloadBtnText] = useState('Reload');
   const [query, setQuery] = useState([]);
 
   const { user } = useContext(Context);
+
+  function urlChecker() {
+    if (window.location.pathname !== '/') {
+      setReloadBtnText('Back');
+    } else {
+      setReloadBtnText('Reload');
+    }
+  }
 
   function queryUpdater(e = '') {
     setQuery(props.searchTags);
@@ -60,11 +70,13 @@ function HeaderContainer(props) {
     setModalSearchIsOpen,
     modalSearchIsOpen,
     query,
+    reloadBtnText,
   };
 
   const functions = {
     btnOnKeyDown,
     btnOnKeyUp,
+    urlChecker,
   };
 
   return (

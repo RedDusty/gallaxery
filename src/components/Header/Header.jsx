@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import ModalSearchContainer from '../ModalWindows/ModalSearch/ModalSearchContainer';
 import Context from '../../context';
 
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import { logOut, signInWithGoogle } from '../../firebase';
 
 function Header(props) {
@@ -12,14 +12,6 @@ function Header(props) {
   const btnOnKeyUp = props.functions.btnOnKeyUp;
 
   const { user } = useContext(Context);
-
-  function checkLocation() {
-    if (window.location.pathname !== '/') {
-      return 'Back';
-    } else {
-      return 'Reload';
-    }
-  }
 
   return (
     <section className="Header">
@@ -40,7 +32,7 @@ function Header(props) {
       <div className="search">
         <div className="search-div">
           <button
-            className="search-icon search-icon-extended btn"
+            className="search-icon search-icon-extended btn btn-icon"
             tabIndex="5"
             onClick={() => {
               setModalSearchIsOpen(!modalSearchIsOpen);
@@ -58,17 +50,24 @@ function Header(props) {
             tabIndex="6"
           ></input>
           <button
-            className="search-icon search-icon-magnifier btn"
+            className="search-icon search-icon-magnifier btn btn-icon"
             tabIndex="7"
           ></button>
         </div>
       </div>
       <div className="actions">
-        <Route path="*">
-          <NavLink className="btn btn-link" to="/" tabIndex="8">
-            {checkLocation()}
-          </NavLink>
-        </Route>
+        <Switch>
+          <Route exact path="/">
+            <NavLink className="btn btn-link" to="/" tabIndex="8">
+              Reload
+            </NavLink>
+          </Route>
+          <Route>
+            <NavLink className="btn btn-link" to="/" tabIndex="8">
+              Main page
+            </NavLink>
+          </Route>
+        </Switch>
         <button className="actions-btnUpload actions-btn btn" tabIndex="9">
           Upload image
         </button>

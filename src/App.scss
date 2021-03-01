@@ -1,2 +1,118 @@
 .App {
 }
+
+.nf {
+  margin-top: 50px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  &-top {
+    display: flex;
+  }
+  &-left-image {
+    background-image: url('./images/notFound.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 128px;
+    height: 128px;
+  }
+  &-right {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    &-code {
+      font-size: 32px;
+      font-weight: 600;
+    }
+    &-title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+  &-bottom {
+    display: flex;
+    flex-flow: column;
+    margin-top: 10px;
+    align-items: flex-start;
+    &-message {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    &-button {
+      margin-top: 10px;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .nf {
+    &-left-image {
+      width: 256px;
+      height: 256px;
+    }
+    &-right {
+      margin-left: 25px;
+      &-code {
+        font-size: 64px;
+        font-weight: 700;
+      }
+      &-title {
+        font-size: 32px;
+        font-weight: 600;
+      }
+    }
+    &-bottom {
+      &-message {
+        font-size: 32px;
+        font-weight: 600;
+      }
+      &-button {
+        .btn {
+          height: 48px;
+          padding: 0 24px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 512px) {
+  .nf {
+    &-top {
+      display: flex;
+      flex-flow: column;
+    }
+    &-left {
+      display: flex;
+      justify-content: center;
+    }
+    &-right {
+      &-code {
+        font-size: 64px;
+      }
+      &-title {
+        font-size: 24px;
+        font-weight: 600;
+      }
+    }
+    &-bottom {
+      align-items: center;
+      &-message {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 400;
+      }
+      &-button {
+        .btn {
+          height: 48px;
+          padding: 0px 24px;
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}

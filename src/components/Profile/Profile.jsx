@@ -21,19 +21,21 @@ const Profile = (props) => {
   const firstLogin = props.vars.firstLogin;
   const lastLogin = props.vars.lastLogin;
   return (
-    <div className="Profile">
-      <div className="profile-actions">
-        <NavLink className="btn btn-link" to="/">
-          Back
-        </NavLink>
-      </div>
-      <div className="info">
-        <div>
-          <img src={photoURL} alt={photoURLAlt} />
+    <div className="p">
+      <div className="p-info">
+        <div className="p-info-left">
+          <div className="p-info-photo">
+            <img src={photoURL} alt={photoURLAlt} />
+          </div>
         </div>
-        <div>{userName}</div>
-        <div>{firstLogin}</div>
-        <div>{lastLogin}</div>
+        <div className="p-info-right">
+          <div className="p-info-username">{userName}</div>
+        </div>
+      </div>
+      <div className="p-actions">
+        <NavLink className="btn btn-link" to="#" tabIndex="42">
+          Change user
+        </NavLink>
       </div>
       <div className="images"></div>
     </div>

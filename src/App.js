@@ -1,7 +1,8 @@
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.scss';
 import GalleryContainer from './components/Gallery/GalleryContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import NotFound from './components/NotFound';
 import ProfileContainer from './components/Profile/ProfileContainer';
 
 import UserProvider from './UserProvider';
@@ -11,8 +12,11 @@ function App() {
     <UserProvider>
       <div className="App">
         <HeaderContainer />
-        <Route component={GalleryContainer} exact path="/" />
-        <Route component={ProfileContainer} exact path="/profile" />
+        <Switch>
+          <Route component={GalleryContainer} exact path="/" />
+          <Route component={ProfileContainer} exact path="/profile" />
+          <Route component={NotFound}></Route>
+        </Switch>
       </div>
     </UserProvider>
   );

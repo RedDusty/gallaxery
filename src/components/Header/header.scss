@@ -121,9 +121,6 @@
     cursor: pointer;
     margin: 0 3px 0 8px;
     border: none;
-    &:hover {
-      background-color: var(--transparent);
-    }
     &-extended {
       grid-area: extended;
       background-image: url('../../images/search/searchExtended.svg');

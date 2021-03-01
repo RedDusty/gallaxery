@@ -1,8 +1,31 @@
-.Profile {
+.p {
+  display: flex;
+  justify-content: space-between;
   margin-top: 60px;
 }
 
-.profile-actions {
+.p-info {
+  display: flex;
+  margin-left: 4px;
+  &-photo {
+    img {
+      transition: 0.25s ease;
+      border-radius: 100%;
+      &:hover {
+        border-radius: 5%;
+      }
+    }
+  }
+  &-right {
+    margin-left: 8px;
+  }
+  &-username {
+    font-size: 24px;
+    font-weight: 500;
+  }
+}
+
+.p-actions {
   display: flex;
   margin: 0 0 0 10px;
 }
