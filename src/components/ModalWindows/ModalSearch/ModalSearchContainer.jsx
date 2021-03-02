@@ -35,40 +35,67 @@ function ModalSearchContainer(props) {
     queryUpdater();
   }
 
-  const queryTags = query.map((tag, index) => {
-    const styleTag = tag.removed === true ? 'tagRemoved' : 'tagNotRemoved';
-    const tagOption =
-      tag.removed === true ? (
-        <button
-          className="tagBtnAdd tagBtn"
-          onClick={() => {
-            btnSearchAdd(index);
-          }}
-        ></button>
-      ) : (
-        <button
-          className="tagBtnRemove tagBtn"
-          onClick={() => {
-            btnSearchRemove(index);
-          }}
-        ></button>
-      );
-    return (
-      <div className={'tagDiv ' + styleTag} data-tag={tag.tag} key={index}>
-        <div className="tagText">{tag.tag}</div>
-        <button
-          className="tagBtnDelete tagBtn"
-          onClick={() => {
-            btnSearchDelete(index);
-          }}
-        ></button>
-        {tagOption}
-      </div>
-    );
-  });
+  const querySearchTags = props.searchTags
+    .filter((tag) => tag !== undefined)
+    .map((tag, index) => {
+      const styleTag = tag.removed === true ? 'removed' : 'standard';
+      if (!tag.removed) {
+        return (
+          <div
+            className={`tag-container-${styleTag} tag-container`}
+            key={index}
+          >
+            <div className={`tag-text tag-text-${styleTag}`}>{tag.tag}</div>
+            <button
+              className="tag-delete btn btn-icon tag-btn"
+              onClick={() => {
+                btnSearchDelete(index);
+              }}
+            ></button>
+            <button
+              className="tag-exclude btn btn-icon tag-btn"
+              onClick={() => {
+                btnSearchRemove(index);
+              }}
+            ></button>
+          </div>
+        );
+      }
+      return [];
+    });
+
+  const queryExcludeTags = props.searchTags
+    .filter((tag) => tag !== undefined)
+    .map((tag, index) => {
+      const styleTag = tag.removed === true ? 'removed' : 'standard';
+      if (tag.removed) {
+        return (
+          <div
+            className={`tag-container-${styleTag} tag-container`}
+            key={index}
+          >
+            <div className={`tag-text tag-text-${styleTag}`}>{tag.tag}</div>
+            <button
+              className="tag-delete btn btn-icon tag-btn"
+              onClick={() => {
+                btnSearchDelete(index);
+              }}
+            ></button>
+            <button
+              className="tag-add btn btn-icon tag-btn"
+              onClick={() => {
+                btnSearchAdd(index);
+              }}
+            ></button>
+          </div>
+        );
+      }
+      return [];
+    });
 
   const vars = {
-    queryTags,
+    querySearchTags,
+    queryExcludeTags,
     setIsOpen,
     isOpen,
   };

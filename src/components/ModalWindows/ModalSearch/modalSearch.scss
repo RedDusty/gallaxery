@@ -26,8 +26,7 @@
     border: 3px solid var(--border1);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    width: max-content;
-    min-width: 550px;
+    width: 75vw;
     height: max-content;
     margin-top: 40px;
     padding-top: 8px;
@@ -43,6 +42,7 @@
     display: flex;
     align-items: center;
     background-color: var(--button);
+    margin: 5px 3px 0 3px;
     padding: 2px;
     border-radius: 10px;
     cursor: pointer;
@@ -99,6 +99,23 @@
         }
       }
     }
+    &-grey {
+      &:hover {
+        border-color: var(--greyBg);
+        color: var(--greyBg);
+      }
+      &-toggle {
+        border-color: var(--greyBrdL);
+        background: var(--greyBgL);
+        &::after {
+          border-color: var(--greyBgL) !important;
+        }
+        &:checked {
+          background: var(--greyBg);
+          border-color: var(--greyBrd);
+        }
+      }
+    }
     &-text {
       user-select: none;
       font-weight: 400;
@@ -107,13 +124,13 @@
     &-toggle {
       -webkit-appearance: none;
       -moz-appearance: none;
-      height: 21px;
-      width: 21px;
+      min-height: 21px;
+      min-width: 21px;
       outline: none;
       position: relative;
       margin: 0;
       border: 1px solid;
-      border-radius: 7px;
+      border-radius: 50%;
       transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
       cursor: pointer;
       &::after {
@@ -140,34 +157,39 @@
   &-labels {
     display: flex;
     flex-flow: column;
+    width: 100%;
     &-text {
       font-weight: 500;
     }
     &-include {
       display: flex;
+      flex-flow: row wrap;
       align-items: center;
       background-color: var(--tagsCol);
+      width: 90%;
       margin: 5px;
       padding: 5px;
       border-radius: 5px;
-      label {
-        margin: 0 3px 0 3px;
-      }
     }
   }
   &-tags {
     &-panel {
       margin: 10px;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      display: flex;
+      flex-flow: row wrap;
     }
     &-col {
       background-color: var(--tagsCol);
       display: flex;
       flex-flow: column;
       border-radius: 10px;
-      min-width: 85px;
+      min-width: 100px;
       width: 90%;
+      margin: 5px;
+      &[open] {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
       &[open] .ms-tags-text {
         border-radius: 0;
         border-top-left-radius: 10px;
@@ -175,7 +197,7 @@
         user-select: none;
       }
     }
-    &-text {
+    &-summary {
       cursor: pointer;
       border-radius: 10px;
       background-color: var(--tagsText);
@@ -183,9 +205,75 @@
       justify-content: center;
       align-items: center;
       outline: none;
+      padding: 2px;
     }
     &-query {
-      margin: 2px 5px 2px 5px;
+      margin: 0px 0px 2px 0px;
+      max-height: 50vh;
+      overflow-y: auto;
+      padding: 5px;
     }
+  }
+}
+
+.tag {
+  &-container {
+    background-color: var(--tagStandard);
+    margin: 4px 2px;
+    padding: 1px 3px;
+    border-radius: 15px;
+    width: max-content;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    &-removed {
+      background-color: var(--tagRemoved);
+      &:hover {
+        background-color: var(--tagStandard);
+      }
+      &:hover .tag-text-removed {
+        text-decoration: none;
+      }
+    }
+  }
+  &-text {
+    color: var(--tagText);
+    width: max-content;
+    &-removed {
+      text-decoration-style: solid;
+      text-decoration-line: line-through;
+      text-decoration-thickness: 1.5px;
+      text-decoration-color: var(--tagRemovedLine);
+    }
+  }
+  &-btn {
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  &-delete {
+    background-image: url('../../../images/search/tagDelete.svg');
+    &:hover {
+      background-image: url('../../../images/search//tagDeleteHover.svg');
+    }
+  }
+  &-exclude {
+    background-image: url('../../../images/search/tagRemove.svg');
+    &:hover {
+      background-image: url('../../../images/search/tagRemoveHover.svg');
+    }
+  }
+  &-add {
+    background-image: url('../../../images/search/tagAdd.svg');
+    &:hover {
+      background-image: url('../../../images/search/tagAddHover.svg');
+    }
+  }
+}
+
+@media screen and (max-width: 436px) {
+  .ms-tags-panel div {
+    width: 100%;
   }
 }

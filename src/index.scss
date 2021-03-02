@@ -15,10 +15,6 @@ code {
     monospace;
 }
 
-#root {
-  height: 100%;
-}
-
 #modal {
   display: flex;
   justify-content: center;
@@ -61,12 +57,14 @@ html {
 }
 
 .btn-icon {
+  border: none;
+  background-color: var(--transparent);
   &:hover {
-    background-color: none;
+    background-color: var(--transparent);
     box-shadow: none;
   }
   &:focus:not(:focus-visible) {
-    background-color: none;
+    background-color: var(--transparent);
     box-shadow: none;
   }
 }

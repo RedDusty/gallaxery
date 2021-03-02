@@ -58,12 +58,26 @@ function Header(props) {
       <div className="actions">
         <Switch>
           <Route exact path="/">
-            <NavLink className="btn btn-link" to="/" tabIndex="8">
+            <NavLink
+              className="btn btn-link"
+              to="/"
+              tabIndex="8"
+              onKeyPress={(e) => {
+                e.currentTarget.click();
+              }}
+            >
               Reload
             </NavLink>
           </Route>
           <Route>
-            <NavLink className="btn btn-link" to="/" tabIndex="8">
+            <NavLink
+              className="btn btn-link"
+              to="/"
+              tabIndex="8"
+              onKeyPress={(e) => {
+                e.currentTarget.click();
+              }}
+            >
               Main page
             </NavLink>
           </Route>
@@ -77,6 +91,9 @@ function Header(props) {
               className="actions-btnAuth actions-btn btn btn-link"
               to="/profile"
               tabIndex="10"
+              onKeyPress={(e) => {
+                e.currentTarget.click();
+              }}
             >
               Profile
             </NavLink>

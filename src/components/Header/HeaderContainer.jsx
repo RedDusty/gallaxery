@@ -11,6 +11,7 @@ function HeaderContainer(props) {
   const [searchGoogle, setSearchGoogle] = useState(false);
   const [searchPinterest, setSearchPinterest] = useState(false);
   const [searchImgur, setSearchImgur] = useState(false);
+  const [unsplash, setUnsplash] = useState(false); // ok
   const [confirmedImages, setConfirmedImages] = useState(true);
   const [userImages, setUserImages] = useState(false);
   const [anonymousImages, setAnonymousImages] = useState(false);
@@ -19,14 +20,6 @@ function HeaderContainer(props) {
   const [query, setQuery] = useState([]);
 
   const { user } = useContext(Context);
-
-  function urlChecker() {
-    if (window.location.pathname !== '/') {
-      setReloadBtnText('Back');
-    } else {
-      setReloadBtnText('Reload');
-    }
-  }
 
   function queryUpdater(e = '') {
     setQuery(props.searchTags);
@@ -69,14 +62,12 @@ function HeaderContainer(props) {
   const vars = {
     setModalSearchIsOpen,
     modalSearchIsOpen,
-    query,
     reloadBtnText,
   };
 
   const functions = {
     btnOnKeyDown,
     btnOnKeyUp,
-    urlChecker,
   };
 
   return (

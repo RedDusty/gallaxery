@@ -41,5 +41,83 @@
   --greenBrdL: #92c59e;
   --greenBg: #63c47b;
   --greenBgL: #ffffff;
+
+  --greyBrd: #272727;
+  --greyBrdL: #464646;
+  --greyBg: #6d6d6d;
+  --greyBgL: #ffffff;
   --text: #000000;
+
+  --scrollbar: #cee5ff;
+  // --scrollbarArrows: #17212c; for scroll bar single button
+  --scrollbarButton: #86b7f0;
+  --scrollbarHover: #6ca2e0;
+  --scrollbarFocus: #6090c7;
+  --scrollbarThumb: #3b53be;
+  --scrollbarThumbHover: #213795;
+  --scrollbarThumbFocus: #071a70;
+  --scrollbarInactiveAction: #656581;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarThumb);
+  border-radius: 25px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  &:hover {
+    background-color: var(--scrollbarThumbHover);
+  }
+  &:active {
+    background-color: var(--scrollbarThumbFocus);
+  }
+}
+::-webkit-scrollbar-button {
+  background-color: var(--scrollbarButton);
+  &:hover {
+    background-color: var(--scrollbarHover);
+  }
+  &:active {
+    background-color: var(--scrollbarFocus);
+  }
+  &:window-inactive {
+    background-color: var(--scrollbarInactiveAction);
+  }
+  &:single-button {
+    background-size: contain;
+    background-repeat: no-repeat;
+    &:vertical:decrement {
+      background-image: url('./images/scrollUp.svg');
+    }
+    &:vertical:increment {
+      background-image: url('./images/scrollDown.svg');
+    }
+    &:horizontal:decrement {
+      background-image: url('./images/scrollLeft.svg');
+    }
+    &:horizontal:increment {
+      background-image: url('./images/scrollRight.svg');
+    }
+  }
+}
+
+::-webkit-scrollbar-corner {
+  background-color: var(--scrollbar);
+}
+::-webkit-scrollbar-track-piece {
+  background-color: var(--scrollbar);
+}
+::-webkit-resizer {
+  background-color: var(--scrollbar);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background-color: var(--scrollbarInactiveAction);
 }

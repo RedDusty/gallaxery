@@ -5,13 +5,14 @@ import TagsCol from './TagsCol';
 import Context from '../../../context';
 
 function ModalSearch(props) {
-  //   const querySearchTags = props.vars.querySearchTags;
-  //   const queryExcludeTags = props.vars.queryExcludeTags;
+  const querySearchTags = props.vars.querySearchTags;
+  const queryExcludeTags = props.vars.queryExcludeTags;
+  console.log(queryExcludeTags);
   //   const officialTags = props.vars.officialTags;
   //   const lastTags = props.vars.lastTags;
   //   const popularTags = props.vars.popularTags;
-  const querySearchTags = [];
-  const queryExcludeTags = [];
+  // const querySearchTags = [];
+  // const queryExcludeTags = [];
   const officialTags = [];
   const lastTags = [];
   const popularTags = [];
@@ -80,6 +81,13 @@ function ModalSearch(props) {
                 <SearchLabel
                   searchEngine={'imgur'}
                   color={'green'}
+                  state={searches.searchImgur}
+                  setState={searches.setSearchImgur}
+                  tabIndex="25"
+                />
+                <SearchLabel
+                  searchEngine={'unsplash'}
+                  color={'grey'}
                   state={searches.searchImgur}
                   setState={searches.setSearchImgur}
                   tabIndex="25"
