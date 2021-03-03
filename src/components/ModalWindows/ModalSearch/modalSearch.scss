@@ -1,5 +1,4 @@
 .ms {
-  grid-area: search;
   position: fixed;
   z-index: 5;
   display: flex;
@@ -11,8 +10,9 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: var(--ms);
+    background-color: var(--black000025);
     transition: 0.25s ease;
+    z-index: 5;
     &:hover {
       opacity: 0.5;
     }
@@ -21,16 +21,17 @@
     }
   }
   &-window {
-    position: fixed;
-    background-color: var(--msWindow);
-    border: 3px solid var(--border1);
+    background-color: var(--blueWhite000);
+    border: 3px solid var(--blue060);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     width: 75vw;
-    height: max-content;
+    height: 75vh;
     margin-top: 40px;
     padding-top: 8px;
     transition: 0.25s ease;
+    overflow: auto;
+    z-index: 15;
   }
   &-actions {
     display: flex;
@@ -41,85 +42,84 @@
   &-label {
     display: flex;
     align-items: center;
-    background-color: var(--button);
+    background-color: var(--blue020);
     margin: 5px 3px 0 3px;
     padding: 2px;
     border-radius: 10px;
     cursor: pointer;
-    border: 1px solid var(--button-border);
+    border: 1px solid var(--blue060);
     transition: 0.25s ease;
+    color: var(--black000);
+    &:hover {
+      background-color: var(--blueWhite000);
+    }
     &-blue {
       &:hover {
-        border-color: var(--blueBg);
-        color: var(--blueBg);
+        border-color: var(--blue090);
+        color: var(--blue090);
       }
       &-toggle {
-        border-color: var(--blueBrdL);
-        background: var(--blueBgL);
+        background: var(--white000);
         &::after {
-          border-color: var(--blueBgL) !important;
+          border-color: var(--white000) !important;
         }
         &:checked {
-          background: var(--blueBg);
-          border-color: var(--blueBrd);
+          background: var(--blue090);
+          border-color: var(--blue080);
         }
       }
     }
     &-red {
       &:hover {
-        border-color: var(--redBg);
-        color: var(--redBg);
+        border-color: var(--red090);
+        color: var(--red090);
       }
       &-toggle {
-        border-color: var(--redBrdL);
-        background: var(--redBgL);
+        background: var(--white000);
         &::after {
-          border-color: var(--redBgL) !important;
+          border-color: var(--white000) !important;
         }
         &:checked {
-          background: var(--redBg);
-          border-color: var(--redBrd);
+          background: var(--red090);
+          border-color: var(--red070);
         }
       }
     }
     &-green {
       &:hover {
-        border-color: var(--greenBg);
-        color: var(--greenBg);
+        border-color: var(--green030);
+        color: var(--green050);
       }
       &-toggle {
-        border-color: var(--greenBrdL);
-        background: var(--greenBgL);
+        background: var(--white000);
         &::after {
-          border-color: var(--greenBgL) !important;
+          border-color: var(--white000) !important;
         }
         &:checked {
-          background: var(--greenBg);
-          border-color: var(--greenBrd);
+          background: var(--green070);
+          border-color: var(--green030);
         }
       }
     }
     &-grey {
       &:hover {
-        border-color: var(--greyBg);
-        color: var(--greyBg);
+        border-color: var(--grey070);
+        color: var(--green050);
       }
       &-toggle {
-        border-color: var(--greyBrdL);
-        background: var(--greyBgL);
+        background: var(--white000);
         &::after {
-          border-color: var(--greyBgL) !important;
+          border-color: var(--white000) !important;
         }
         &:checked {
-          background: var(--greyBg);
-          border-color: var(--greyBrd);
+          background: var(--grey080);
+          border-color: var(--grey060);
         }
       }
     }
     &-text {
       user-select: none;
       font-weight: 400;
-      color: var(--textInactive);
     }
     &-toggle {
       -webkit-appearance: none;
@@ -165,7 +165,7 @@
       display: flex;
       flex-flow: row wrap;
       align-items: center;
-      background-color: var(--tagsCol);
+      background-color: var(--blue010);
       width: 90%;
       margin: 5px;
       padding: 5px;
@@ -179,7 +179,7 @@
       flex-flow: row wrap;
     }
     &-col {
-      background-color: var(--tagsCol);
+      background-color: var(--blue020);
       display: flex;
       flex-flow: column;
       border-radius: 10px;
@@ -200,7 +200,7 @@
     &-summary {
       cursor: pointer;
       border-radius: 10px;
-      background-color: var(--tagsText);
+      background-color: var(--blue060);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -218,7 +218,7 @@
 
 .tag {
   &-container {
-    background-color: var(--tagStandard);
+    background-color: var(--white000);
     margin: 4px 2px;
     padding: 1px 3px;
     border-radius: 15px;
@@ -226,10 +226,11 @@
     height: max-content;
     display: flex;
     align-items: center;
+    float: left;
     &-removed {
-      background-color: var(--tagRemoved);
+      background-color: var(--grey020);
       &:hover {
-        background-color: var(--tagStandard);
+        background-color: var(--white000);
       }
       &:hover .tag-text-removed {
         text-decoration: none;
@@ -237,13 +238,13 @@
     }
   }
   &-text {
-    color: var(--tagText);
+    color: var(--black000);
     width: max-content;
     &-removed {
       text-decoration-style: solid;
       text-decoration-line: line-through;
       text-decoration-thickness: 1.5px;
-      text-decoration-color: var(--tagRemovedLine);
+      text-decoration-color: var(--grey070);
     }
   }
   &-btn {
@@ -273,7 +274,20 @@
 }
 
 @media screen and (max-width: 436px) {
-  .ms-tags-panel div {
+  .ms-tags-col {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .ms {
+    &-close {
+      display: none;
+    }
+    &-window {
+      width: 100%;
+      height: calc(100% - 50px);
+      overflow: auto;
+    }
   }
 }

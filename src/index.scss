@@ -25,11 +25,11 @@ html {
 }
 
 .btn {
-  background-color: var(--button);
+  background-color: var(--blue010);
   outline: none;
   height: 30px;
   width: max-content;
-  border: 1.5px solid var(--button-border);
+  border: 1.5px solid var(--blue070);
   border-radius: 5px;
   cursor: pointer;
   font-weight: 600;
@@ -41,12 +41,12 @@ html {
   font-size: 14px;
   box-sizing: border-box;
   &:hover {
-    background-color: var(--button-hover);
-    box-shadow: 0px 0px 3px 1px var(--button-border);
+    background-color: var(--blue020);
+    box-shadow: 0px 0px 3px 1px var(--blue060);
   }
   &:focus:not(:focus-visible) {
-    background-color: var(--button-hover);
-    box-shadow: 0px 0px 3px 1px var(--button-border);
+    background-color: var(--blue020);
+    box-shadow: 0px 0px 3px 1px var(--blue060);
   }
 }
 
@@ -73,7 +73,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--button-text);
+  color: var(--black000);
   cursor: pointer;
 }
 
@@ -92,7 +92,7 @@ input,
 summary,
 div {
   &:focus-visible {
-    box-shadow: 0 0 0 3px var(--focusWithinBorder);
+    box-shadow: 0 0 0 3px var(--focus);
   }
 }
 
