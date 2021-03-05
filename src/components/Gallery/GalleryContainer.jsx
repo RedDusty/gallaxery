@@ -137,7 +137,6 @@ const GalleryContainer = (props) => {
   }
 
   const allImageBlocks = imagesBlocks.map((block) => {
-    window.block = block;
     return (
       <div
         className="imageContainer"

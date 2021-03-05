@@ -7,7 +7,6 @@ import Context from '../../../context';
 function ModalSearch(props) {
   const querySearchTags = props.vars.querySearchTags;
   const queryExcludeTags = props.vars.queryExcludeTags;
-  console.log(queryExcludeTags);
   //   const officialTags = props.vars.officialTags;
   //   const lastTags = props.vars.lastTags;
   //   const popularTags = props.vars.popularTags;
