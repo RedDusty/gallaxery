@@ -80,7 +80,8 @@ html {
 button,
 a,
 input,
-summary {
+summary,
+textarea {
   &:focus:not(:focus-visible) {
     box-shadow: none;
   }
@@ -90,17 +91,24 @@ button,
 a,
 input,
 summary,
-div {
+div,
+textarea {
   &:focus-visible {
     box-shadow: 0 0 0 3px var(--focus);
   }
 }
 
-div {
+div,
+textarea,
+input {
   &:focus-visible {
     outline: none;
   }
   &:focus:not(:focus-visible) {
     outline: none;
   }
+}
+
+textarea {
+  resize: none;
 }

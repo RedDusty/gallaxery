@@ -37,8 +37,14 @@ const UploadFile = (props) => {
             inputName={props.vars.inputName}
             userInfo={props.vars.userInfo}
             currentTime={props.vars.currentTime}
+            textareaKeyUp={props.functions.textareaKeyUp}
+            textareaKeyDown={props.functions.textareaKeyDown}
+            textareaPaste={props.functions.textareaPaste}
           />
         </div>
+      </div>
+      <div className="prew-actions">
+        <button className="prew-actions-done btn">Done</button>
       </div>
     </section>
   );

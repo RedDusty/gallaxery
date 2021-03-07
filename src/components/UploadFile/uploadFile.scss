@@ -1,6 +1,6 @@
 .iu {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 60px;
   width: 100%;
   height: calc(100% - 60px);
@@ -10,8 +10,8 @@
 .prew {
   &-container {
     background-color: var(--blue010);
-    width: calc(100% - 10px);
-    height: calc(100% - 10px);
+    width: calc(100% - 100px);
+    height: calc(100% - 100px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,6 +28,12 @@
       border-radius: 15px;
     }
   }
+  &-actions {
+    width: 75px;
+    &-done {
+      width: 100%;
+    }
+  }
   &-files {
     width: 100%;
     height: 100%;
@@ -40,7 +46,7 @@
 
 .uploader {
   &-container {
-    background-color: var(--blue020);
+    background-color: var(--blue030);
     width: 95%;
     height: 550px;
     display: flex;
@@ -96,7 +102,7 @@
   }
   &-action {
     &-del {
-      background-image: url('../../images/fileUploadDel.svg');
+      background-image: url('../../images/uploadFile/fileUploadDel.svg');
       background-color: var(--blue010);
       background-size: 20px;
       background-position: 2px;
@@ -113,11 +119,82 @@
       border-radius: 50%;
       cursor: pointer;
       &:hover {
-        background-image: url('../../images/fileUploadDelHover.svg');
+        background-image: url('../../images/uploadFile/fileUploadDelHover.svg');
         background-color: var(--red010);
         border-color: var(--red010);
         box-shadow: 0 0 3px 3px var(--red010);
       }
+    }
+  }
+}
+
+.finfo {
+  &-name {
+    font-size: 22px;
+    font-weight: 600;
+  }
+  &-sub {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+    margin-top: 5px;
+    &-author {
+      background-color: var(--blue010);
+      width: max-content;
+      display: flex;
+      padding: 3px 10px;
+      border-radius: 25px;
+      align-items: center;
+      &-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+      &-username {
+        margin-left: 5px;
+        font-weight: 500;
+      }
+    }
+    &-time {
+      background-color: var(--blue010);
+      width: max-content;
+      padding: 3px 5px;
+      margin: 2px 0 0 0;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+  &-comment {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  &-textarea {
+    background-color: var(--blue010);
+    min-width: 250px;
+    width: 95%;
+    height: 26px;
+    padding: 5px;
+    border: 2px solid var(--transparent);
+    border-radius: 15px;
+    outline: none;
+    word-break: break-all;
+    overflow: hidden;
+    &:placeholder-shown {
+      background-color: var(--blueWhite000);
+    }
+    &:hover:not(:focus) {
+      background-color: var(--blue010);
+      border: 2px solid var(--blue080);
+    }
+    &:focus {
+      background-color: var(--blueWhite000);
+    }
+    &:focus::placeholder {
+      color: var(--grey070);
+    }
+    &::placeholder {
+      color: var(--black000);
     }
   }
 }

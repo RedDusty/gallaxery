@@ -40,6 +40,37 @@ function UploadFileContainer(props) {
     noClick: true,
   });
 
+  function textareaPaste(e) {
+    console.log('a');
+    e.target.value = e.target.value.replace(/[\t\n\r]+/gm, ' ');
+    e.target.style.height = '1px';
+    e.target.style.height = e.target.scrollHeight - 10 + 'px';
+  }
+
+  function textareaKeyUp(e) {
+    console.log('b');
+    e.target.value = e.target.value.replace(/[\t\n\r]+/gm, ' ');
+    if (e.key === 'Enter' || e.key === 13) {
+      e.preventDefault();
+    }
+    e.target.style.height = '1px';
+    e.target.style.height = e.target.scrollHeight - 10 + 'px';
+  }
+
+  function textareaKeyDown(e) {
+    console.log('b');
+    e.target.value = e.target.value.replace(/[\t\n\r]+/gm, ' ');
+    if (e.key === 'Enter' || e.key === 13) {
+      e.preventDefault();
+    }
+    e.target.style.height = '1px';
+    e.target.style.height = e.target.scrollHeight - 10 + 'px';
+  }
+
+  function clearFile() {
+    setFile([]);
+  }
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setCurrentTime(currentTimeFunc());
@@ -56,10 +87,6 @@ function UploadFileContainer(props) {
     username: currentUser.displayName,
     photo: currentUser.photoURL,
   };
-
-  function clearFile() {
-    setFile([]);
-  }
 
   const fileInfo = file.map((file) => {
     if (inputName.current.value === '') {
@@ -93,7 +120,12 @@ function UploadFileContainer(props) {
     currentTime,
   };
 
-  const functions = { clearFile };
+  const functions = {
+    clearFile,
+    textareaKeyUp,
+    textareaKeyDown,
+    textareaPaste,
+  };
   return <UploadFile vars={vars} functions={functions} />;
 }
 
