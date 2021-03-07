@@ -3,12 +3,6 @@ import FileInfo from './FileInfo';
 import FileUploader from './FileUploader';
 
 const UploadFile = (props) => {
-  const getRootProps = props.vars.getRootProps;
-  const getInputProps = props.vars.getInputProps;
-  const open = props.vars.open;
-  const inputName = props.vars.inputName;
-  const userInfo = props.vars.userInfo;
-  const clearFile = props.functions.clearFile;
   let fileInfo = {};
   try {
     fileInfo = props.vars.fileInfo[0];
@@ -33,13 +27,17 @@ const UploadFile = (props) => {
       <div className="prew-container">
         <div className="prew-container-border">
           <FileUploader
-            getRootProps={getRootProps}
-            getInputProps={getInputProps}
-            open={open}
+            getRootProps={props.vars.getRootProps}
+            getInputProps={props.vars.getInputProps}
+            open={props.vars.open}
             fileInfo={fileInfo}
-            clearFile={clearFile}
+            clearFile={props.functions.clearFile}
           />
-          <FileInfo inputName={inputName} userInfo={userInfo} />
+          <FileInfo
+            inputName={props.vars.inputName}
+            userInfo={props.vars.userInfo}
+            currentTime={props.vars.currentTime}
+          />
         </div>
       </div>
     </section>

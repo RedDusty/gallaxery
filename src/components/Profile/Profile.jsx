@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
-import Context from '../../context';
+import { UserContext } from '../../UserProvider';
 
 const Profile = (props) => {
   const [redirect, setRedirect] = useState(null);
-  const user = useContext(Context);
+  const currentUser = useContext(UserContext);
 
   useEffect(() => {
-    if (!user) {
+    if (!currentUser) {
       setRedirect('/');
     }
-  }, [user]);
+  }, [currentUser]);
 
   if (redirect) {
     <Redirect to={redirect} />;

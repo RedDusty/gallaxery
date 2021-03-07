@@ -1,16 +1,26 @@
-import React, { useContext, useRef, useState } from 'react';
-import Context from '../../context';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import UploadFile from './UploadFile';
 import './uploadFile.scss';
 
 import firebase from 'firebase/app';
 import { Redirect } from 'react-router';
+import { UserContext } from '../../UserProvider';
+
+function currentTimeFunc() {
+  return new Intl.DateTimeFormat('en-GB', {
+    dateStyle: 'short',
+    timeStyle: 'medium',
+  })
+    .format(new Date(Date.now()))
+    .replace(/\//g, '.');
+}
 
 function UploadFileContainer(props) {
   const [file, setFile] = useState([]);
+  const [currentTime, setCurrentTime] = useState();
   const inputName = useRef(null);
-  const { user } = useContext(Context);
+  const { currentUser } = useContext(UserContext);
 
   const { getRootProps, getInputProps, open } = useDropzone({
     accept: 'image/*, video/*',
@@ -30,20 +40,21 @@ function UploadFileContainer(props) {
     noClick: true,
   });
 
-  if (!user) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentTime(currentTimeFunc());
+    }, 1000);
+    return () => clearTimeout(timer);
+  });
+
+  if (!currentUser) {
     console.log('Redirect');
     return <Redirect to="/" />;
   }
 
   const userInfo = {
-    username: user.displayName,
-    photo: user.photoURL,
-    time: new Intl.DateTimeFormat('en-GB', {
-      dateStyle: 'short',
-      timeStyle: 'medium',
-    })
-      .format(new Date(Date.now()))
-      .replace(/\//g, '.'),
+    username: currentUser.displayName,
+    photo: currentUser.photoURL,
   };
 
   function clearFile() {
@@ -79,6 +90,7 @@ function UploadFileContainer(props) {
     fileInfo,
     inputName,
     userInfo,
+    currentTime,
   };
 
   const functions = { clearFile };

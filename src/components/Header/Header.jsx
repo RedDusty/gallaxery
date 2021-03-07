@@ -1,17 +1,14 @@
 import React, { useContext } from 'react';
 import ModalSearchContainer from '../ModalWindows/ModalSearch/ModalSearchContainer';
-import Context from '../../context';
 
 import { NavLink, Route, Switch } from 'react-router-dom';
-import { logOut, signInWithGoogle } from '../../firebase';
+// import { logOut, signInWithGoogle } from '../../firebase';
 
 function Header(props) {
   const setModalSearchIsOpen = props.vars.setModalSearchIsOpen;
   const modalSearchIsOpen = props.vars.modalSearchIsOpen;
   const btnOnKeyDown = props.functions.btnOnKeyDown;
   const btnOnKeyUp = props.functions.btnOnKeyUp;
-
-  const { user } = useContext(Context);
 
   return (
     <section className="Header">
@@ -82,7 +79,7 @@ function Header(props) {
             </NavLink>
           </Route>
         </Switch>
-        {user ? (
+        {props.currentUser.currentUser !== null ? (
           <>
             <NavLink
               className="btn btn-link"
@@ -107,7 +104,7 @@ function Header(props) {
             <button
               className="actions-btnAuth actions-btn btn"
               onClick={() => {
-                logOut();
+                props.logOut();
                 window.location.reload();
               }}
               tabIndex="11"
@@ -119,7 +116,7 @@ function Header(props) {
           <button
             className="actions-btnAuth actions-btn btn"
             onClick={() => {
-              signInWithGoogle();
+              props.authWithGoogle();
             }}
             tabIndex="10"
           >
@@ -130,6 +127,7 @@ function Header(props) {
       <ModalSearchContainer
         isOpen={modalSearchIsOpen}
         setIsOpen={setModalSearchIsOpen}
+        searchParams={props.searchParams}
       />
     </section>
   );

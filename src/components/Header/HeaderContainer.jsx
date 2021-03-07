@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import Header from './Header';
 import './header.scss';
-import Context from '../../context';
 
 import { connect } from 'react-redux';
 import { tagParserOnKeyDown, tagParserOnKeyUp } from '../../redux/actions';
+import { UserContext } from '../../UserProvider';
 
 function HeaderContainer(props) {
   const [modalSearchIsOpen, setModalSearchIsOpen] = useState(false);
@@ -18,7 +18,7 @@ function HeaderContainer(props) {
   const [reloadBtnText, setReloadBtnText] = useState('Reload');
   const [query, setQuery] = useState([]);
 
-  const { user } = useContext(Context);
+  const currentUser = useContext(UserContext);
 
   function queryUpdater(e = '') {
     setQuery(props.searchTags);
@@ -68,9 +68,14 @@ function HeaderContainer(props) {
   };
 
   return (
-    <Context.Provider value={{ searchParams, user }}>
-      <Header vars={vars} functions={functions} />
-    </Context.Provider>
+    <Header
+      vars={vars}
+      functions={functions}
+      authWithGoogle={props.authWithGoogle}
+      logOut={props.logOut}
+      currentUser={currentUser}
+      searchParams={searchParams}
+    />
   );
 }
 

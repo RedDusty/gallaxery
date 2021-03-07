@@ -14,6 +14,7 @@ import rootReducer from './redux/reducers/rootReducer';
 // app other
 import './index.scss';
 import App from './App';
+import { UserProvider } from './UserProvider';
 
 const store = createStore(
   rootReducer,
@@ -22,11 +23,13 @@ const store = createStore(
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <UserProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -2,19 +2,20 @@ import React, { useState, useContext, useEffect } from 'react';
 import Profile from './Profile';
 import './profile.scss';
 
-import Context from '../../context';
 import { Redirect } from 'react-router-dom';
+import { UserContext } from '../../UserProvider';
 
 function ProfileContainer() {
   const [redirect, setRedirect] = useState(null);
-  const { user } = useContext(Context);
+  const { currentUser } = useContext(UserContext);
+  console.log(currentUser);
 
   useEffect(() => {
-    if (!user) {
+    if (!currentUser) {
       console.log('Redirect');
       setRedirect('/');
     }
-  }, [user]);
+  }, [currentUser]);
 
   if (redirect) {
     return <Redirect to="/" />;
@@ -26,10 +27,10 @@ function ProfileContainer() {
   let firstLogin = 'Loading first login...';
   let lastLogin = 'Loading last login...';
   try {
-    userName = user.displayName;
-    photoURL = user.photoURL;
-    firstLogin = user.firstLogin;
-    lastLogin = user.lastLogin;
+    userName = currentUser.displayName;
+    photoURL = currentUser.photoURL;
+    firstLogin = currentUser.firstLogin;
+    lastLogin = currentUser.lastLogin;
   } catch (error) {}
 
   const vars = {

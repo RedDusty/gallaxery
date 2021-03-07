@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import Modal from '../../Modal';
 import SearchLabel from './SearchLabel';
 import TagsCol from './TagsCol';
-import Context from '../../../context';
 
 function ModalSearch(props) {
+  const searchParams = props.searchParams;
   const querySearchTags = props.vars.querySearchTags;
   const queryExcludeTags = props.vars.queryExcludeTags;
   //   const officialTags = props.vars.officialTags;
@@ -16,7 +16,6 @@ function ModalSearch(props) {
   const lastTags = [];
   const popularTags = [];
 
-  const { searchParams } = useContext(Context);
   const searches = searchParams.searches;
   const userAllowed = searchParams.userAllowed;
 

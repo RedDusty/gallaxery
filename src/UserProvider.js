@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import Context from './context';
-import { auth } from './firebase';
+import { firebaseConfig } from './firebase';
 
-export default (props) => {
-  const [user, setUser] = useState(null);
+export const UserContext = React.createContext();
+
+export const UserProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
-    auth.onAuthStateChanged(async (userFb) => {
-      try {
-        const displayName = userFb.displayName;
-        const photoURL = userFb.photoURL;
-        const firstLogin = userFb.metadata.creationTime;
-        const lastLogin = userFb.metadata.lastSignInTime;
-        setUser({
-          displayName,
-          photoURL,
-          firstLogin,
-          lastLogin,
-        });
-      } catch (error) {}
+    firebaseConfig.auth().onAuthStateChanged((user) => {
+      setCurrentUser(user);
     });
   }, []);
 
-  return <Context.Provider value={{ user }}>{props.children}</Context.Provider>;
+  return (
+    <UserContext.Provider value={{ currentUser }}>
+      {children}
+    </UserContext.Provider>
+  );
 };

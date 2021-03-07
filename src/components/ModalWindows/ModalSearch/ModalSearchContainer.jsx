@@ -101,7 +101,13 @@ function ModalSearchContainer(props) {
   };
   const functions = {};
 
-  return <ModalSearch vars={vars} functions={functions} />;
+  return (
+    <ModalSearch
+      vars={vars}
+      functions={functions}
+      searchParams={props.searchParams}
+    />
+  );
 }
 
 const mapStateToProps = (state) => {
