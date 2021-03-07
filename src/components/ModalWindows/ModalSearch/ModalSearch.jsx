@@ -42,23 +42,16 @@ function ModalSearch(props) {
                 <SearchLabel
                   searchEngine={'Official images'}
                   color={'blue'}
-                  state={userAllowed.confirmedImages}
+                  state={true}
                   setState={userAllowed.setConfirmedImages}
                   tabIndex="20"
                 ></SearchLabel>
                 <SearchLabel
                   searchEngine={'User images'}
                   color={'green'}
-                  state={userAllowed.userImages}
+                  state={true}
                   setState={userAllowed.setUserImages}
                   tabIndex="21"
-                ></SearchLabel>
-                <SearchLabel
-                  searchEngine={'Anonymous images'}
-                  color={'red'}
-                  state={userAllowed.anonymousImages}
-                  setState={userAllowed.setAnonymousImages}
-                  tabIndex="22"
                 ></SearchLabel>
               </div>
               <div className="ms-labels-include">

@@ -82,18 +82,18 @@ function Header(props) {
             </NavLink>
           </Route>
         </Switch>
-        <NavLink
-          className="btn btn-link"
-          to="/imageUpload"
-          tabIndex="9"
-          onClick={() => {
-            setModalSearchIsOpen(false);
-          }}
-        >
-          Upload image
-        </NavLink>
         {user ? (
           <>
+            <NavLink
+              className="btn btn-link"
+              to="/file-upload"
+              tabIndex="9"
+              onClick={() => {
+                setModalSearchIsOpen(false);
+              }}
+            >
+              Upload file
+            </NavLink>
             <NavLink
               className="actions-btnAuth actions-btn btn btn-link"
               to="/profile"

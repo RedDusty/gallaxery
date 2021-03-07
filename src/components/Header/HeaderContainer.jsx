@@ -14,7 +14,6 @@ function HeaderContainer(props) {
   const [unsplash, setUnsplash] = useState(false); // ok
   const [confirmedImages, setConfirmedImages] = useState(true);
   const [userImages, setUserImages] = useState(false);
-  const [anonymousImages, setAnonymousImages] = useState(false);
 
   const [reloadBtnText, setReloadBtnText] = useState('Reload');
   const [query, setQuery] = useState([]);
@@ -50,8 +49,6 @@ function HeaderContainer(props) {
     setConfirmedImages,
     userImages,
     setUserImages,
-    anonymousImages,
-    setAnonymousImages,
   };
 
   const searchParams = {
