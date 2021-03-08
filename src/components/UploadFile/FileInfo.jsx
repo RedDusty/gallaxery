@@ -4,9 +4,8 @@ const FileInfo = ({
   inputName,
   userInfo,
   currentTime,
-  textareaKeyDown,
-  textareaKeyUp,
-  textareaPaste,
+  textareaAction,
+  fileTags,
 }) => {
   return (
     <form className="prew-info">
@@ -15,31 +14,26 @@ const FileInfo = ({
           className="finfo-name finfo-textarea"
           placeholder="Write name here..."
           ref={inputName}
-          minLength="1"
-          maxLength="100"
           spellCheck="false"
-          required={true}
-          onKeyPress={textareaKeyDown}
-          onKeyUp={textareaKeyUp}
-          onPaste={textareaPaste}
+          onKeyPress={textareaAction}
+          onKeyUp={textareaAction}
+          onPaste={textareaAction}
         ></textarea>
+        <p className="finfo-length-name finfo-length">
+          Maximum 500 characters!
+        </p>
       </div>
       <textarea
         className="finfo-comment finfo-textarea"
         placeholder="Write some comments here..."
-        maxLength="500"
         spellCheck="false"
-        onKeyPress={textareaKeyDown}
-        onKeyUp={textareaKeyUp}
-        onPaste={textareaPaste}
+        onKeyPress={textareaAction}
+        onKeyUp={textareaAction}
+        onPaste={textareaAction}
       ></textarea>
-      <textarea
-        className="finfo-tags finfo-textarea"
-        placeholder="Add tags here to find this..."
-        onKeyPress={textareaKeyDown}
-        onKeyUp={textareaKeyUp}
-        onPaste={textareaPaste}
-      ></textarea>
+      <p className="finfo-length-comment finfo-length">
+        Maximum 1000 characters!
+      </p>
       <div className="finfo-sub">
         <div className="finfo-sub-author">
           <img className="finfo-sub-author-icon" src={userInfo.photo}></img>
@@ -47,6 +41,10 @@ const FileInfo = ({
         </div>
         <p className="finfo-sub-time">{currentTime}</p>
       </div>
+      <div className="finfo-tags-container">{fileTags}</div>
+      <p className="finfo-length-tags finfo-length">
+        There should be 4-25 tags.
+      </p>
     </form>
   );
 };

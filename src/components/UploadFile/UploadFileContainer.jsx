@@ -6,6 +6,8 @@ import './uploadFile.scss';
 import firebase from 'firebase/app';
 import { Redirect } from 'react-router';
 import { UserContext } from '../../UserProvider';
+import { ufTagDelete, ufTagParse } from '../../redux/actions';
+import { connect } from 'react-redux';
 
 function currentTimeFunc() {
   return new Intl.DateTimeFormat('en-GB', {
@@ -21,6 +23,7 @@ function UploadFileContainer(props) {
   const [currentTime, setCurrentTime] = useState();
   const inputName = useRef(null);
   const { currentUser } = useContext(UserContext);
+  let tags = 0;
 
   const { getRootProps, getInputProps, open } = useDropzone({
     accept: 'image/*, video/*',
@@ -40,25 +43,71 @@ function UploadFileContainer(props) {
     noClick: true,
   });
 
-  function textareaPaste(e) {
-    console.log('a');
-    e.target.value = e.target.value.replace(/[\t\n\r]+/gm, ' ');
-    e.target.style.height = '1px';
-    e.target.style.height = e.target.scrollHeight - 10 + 'px';
-  }
-
-  function textareaKeyUp(e) {
-    console.log('b');
-    e.target.value = e.target.value.replace(/[\t\n\r]+/gm, ' ');
-    if (e.key === 'Enter' || e.key === 13) {
-      e.preventDefault();
+  function queryUpdater(e = '') {
+    props.ufTagParse(e, tags);
+    tags = props.ufTags.length;
+    console.log(tags);
+    if (tags < 4) {
+      document.documentElement.style.setProperty('--finfoLenTags', 'block');
+    } else {
+      document.documentElement.style.setProperty('--finfoLenTags', 'none');
     }
-    e.target.style.height = '1px';
-    e.target.style.height = e.target.scrollHeight - 10 + 'px';
   }
 
-  function textareaKeyDown(e) {
-    console.log('b');
+  function tagKeyDown(e) {
+    console.log('entry: ' + tags);
+    if (tags < 25) {
+      console.log('25: ' + tags);
+      if (tags < 4) {
+        document.documentElement.style.setProperty('--finfoLenTags', 'block');
+      } else {
+        document.documentElement.style.setProperty('--finfoLenTags', 'none');
+      }
+      props.ufTagParse(e, tags);
+      queryUpdater();
+    } else {
+      console.log('else: ' + tags);
+      document.documentElement.style.setProperty('--finfoLenTags', 'block');
+    }
+  }
+  function tagKeyUp(e) {
+    if (e.key === ' ') {
+      tags = props.ufTags.length;
+      if (tags < 4) {
+        document.documentElement.style.setProperty('--finfoLenTags', 'block');
+      } else {
+        document.documentElement.style.setProperty('--finfoLenTags', 'none');
+      }
+      e.target.value = '';
+    }
+  }
+
+  function tagDelete(tagId) {
+    props.ufTagDelete(tagId, tags);
+    tags = props.ufTags.length;
+    queryUpdater();
+  }
+
+  function textareaAction(e) {
+    if (
+      e.target.classList[0] === 'finfo-comment' &&
+      e.target.value.length > 1000
+    ) {
+      document.documentElement.style.setProperty('--finfoLenComment', 'block');
+    } else if (
+      e.target.classList[0] === 'finfo-comment' &&
+      e.target.value.length < 1001
+    ) {
+      document.documentElement.style.setProperty('--finfoLenComment', 'none');
+    }
+    if (e.target.classList[0] === 'finfo-name' && e.target.value.length > 500) {
+      document.documentElement.style.setProperty('--finfoLenName', 'block');
+    } else if (
+      e.target.classList[0] === 'finfo-name' &&
+      e.target.value.length < 501
+    ) {
+      document.documentElement.style.setProperty('--finfoLenName', 'none');
+    }
     e.target.value = e.target.value.replace(/[\t\n\r]+/gm, ' ');
     if (e.key === 'Enter' || e.key === 13) {
       e.preventDefault();
@@ -76,7 +125,7 @@ function UploadFileContainer(props) {
       setCurrentTime(currentTimeFunc());
     }, 1000);
     return () => clearTimeout(timer);
-  });
+  }, [currentTime]);
 
   if (!currentUser) {
     console.log('Redirect');
@@ -87,6 +136,26 @@ function UploadFileContainer(props) {
     username: currentUser.displayName,
     photo: currentUser.photoURL,
   };
+
+  const fileTags = props.ufTags
+    .filter((tag) => tag !== undefined)
+    .map((tag, index) => {
+      if (!tag.removed) {
+        return (
+          <div className={`tag-container-standard tag-container`} key={index}>
+            <div className={`tag-text tag-text-standard`}>{tag.tag}</div>
+            <button
+              className="tag-delete btn btn-icon tag-btn"
+              onClick={(e) => {
+                e.preventDefault();
+                tagDelete(index);
+              }}
+            ></button>
+          </div>
+        );
+      }
+      return [];
+    });
 
   const fileInfo = file.map((file) => {
     if (inputName.current.value === '') {
@@ -118,15 +187,30 @@ function UploadFileContainer(props) {
     inputName,
     userInfo,
     currentTime,
+    fileTags,
   };
 
   const functions = {
     clearFile,
-    textareaKeyUp,
-    textareaKeyDown,
-    textareaPaste,
+    textareaAction,
+    tagKeyDown,
+    tagKeyUp,
   };
   return <UploadFile vars={vars} functions={functions} />;
 }
 
-export default UploadFileContainer;
+const mapStateToProps = (state) => {
+  return {
+    ufTags: state.uploadFileReducer.uf_tags,
+  };
+};
+
+const mapDispatchToProps = {
+  ufTagParse,
+  ufTagDelete,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UploadFileContainer);

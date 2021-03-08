@@ -5,6 +5,8 @@ import {
   TAG_SEARCH_REMOVE,
   TAG_SEARCH_ADD,
   BLOCKS_CONFIRMED_LOADING,
+  UF_TAG_PARSE,
+  UF_TAG_DELETE,
 } from './types';
 
 export const tagParserOnKeyDown = (e = {}) => ({
@@ -47,5 +49,19 @@ export const blocksConfirmedLoading = (blockId) => ({
   type: BLOCKS_CONFIRMED_LOADING,
   payload: {
     blockId: blockId,
+  },
+});
+
+export const ufTagParse = (e) => ({
+  type: UF_TAG_PARSE,
+  payload: {
+    e,
+  },
+});
+
+export const ufTagDelete = (tagId) => ({
+  type: UF_TAG_DELETE,
+  payload: {
+    tagId,
   },
 });

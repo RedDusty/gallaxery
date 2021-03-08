@@ -8,3 +8,9 @@ export const TAG_SEARCH_DELETE = 'TAG_SEARCH_DELETE';
 
 // BLOCKS
 export const BLOCKS_CONFIRMED_LOADING = 'BLOCKS_CONFIRMED_LOADING';
+
+// uploadFile
+
+export const UF_TAG_PARSE = 'UF_TAG_PARSE';
+export const UF_TAG_DELETE = 'UF_TAG_DELETE';
+export const UF_TEXTAREA = 'UF_TEXTAREA';
