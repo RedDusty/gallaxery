@@ -5,6 +5,7 @@ import {
   TAG_SEARCH,
   TAG_SEARCH_REMOVE,
   TAG_SEARCH_ADD,
+  HEADER_TAGS_UPDATER,
 } from '../types';
 
 const initialState = {
@@ -19,30 +20,33 @@ export default function searchReducer(state = initialState, action) {
     case TAG_PARSE_ONKEYDOWN: {
       const { e } = action.payload;
       let queryReturn = [];
-      if (e.key === 'Space' || e.key === 32 || e.key === ' ') {
-        const val = e.target.value.match(/[^ -][^ ]*/g);
-        if (val !== null) {
-          val.map((tag) => {
-            if (
-              tag !== '' ||
-              tag !== ' ' ||
-              tag !== undefined ||
-              tag !== null
-            ) {
-              let canPush = true;
-              for (let index = 0; index < state.tags.length; index++) {
-                if (state.tags[index].tag === tag) {
-                  canPush = false;
+      if (e !== '') {
+        if (/\s/.test(e.target.value)) {
+          const val = e.target.value.match(/[^ -][^ ]*/g);
+          if (val !== null) {
+            val.map((tag) => {
+              if (
+                tag !== '' ||
+                tag !== ' ' ||
+                tag !== undefined ||
+                tag !== null
+              ) {
+                let canPush = true;
+                for (let index = 0; index < state.tags.length; index++) {
+                  if (state.tags[index].tag === tag) {
+                    canPush = false;
+                  }
+                }
+                if (canPush) {
+                  console.log('push');
+                  queryReturn.push({
+                    tag: tag,
+                    removed: false,
+                  });
                 }
               }
-              if (canPush) {
-                queryReturn.push({
-                  tag: tag,
-                  removed: false,
-                });
-              }
-            }
-          });
+            });
+          }
         }
       }
       const newState = [...new Set(state.tags.concat(queryReturn))];
@@ -53,7 +57,7 @@ export default function searchReducer(state = initialState, action) {
     }
     case TAG_PARSE_ONKEYUP: {
       const { e, clearAction } = action.payload;
-      if (e.key === 'Space' || e.key === 32 || e.key === ' ') {
+      if (/\s/.test(e.target.value)) {
         e.target.value = '';
       }
       if (clearAction === 'clear') {
@@ -80,6 +84,11 @@ export default function searchReducer(state = initialState, action) {
     case TAG_SEARCH_ADD: {
       const { tagId } = action.payload;
       state.tags[tagId].removed = false;
+      return {
+        ...state,
+      };
+    }
+    case HEADER_TAGS_UPDATER: {
       return {
         ...state,
       };

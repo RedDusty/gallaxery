@@ -7,12 +7,14 @@ import {
   BLOCKS_CONFIRMED_LOADING,
   UF_TAG_PARSE,
   UF_TAG_DELETE,
+  HEADER_TAGS_UPDATER,
 } from './types';
 
-export const tagParserOnKeyDown = (e = {}) => ({
+export const tagParserOnKeyDown = (e = {}, action = '') => ({
   type: TAG_PARSE_ONKEYDOWN,
   payload: {
-    e: e,
+    e,
+    action,
   },
 });
 
@@ -43,6 +45,10 @@ export const tagSearchAdd = (tagId) => ({
   payload: {
     tagId: tagId,
   },
+});
+
+export const headerTagsUpdater = () => ({
+  type: HEADER_TAGS_UPDATER,
 });
 
 export const blocksConfirmedLoading = (blockId) => ({

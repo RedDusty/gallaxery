@@ -112,7 +112,7 @@ function ModalSearchContainer(props) {
 
 const mapStateToProps = (state) => {
   return {
-    searchTags: state.searchReducer.tags,
+    searchTags: state.headerReducer.tags,
   };
 };
 

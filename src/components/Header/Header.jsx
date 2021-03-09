@@ -39,8 +39,9 @@ function Header(props) {
             type="text"
             className="search-input search-btn"
             placeholder="Search..."
-            onKeyDown={btnOnKeyDown}
+            // onKeyDown={btnOnKeyDown}
             onKeyUp={btnOnKeyUp}
+            onChange={btnOnKeyDown}
             onClick={() => {
               setModalSearchIsOpen(true);
             }}

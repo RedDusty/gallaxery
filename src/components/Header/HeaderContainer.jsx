@@ -20,19 +20,13 @@ function HeaderContainer(props) {
 
   const currentUser = useContext(UserContext);
 
-  function queryUpdater(e = '') {
-    setQuery(props.searchTags);
-    props.tagParserOnKeyDown(e);
-  }
-
   function btnOnKeyDown(e) {
     props.tagParserOnKeyDown(e);
-    queryUpdater();
+    setQuery(props.searchTags);
   }
 
   function btnOnKeyUp(e, action) {
     props.tagParserOnKeyUp(e, action);
-    queryUpdater();
   }
 
   const searches = {
@@ -81,7 +75,7 @@ function HeaderContainer(props) {
 
 const mapStateToProps = (state) => {
   return {
-    searchTags: state.searchReducer.tags,
+    searchTags: state.headerReducer.tags,
   };
 };
 

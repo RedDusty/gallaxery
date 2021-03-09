@@ -9,6 +9,8 @@ import { UserContext } from '../../UserProvider';
 import { ufTagDelete, ufTagParse } from '../../redux/actions';
 import { connect } from 'react-redux';
 
+//CARD COLOR, MINI-ALUBM (10 FILES IN ONE CARD MAX)
+
 function currentTimeFunc() {
   return new Intl.DateTimeFormat('en-GB', {
     dateStyle: 'short',
