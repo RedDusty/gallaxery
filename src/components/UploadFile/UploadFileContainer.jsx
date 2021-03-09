@@ -48,7 +48,6 @@ function UploadFileContainer(props) {
   function queryUpdater(e = '') {
     props.ufTagParse(e, tags);
     tags = props.ufTags.length;
-    console.log(tags);
     if (tags < 4) {
       document.documentElement.style.setProperty('--finfoLenTags', 'block');
     } else {
@@ -57,9 +56,7 @@ function UploadFileContainer(props) {
   }
 
   function tagKeyDown(e) {
-    console.log('entry: ' + tags);
     if (tags < 25) {
-      console.log('25: ' + tags);
       if (tags < 4) {
         document.documentElement.style.setProperty('--finfoLenTags', 'block');
       } else {
@@ -68,7 +65,6 @@ function UploadFileContainer(props) {
       props.ufTagParse(e, tags);
       queryUpdater();
     } else {
-      console.log('else: ' + tags);
       document.documentElement.style.setProperty('--finfoLenTags', 'block');
     }
   }

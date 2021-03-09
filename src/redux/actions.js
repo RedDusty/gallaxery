@@ -1,17 +1,17 @@
 import {
-  TAG_SEARCH_DELETE,
-  TAG_PARSE_ONKEYDOWN,
-  TAG_PARSE_ONKEYUP,
-  TAG_SEARCH_REMOVE,
-  TAG_SEARCH_ADD,
-  BLOCKS_CONFIRMED_LOADING,
+  HDR_TAG_PARSE_ONKEYDOWN,
+  HDR_TAG_PARSE_ONKEYUP,
+  MS_TAG_SEARCH_DELETE,
+  MS_TAG_SEARCH_REMOVE,
+  MS_TAG_SEARCH_ADD,
+  GLR_CARD_LOAD,
   UF_TAG_PARSE,
   UF_TAG_DELETE,
-  HEADER_TAGS_UPDATER,
+  UF_TEXTAREA,
 } from './types';
 
 export const tagParserOnKeyDown = (e = {}, action = '') => ({
-  type: TAG_PARSE_ONKEYDOWN,
+  type: HDR_TAG_PARSE_ONKEYDOWN,
   payload: {
     e,
     action,
@@ -19,7 +19,7 @@ export const tagParserOnKeyDown = (e = {}, action = '') => ({
 });
 
 export const tagParserOnKeyUp = (e = {}, clearAction = 'none') => ({
-  type: TAG_PARSE_ONKEYUP,
+  type: HDR_TAG_PARSE_ONKEYUP,
   payload: {
     e: e,
     clearAction: clearAction,
@@ -27,32 +27,28 @@ export const tagParserOnKeyUp = (e = {}, clearAction = 'none') => ({
 });
 
 export const tagSearchDelete = (tagId) => ({
-  type: TAG_SEARCH_DELETE,
+  type: MS_TAG_SEARCH_DELETE,
   payload: {
     tagId: tagId,
   },
 });
 
 export const tagSearchRemove = (tagId) => ({
-  type: TAG_SEARCH_REMOVE,
+  type: MS_TAG_SEARCH_REMOVE,
   payload: {
     tagId: tagId,
   },
 });
 
 export const tagSearchAdd = (tagId) => ({
-  type: TAG_SEARCH_ADD,
+  type: MS_TAG_SEARCH_ADD,
   payload: {
     tagId: tagId,
   },
 });
 
-export const headerTagsUpdater = () => ({
-  type: HEADER_TAGS_UPDATER,
-});
-
 export const blocksConfirmedLoading = (blockId) => ({
-  type: BLOCKS_CONFIRMED_LOADING,
+  type: GLR_CARD_LOAD,
   payload: {
     blockId: blockId,
   },

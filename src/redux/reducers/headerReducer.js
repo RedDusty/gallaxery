@@ -1,11 +1,10 @@
 import {
-  TAG_SEARCH_DELETE,
-  TAG_PARSE_ONKEYDOWN,
-  TAG_PARSE_ONKEYUP,
-  TAG_SEARCH,
-  TAG_SEARCH_REMOVE,
-  TAG_SEARCH_ADD,
-  HEADER_TAGS_UPDATER,
+  HDR_TAG_SEARCH,
+  HDR_TAG_PARSE_ONKEYDOWN,
+  HDR_TAG_PARSE_ONKEYUP,
+  MS_TAG_SEARCH_DELETE,
+  MS_TAG_SEARCH_REMOVE,
+  MS_TAG_SEARCH_ADD,
 } from '../types';
 
 const initialState = {
@@ -14,10 +13,10 @@ const initialState = {
 
 export default function searchReducer(state = initialState, action) {
   switch (action.type) {
-    case TAG_SEARCH: {
+    case HDR_TAG_SEARCH: {
       return state;
     }
-    case TAG_PARSE_ONKEYDOWN: {
+    case HDR_TAG_PARSE_ONKEYDOWN: {
       const { e } = action.payload;
       let queryReturn = [];
       if (e !== '') {
@@ -38,7 +37,6 @@ export default function searchReducer(state = initialState, action) {
                   }
                 }
                 if (canPush) {
-                  console.log('push');
                   queryReturn.push({
                     tag: tag,
                     removed: false,
@@ -55,7 +53,7 @@ export default function searchReducer(state = initialState, action) {
         tags: newState,
       };
     }
-    case TAG_PARSE_ONKEYUP: {
+    case HDR_TAG_PARSE_ONKEYUP: {
       const { e, clearAction } = action.payload;
       if (/\s/.test(e.target.value)) {
         e.target.value = '';
@@ -67,28 +65,23 @@ export default function searchReducer(state = initialState, action) {
         ...state,
       };
     }
-    case TAG_SEARCH_DELETE: {
+    case MS_TAG_SEARCH_DELETE: {
       const { tagId } = action.payload;
       state.tags.splice(tagId, 1);
       return {
         ...state,
       };
     }
-    case TAG_SEARCH_REMOVE: {
+    case MS_TAG_SEARCH_REMOVE: {
       const { tagId } = action.payload;
       state.tags[tagId].removed = true;
       return {
         ...state,
       };
     }
-    case TAG_SEARCH_ADD: {
+    case MS_TAG_SEARCH_ADD: {
       const { tagId } = action.payload;
       state.tags[tagId].removed = false;
-      return {
-        ...state,
-      };
-    }
-    case HEADER_TAGS_UPDATER: {
       return {
         ...state,
       };

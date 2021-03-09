@@ -170,8 +170,8 @@ const GalleryContainer = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    blocks: state.blocksReducer.blocks,
-    update: state.blocksReducer.update,
+    blocks: state.galleryReducer.blocks,
+    update: state.galleryReducer.update,
   };
 };
 

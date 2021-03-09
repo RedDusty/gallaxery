@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import headerReducer from './headerReducer';
-import blocksReducer from './blocksReducer';
+import galleryReducer from './galleryReducer';
 import uploadFileReducer from './uploadFileReducer';
 
 export default combineReducers({
   headerReducer,
-  blocksReducer,
+  galleryReducer,
   uploadFileReducer,
 });

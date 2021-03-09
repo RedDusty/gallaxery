@@ -8,7 +8,6 @@ import { UserContext } from '../../UserProvider';
 function ProfileContainer() {
   const [redirect, setRedirect] = useState(null);
   const { currentUser } = useContext(UserContext);
-  console.log(currentUser);
 
   useEffect(() => {
     if (!currentUser) {

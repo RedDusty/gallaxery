@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import { BLOCKS_CONFIRMED_LOADING } from '../types';
+import { GLR_CARD_LOAD } from '../types';
 
 const initialState = {
   blocks: [],
@@ -7,7 +7,7 @@ const initialState = {
 
 export default function blocksReducer(state = initialState, action) {
   switch (action.type) {
-    case BLOCKS_CONFIRMED_LOADING: {
+    case GLR_CARD_LOAD: {
       const { blockId } = action.payload;
       let blocks = [];
       let dataLength = 1;
