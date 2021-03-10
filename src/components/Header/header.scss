@@ -1,7 +1,6 @@
 .Header {
   background-color: var(--blueWhite000);
   border-bottom: 3px solid var(--blue060);
-  box-shadow: 0 0 4px 2px var(--blue060);
   z-index: 15;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -123,16 +122,19 @@
     border: none;
     &-extended {
       grid-area: extended;
+      border-radius: 0;
       background-image: url('../../images/search/searchExtended.svg');
       &:hover {
-        background-image: url('../../images/search/searchExtendedHover.svg');
+        filter: invert(13%) sepia(78%) saturate(3733%) hue-rotate(237deg)
+          brightness(113%) contrast(116%);
       }
     }
     &-magnifier {
       grid-area: icon;
       background-image: url('../../images/search/searchIcon.svg');
       &:hover {
-        background-image: url('../../images/search/searchIconHover.svg');
+        filter: invert(13%) sepia(78%) saturate(3733%) hue-rotate(237deg)
+          brightness(113%) contrast(116%);
       }
     }
   }

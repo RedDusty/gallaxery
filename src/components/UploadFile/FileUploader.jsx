@@ -36,7 +36,9 @@ const FileUploader = ({
             onClick={() => {
               clearFile();
             }}
-          ></button>
+          >
+            <div className="file-action-del-icon" />
+          </button>
         </div>
       </div>
     );
