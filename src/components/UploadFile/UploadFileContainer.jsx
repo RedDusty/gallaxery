@@ -9,7 +9,8 @@ import { UserContext } from '../../UserProvider';
 import { ufTagDelete, ufTagParse } from '../../redux/actions';
 import { connect } from 'react-redux';
 
-//CARD COLOR, MINI-ALUBM (10 FILES IN ONE CARD MAX)
+// CARD COLOR
+// MINI-ALUBM (10 FILES IN ONE CARD MAX)
 
 function currentTimeFunc() {
   return new Intl.DateTimeFormat('en-GB', {
@@ -48,7 +49,7 @@ function UploadFileContainer(props) {
   function queryUpdater(e = '') {
     props.ufTagParse(e, tags);
     tags = props.ufTags.length;
-    if (tags < 4) {
+    if (tags < 4 || tags >= 25) {
       document.documentElement.style.setProperty('--finfoLenTags', 'block');
     } else {
       document.documentElement.style.setProperty('--finfoLenTags', 'none');
@@ -56,22 +57,24 @@ function UploadFileContainer(props) {
   }
 
   function tagKeyDown(e) {
-    if (tags < 25) {
-      if (tags < 4) {
-        document.documentElement.style.setProperty('--finfoLenTags', 'block');
+    if (!(e.target.value.length > 25)) {
+      if (tags < 25 && !(tags >= 25)) {
+        if (tags < 4) {
+          document.documentElement.style.setProperty('--finfoLenTags', 'block');
+        } else {
+          document.documentElement.style.setProperty('--finfoLenTags', 'none');
+        }
+        props.ufTagParse(e, tags);
+        queryUpdater();
       } else {
-        document.documentElement.style.setProperty('--finfoLenTags', 'none');
+        document.documentElement.style.setProperty('--finfoLenTags', 'block');
       }
-      props.ufTagParse(e, tags);
-      queryUpdater();
-    } else {
-      document.documentElement.style.setProperty('--finfoLenTags', 'block');
     }
   }
   function tagKeyUp(e) {
     if (e.key === ' ') {
       tags = props.ufTags.length;
-      if (tags < 4) {
+      if (tags < 4 || tags >= 25) {
         document.documentElement.style.setProperty('--finfoLenTags', 'block');
       } else {
         document.documentElement.style.setProperty('--finfoLenTags', 'none');

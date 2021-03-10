@@ -30,6 +30,8 @@ const UploadFile = (props) => {
           placeholder="Add tags to find this..."
           onKeyDown={props.functions.tagKeyDown}
           onKeyUp={props.functions.tagKeyUp}
+          minLength="1"
+          maxLength="15"
         ></input>
         <button className="prew-actions-done btn">Create</button>
       </div>

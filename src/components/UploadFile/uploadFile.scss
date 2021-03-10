@@ -1,5 +1,5 @@
 :root {
-  --finfoLenName: block;
+  --finfoLenName: none;
   --finfoLenComment: none;
   --finfoLenTags: block;
 }
@@ -37,18 +37,20 @@
   &-files {
     width: 100%;
     height: 100%;
+    margin-right: 5px;
   }
   &-info {
     width: 100%;
     height: 100%;
+    margin-left: 5px;
   }
 }
 
 .uploader {
   &-container {
     background-color: var(--blue030);
-    width: 95%;
-    height: 550px;
+    width: 500px;
+    height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,10 +87,11 @@
 .file {
   &-img {
     display: flex;
+    width: 100%;
     img,
     video {
       border-radius: 15px;
-      width: 95%;
+      width: 100%;
       height: auto;
       transition: 0.25s ease;
       &:hover {
@@ -251,5 +254,86 @@
   &-done {
     width: 75px;
     margin: 0 15px 0 0;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .iu {
+    align-items: center;
+  }
+  .prew {
+    &-actions {
+      width: 512px;
+    }
+    &-container {
+      width: 512px;
+      &-border {
+        flex-flow: column;
+      }
+    }
+    &-files {
+      margin-right: 0;
+    }
+    &-info {
+      margin-left: 0;
+    }
+  }
+  .uploader-container {
+    width: 450px;
+    height: 450px;
+  }
+}
+
+@media screen and (max-width: 532px) {
+  .iu {
+    align-items: center;
+  }
+  .prew {
+    &-actions {
+      width: 100%;
+      margin: 5px 5px 0 5px;
+      border-radius: 0;
+    }
+    &-container {
+      width: 100%;
+      margin: 0 5px 0 5px;
+      border-radius: 0;
+      &-border {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        border-width: 0;
+      }
+    }
+    &-files {
+      margin: 0;
+      img {
+        border-radius: 0;
+      }
+    }
+    &-info {
+      margin-left: 0;
+    }
+  }
+  .uploader {
+    &-container {
+      width: 100%;
+      height: 475px;
+      border-radius: 0;
+    }
+    &-inner {
+      border-radius: 0;
+    }
+  }
+  .finfo {
+    &-textarea {
+      width: calc(95% - 10px);
+      margin: 5px;
+    }
+    &-tags-container {
+      margin: 0;
+      border-radius: 0;
+    }
   }
 }
