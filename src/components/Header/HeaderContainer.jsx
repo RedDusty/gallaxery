@@ -28,7 +28,6 @@ function HeaderContainer(props) {
           !menuRef.current.contains(event.target) &&
           event.target.id !== 'actions-menu-btn-img'
         ) {
-          console.log(event.target.id !== 'actions-menu-btn-img');
           setMenuIsOpen(false);
         }
       }

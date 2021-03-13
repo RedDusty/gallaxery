@@ -98,6 +98,10 @@ textarea {
   border-radius: 50%;
   &-gallaxery {
     background-image: url('./images/favicon.svg');
+    background-size: 35px;
+    &:hover {
+      animation: HeaderLogoRotate 2.5s infinite linear;
+    }
   }
   &-google {
     background-image: url('./images/header/Google.svg');
@@ -107,5 +111,14 @@ textarea {
   }
   &:hover {
     background-color: var(--blue020);
+  }
+}
+
+@keyframes HeaderLogoRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
