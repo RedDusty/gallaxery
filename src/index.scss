@@ -25,28 +25,29 @@ html {
 }
 
 .btn {
-  background-color: var(--blue010);
+  background-color: var(--transparent);
   outline: none;
   height: 30px;
   width: max-content;
-  border: 1.5px solid var(--blue070);
+  padding: 1px 6px;
+  margin: 3px 3px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: 600;
   user-select: none;
   color: var(--button-text);
-  padding: 1px 6px;
-  margin: 0 3px;
   text-align: center;
-  font-size: 14px;
-  box-sizing: border-box;
+  font-size: 16px;
   &:hover {
     background-color: var(--blue020);
-    box-shadow: 0px 0px 3px 1px var(--blue060);
   }
-  &:focus:not(:focus-visible) {
+  &:focus {
     background-color: var(--blue020);
-    box-shadow: 0px 0px 3px 1px var(--blue060);
   }
 }
 
@@ -58,15 +59,9 @@ html {
 
 .btn-icon {
   border: none;
+  border-radius: 50%;
   background-color: var(--transparent);
-  &:hover {
-    background-color: var(--transparent);
-    box-shadow: none;
-  }
-  &:focus:not(:focus-visible) {
-    background-color: var(--transparent);
-    box-shadow: none;
-  }
+  padding: 5px;
 }
 
 .btn-div {
@@ -81,34 +76,36 @@ button,
 a,
 input,
 summary,
-textarea {
-  &:focus:not(:focus-visible) {
-    box-shadow: none;
-  }
-}
-
-button,
-a,
-input,
-summary,
 div,
 textarea {
-  &:focus-visible {
+  &:focus {
     box-shadow: 0 0 0 3px var(--focus);
-  }
-}
-
-div,
-textarea,
-input {
-  &:focus-visible {
-    outline: none;
-  }
-  &:focus:not(:focus-visible) {
-    outline: none;
   }
 }
 
 textarea {
   resize: none;
+}
+
+.logo {
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 45px;
+  height: 45px;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  &-gallaxery {
+    background-image: url('./images/favicon.svg');
+  }
+  &-google {
+    background-image: url('./images/header/Google.svg');
+    background-size: 25px;
+    width: 30px;
+    height: 30px;
+  }
+  &:hover {
+    background-color: var(--blue020);
+  }
 }

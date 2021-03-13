@@ -79,8 +79,8 @@ function ModalSearch(props) {
                 <SearchLabel
                   searchEngine={'unsplash'}
                   color={'grey'}
-                  state={searches.searchImgur}
-                  setState={searches.setSearchImgur}
+                  state={searches.searchUnsplash}
+                  setState={searches.setSearchUnsplash}
                   tabIndex="25"
                 />
               </div>

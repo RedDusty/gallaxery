@@ -1,8 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ModalSearchContainer from '../ModalWindows/ModalSearch/ModalSearchContainer';
 
 import { NavLink, Route, Switch } from 'react-router-dom';
-// import { logOut, signInWithGoogle } from '../../firebase';
+
+import actions from '../../images/header/actions.svg';
+import HeaderSearch from './HeaderSearch';
+import HeaderActionsMenu from './HeaderActionsMenu';
 
 function Header(props) {
   const setModalSearchIsOpen = props.vars.setModalSearchIsOpen;
@@ -11,120 +14,46 @@ function Header(props) {
   const btnOnKeyUp = props.functions.btnOnKeyUp;
 
   return (
-    <section className="Header">
+    <section className="h">
       <div className="icons">
-        <a
-          className="icons-React icons-ico"
-          href="https://reactjs.org/"
+        <NavLink
+          className="logo logo-gallaxery"
+          to="/"
           tabIndex="1"
-        ></a>
-        <a className="icons-GitHub icons-ico" tabIndex="2"></a>
-        <a
-          className="icons-FireBase icons-ico"
-          href="https://firebase.google.com/"
-          tabIndex="3"
-        ></a>
-        <a className="icons-Vercel icons-ico" tabIndex="4"></a>
+          onKeyPress={(e) => {
+            e.currentTarget.click();
+          }}
+        ></NavLink>
       </div>
-      <div className="search">
-        <div className="search-div">
-          <button
-            className="search-icon search-icon-extended btn btn-icon"
-            tabIndex="5"
-            onClick={() => {
-              setModalSearchIsOpen(!modalSearchIsOpen);
-            }}
-          ></button>
-          <input
-            type="text"
-            className="search-input search-btn"
-            placeholder="Search..."
-            // onKeyDown={btnOnKeyDown}
-            onKeyUp={btnOnKeyUp}
-            onChange={btnOnKeyDown}
-            onClick={() => {
-              setModalSearchIsOpen(true);
-            }}
-            tabIndex="6"
-          ></input>
-          <button
-            className="search-icon search-icon-magnifier btn btn-icon"
-            tabIndex="7"
-          ></button>
-        </div>
-      </div>
+      <HeaderSearch
+        modalSearchIsOpen={modalSearchIsOpen}
+        setModalSearchIsOpen={setModalSearchIsOpen}
+        btnOnKeyUp={btnOnKeyUp}
+        btnOnKeyDown={btnOnKeyDown}
+      />
       <div className="actions">
-        <Switch>
-          <Route exact path="/">
-            <NavLink
-              className="btn btn-link"
-              to="/"
-              tabIndex="8"
-              onKeyPress={(e) => {
-                e.currentTarget.click();
-              }}
-            >
-              Reload
-            </NavLink>
-          </Route>
-          <Route>
-            <NavLink
-              className="btn btn-link"
-              to="/"
-              tabIndex="8"
-              onKeyPress={(e) => {
-                e.currentTarget.click();
-              }}
-            >
-              Main page
-            </NavLink>
-          </Route>
-        </Switch>
-        {props.currentUser.currentUser !== null ? (
-          <>
-            <NavLink
-              className="btn btn-link"
-              to="/file-upload"
-              tabIndex="9"
-              onClick={() => {
-                setModalSearchIsOpen(false);
-              }}
-            >
-              Upload file
-            </NavLink>
-            <NavLink
-              className="actions-btnAuth actions-btn btn btn-link"
-              to="/profile"
-              tabIndex="10"
-              onKeyPress={(e) => {
-                e.currentTarget.click();
-              }}
-            >
-              Profile
-            </NavLink>
-            <button
-              className="actions-btnAuth actions-btn btn"
-              onClick={() => {
-                props.logOut();
-                window.location.reload();
-              }}
-              tabIndex="11"
-            >
-              Log out
-            </button>
-          </>
-        ) : (
-          <button
-            className="actions-btnAuth actions-btn btn"
-            onClick={() => {
-              props.authWithGoogle();
-            }}
-            tabIndex="10"
-          >
-            Sign in
-          </button>
-        )}
+        <button
+          className="actions-menu-btn btn btn-icon"
+          onClick={() => {
+            setModalSearchIsOpen(false);
+            props.vars.menuIsOpen === true
+              ? props.vars.setMenuIsOpen(false)
+              : props.vars.setMenuIsOpen(true);
+          }}
+          tabIndex="5"
+          id="actions-menu-btn"
+        >
+          <img src={actions} alt="" id="actions-menu-btn-img" />
+        </button>
       </div>
+      <HeaderActionsMenu
+        menuIsOpen={props.vars.menuIsOpen}
+        setModalSearchIsOpen={setModalSearchIsOpen}
+        currentUser={props.currentUser}
+        logOut={props.logOut}
+        authWithGoogle={props.authWithGoogle}
+        ActionMenuCloser={props.functions.ActionMenuCloser}
+      />
       <ModalSearchContainer
         isOpen={modalSearchIsOpen}
         setIsOpen={setModalSearchIsOpen}

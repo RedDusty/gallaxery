@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Header from './Header';
 import './header.scss';
 
@@ -11,12 +11,33 @@ function HeaderContainer(props) {
   const [searchGoogle, setSearchGoogle] = useState(false);
   const [searchPinterest, setSearchPinterest] = useState(false);
   const [searchImgur, setSearchImgur] = useState(false);
-  const [unsplash, setUnsplash] = useState(false); // ok
+  const [searchUnsplash, setSearchUnsplash] = useState(false);
   const [confirmedImages, setConfirmedImages] = useState(true);
   const [userImages, setUserImages] = useState(false);
 
   const [reloadBtnText, setReloadBtnText] = useState('Reload');
   const [query, setQuery] = useState([]);
+
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+  function ActionMenuCloser(menuRef) {
+    useEffect(() => {
+      function MenuClose(event) {
+        if (
+          menuRef.current &&
+          !menuRef.current.contains(event.target) &&
+          event.target.id !== 'actions-menu-btn-img'
+        ) {
+          console.log(event.target.id !== 'actions-menu-btn-img');
+          setMenuIsOpen(false);
+        }
+      }
+      document.addEventListener('mousedown', MenuClose);
+      return () => {
+        document.removeEventListener('mousedown', MenuClose);
+      };
+    }, [menuRef]);
+  }
 
   const currentUser = useContext(UserContext);
 
@@ -36,6 +57,8 @@ function HeaderContainer(props) {
     setSearchPinterest,
     searchImgur,
     setSearchImgur,
+    searchUnsplash,
+    setSearchUnsplash,
   };
 
   const userAllowed = {
@@ -54,11 +77,14 @@ function HeaderContainer(props) {
     setModalSearchIsOpen,
     modalSearchIsOpen,
     reloadBtnText,
+    menuIsOpen,
+    setMenuIsOpen,
   };
 
   const functions = {
     btnOnKeyDown,
     btnOnKeyUp,
+    ActionMenuCloser,
   };
 
   return (

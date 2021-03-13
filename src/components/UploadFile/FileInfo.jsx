@@ -20,7 +20,7 @@ const FileInfo = ({
           onPaste={textareaAction}
         ></textarea>
         <p className="finfo-length-name finfo-length">
-          Maximum 500 characters!
+          Maximum 250 characters!
         </p>
       </div>
       <textarea
@@ -32,7 +32,7 @@ const FileInfo = ({
         onPaste={textareaAction}
       ></textarea>
       <p className="finfo-length-comment finfo-length">
-        Maximum 1000 characters!
+        Maximum 750 characters!
       </p>
       <div className="finfo-sub">
         <div className="finfo-sub-author">

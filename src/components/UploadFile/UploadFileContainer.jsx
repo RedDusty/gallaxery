@@ -92,20 +92,20 @@ function UploadFileContainer(props) {
   function textareaAction(e) {
     if (
       e.target.classList[0] === 'finfo-comment' &&
-      e.target.value.length > 1000
+      e.target.value.length > 750
     ) {
       document.documentElement.style.setProperty('--finfoLenComment', 'block');
     } else if (
       e.target.classList[0] === 'finfo-comment' &&
-      e.target.value.length < 1001
+      e.target.value.length < 751
     ) {
       document.documentElement.style.setProperty('--finfoLenComment', 'none');
     }
-    if (e.target.classList[0] === 'finfo-name' && e.target.value.length > 500) {
+    if (e.target.classList[0] === 'finfo-name' && e.target.value.length > 250) {
       document.documentElement.style.setProperty('--finfoLenName', 'block');
     } else if (
       e.target.classList[0] === 'finfo-name' &&
-      e.target.value.length < 501
+      e.target.value.length < 251
     ) {
       document.documentElement.style.setProperty('--finfoLenName', 'none');
     }
