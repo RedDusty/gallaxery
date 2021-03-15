@@ -8,7 +8,7 @@ const FileInfo = ({
   fileTags,
 }) => {
   return (
-    <form className="prew-info">
+    <div className="prew-info">
       <div className="finfo-header">
         <textarea
           className="finfo-name finfo-textarea"
@@ -45,7 +45,7 @@ const FileInfo = ({
       <p className="finfo-length-tags finfo-length">
         There should be 4-25 tags.
       </p>
-    </form>
+    </div>
   );
 };
 export default FileInfo;

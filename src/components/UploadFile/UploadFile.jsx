@@ -36,7 +36,10 @@ const UploadFile = (props) => {
         <button className="prew-actions-done btn">Create</button>
       </div>
       <div className="prew-container">
-        <div className="prew-container-border">
+        <form
+          className="prew-container-border"
+          onSubmit={props.functions.onSubmit}
+        >
           <FileUploader
             getRootProps={props.vars.getRootProps}
             getInputProps={props.vars.getInputProps}
@@ -51,7 +54,7 @@ const UploadFile = (props) => {
             fileTags={props.vars.fileTags}
             textareaAction={props.functions.textareaAction}
           />
-        </div>
+        </form>
       </div>
     </section>
   );

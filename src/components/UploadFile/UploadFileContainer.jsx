@@ -26,25 +26,34 @@ function UploadFileContainer(props) {
   const [currentTime, setCurrentTime] = useState();
   const inputName = useRef(null);
   const { currentUser } = useContext(UserContext);
+  let fileName = 0;
   let tags = 0;
 
   const { getRootProps, getInputProps, open } = useDropzone({
-    accept: 'image/*, video/*',
+    accept: 'image/*',
     onDrop: (acceptedFiles) => {
-      setFile(
-        acceptedFiles.map(
-          (file) =>
-            Object.assign(file, {
-              source: URL.createObjectURL(file),
-            }),
-          URL.revokeObjectURL(file)
-        )
-      );
+      if (acceptedFiles[0].size > 5242880) {
+        return <div>Too large!</div>;
+      } else {
+        const reader = new FileReader();
+        const url = reader.readAsDataURL(acceptedFiles[0]);
+        reader.onloadend = () => {
+          setFile(
+            acceptedFiles.map((file) =>
+              Object.assign(file, {
+                source: reader.result,
+              })
+            )
+          );
+        };
+      }
     },
     multiple: false,
     noKeyboard: true,
     noClick: true,
   });
+
+  window.file = file;
 
   function queryUpdater(e = '') {
     props.ufTagParse(e, tags);
@@ -170,14 +179,26 @@ function UploadFileContainer(props) {
     };
   });
 
+  const onFileChange = async (e) => {
+    // console.log(storageRef);
+    // const fileRef = storageRef.child(file.name);
+    // await fileRef.put(file);
+    // console.log(fileRef.getDownloadURL());
+    // setFileUrl(await fileRef.getDownloadURL());
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    // const file = e.target.files[0];
+    console.log(e.target);
+    const storageRef = firebase.storage().ref().child('usersImages');
     const getLastId = await firebase
       .firestore()
       .collection('confirmed')
       .orderBy('id', 'desc')
       .limit(1)
       .get();
+    console.log(getLastId);
   };
 
   const vars = {
@@ -196,6 +217,7 @@ function UploadFileContainer(props) {
     textareaAction,
     tagKeyDown,
     tagKeyUp,
+    onSubmit,
   };
   return <UploadFile vars={vars} functions={functions} />;
 }
