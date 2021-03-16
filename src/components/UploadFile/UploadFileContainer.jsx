@@ -11,6 +11,7 @@ import {
   ufTagDelete,
   ufTagParse,
   ufFileImageDelete,
+  ufTextArea,
 } from '../../redux/actions';
 import { connect } from 'react-redux';
 
@@ -91,32 +92,8 @@ function UploadFileContainer(props) {
     queryUpdater();
   }
 
-  function textareaAction(e) {
-    if (
-      e.target.classList[0] === 'finfo-comment' &&
-      e.target.value.length > 750
-    ) {
-      document.documentElement.style.setProperty('--finfoLenComment', 'block');
-    } else if (
-      e.target.classList[0] === 'finfo-comment' &&
-      e.target.value.length < 751
-    ) {
-      document.documentElement.style.setProperty('--finfoLenComment', 'none');
-    }
-    if (e.target.classList[0] === 'finfo-name' && e.target.value.length > 250) {
-      document.documentElement.style.setProperty('--finfoLenName', 'block');
-    } else if (
-      e.target.classList[0] === 'finfo-name' &&
-      e.target.value.length < 251
-    ) {
-      document.documentElement.style.setProperty('--finfoLenName', 'none');
-    }
-    e.target.value = e.target.value.replace(/[\t\n\r]+/gm, ' ');
-    if (e.key === 'Enter' || e.key === 13) {
-      e.preventDefault();
-    }
-    e.target.style.height = '1px';
-    e.target.style.height = e.target.scrollHeight - 10 + 'px';
+  function textareaAction(textarea, areaAction) {
+    props.ufTextArea(textarea, areaAction);
   }
 
   function clearFile() {
@@ -151,28 +128,26 @@ function UploadFileContainer(props) {
   const fileTags = props.ufTags
     .filter((tag) => tag !== undefined)
     .map((tag, index) => {
-      if (!tag.removed) {
-        return (
-          <div className={`tag-container-standard tag-container`} key={index}>
-            <div className={`tag-text tag-text-standard`}>{tag.tag}</div>
-            <button
-              className="tag-delete btn btn-icon tag-btn"
-              onClick={(e) => {
-                e.preventDefault();
-                tagDelete(index);
-              }}
-            >
-              <img src={tagDelIcon} alt="remove" />
-            </button>
-          </div>
-        );
-      }
-      return [];
+      return (
+        <div className={`tag-container-standard tag-container`} key={index}>
+          <div className={`tag-text tag-text-standard`}>{tag.tag}</div>
+          <button
+            className="tag-delete btn btn-icon tag-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              tagDelete(index);
+            }}
+          >
+            <img src={tagDelIcon} alt="remove" />
+          </button>
+        </div>
+      );
     });
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const file = e.target.files[0];
+    console.log('Trying send image...');
+    const file = fileInfo;
     const storageRef = firebase.storage().ref().child('usersImages');
     const getLastId = await firebase
       .firestore()
@@ -180,7 +155,7 @@ function UploadFileContainer(props) {
       .orderBy('id', 'desc')
       .limit(1)
       .get();
-    console.log(getLastId);
+    console.log(getLastId[0].id);
   };
 
   const vars = {
@@ -216,6 +191,7 @@ const mapDispatchToProps = {
   ufTagDelete,
   ufFileUpload,
   ufFileImageDelete,
+  ufTextArea,
 };
 
 export default connect(

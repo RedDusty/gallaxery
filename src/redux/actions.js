@@ -87,3 +87,11 @@ export const ufFileUpload = (file) => (dispatch) => {
 export const ufFileImageDelete = () => ({
   type: UF_FILEIMAGEDLETE,
 });
+
+export const ufTextArea = (textarea, areaAction) => ({
+  type: UF_TEXTAREA,
+  payload: {
+    textarea,
+    areaAction,
+  },
+});

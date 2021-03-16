@@ -19,9 +19,15 @@ const FileInfo = ({
           placeholder="Write name here..."
           ref={inputName}
           spellCheck="false"
-          onKeyPress={textareaAction}
-          onKeyUp={textareaAction}
-          onPaste={textareaAction}
+          onKeyPress={(e) => {
+            textareaAction(e, 'name');
+          }}
+          onKeyUp={(e) => {
+            textareaAction(e, 'name');
+          }}
+          onPaste={(e) => {
+            textareaAction(e, 'name');
+          }}
         ></textarea>
         <p className="finfo-length-name finfo-length">
           Maximum 250 characters!
@@ -31,9 +37,15 @@ const FileInfo = ({
         className="finfo-comment finfo-textarea"
         placeholder="Write some comments here..."
         spellCheck="false"
-        onKeyPress={textareaAction}
-        onKeyUp={textareaAction}
-        onPaste={textareaAction}
+        onKeyPress={(e) => {
+          textareaAction(e, 'comment');
+        }}
+        onKeyUp={(e) => {
+          textareaAction(e, 'comment');
+        }}
+        onPaste={(e) => {
+          textareaAction(e, 'comment');
+        }}
       ></textarea>
       <p className="finfo-length-comment finfo-length">
         Maximum 750 characters!
