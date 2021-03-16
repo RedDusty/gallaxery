@@ -15,3 +15,5 @@ export const GLR_CARD_LOAD = 'GLR_CARD_LOAD';
 export const UF_TAG_PARSE = 'UF_TAG_PARSE';
 export const UF_TAG_DELETE = 'UF_TAG_DELETE';
 export const UF_TEXTAREA = 'UF_TEXTAREA';
+export const UF_FILEUPLOAD = 'UF_FILEUPLOAD';
+export const UF_FILEIMAGEDLETE = 'UF_FILEIMAGEDLETE';

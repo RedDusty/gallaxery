@@ -7,7 +7,7 @@ const FileUploader = ({
   fileInfo,
   clearFile,
 }) => {
-  if (fileInfo.code !== 'return') {
+  if (fileInfo.fileCode !== 'return') {
     return (
       <div className="prew-files">
         <div className="uploader-container" {...getRootProps()}>
@@ -26,11 +26,11 @@ const FileUploader = ({
       </div>
     );
   }
-  if (fileInfo.type.slice(0, 5) === 'image') {
+  if (fileInfo.fileType.slice(0, 5) === 'image') {
     return (
       <div className="prew-files">
         <div className="file-img">
-          <img src={fileInfo.source} alt="" />
+          <img src={fileInfo.fileURL} alt="" />
           <button
             className="file-action-del"
             onClick={() => {
@@ -42,7 +42,7 @@ const FileUploader = ({
         </div>
       </div>
     );
-  } else if (fileInfo.type.slice(0, 5) === 'video') {
+  } else if (fileInfo.fileType.slice(0, 5) === 'video') {
     return (
       <div className="prew-files">
         <div className="file-img">

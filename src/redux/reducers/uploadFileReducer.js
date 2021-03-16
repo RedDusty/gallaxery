@@ -1,7 +1,18 @@
-import { UF_TAG_DELETE, UF_TAG_PARSE, UF_TEXTAREA } from '../types';
+import {
+  UF_TAG_DELETE,
+  UF_TAG_PARSE,
+  UF_TEXTAREA,
+  UF_FILEUPLOAD,
+  UF_FILEIMAGEDLETE,
+} from '../types';
 
 const initialState = {
   uf_tags: [],
+  fileURL: '',
+  fileName: '',
+  fileSize: '',
+  fileType: '',
+  fileCode: '',
 };
 
 export default function uploadFileReducer(state = initialState, action) {
@@ -42,10 +53,31 @@ export default function uploadFileReducer(state = initialState, action) {
       };
     }
     case UF_TAG_DELETE: {
-      const { tagId, count } = action.payload;
+      const { tagId } = action.payload;
       state.uf_tags.splice(tagId, 1);
       return {
         ...state,
+      };
+    }
+    case UF_FILEUPLOAD: {
+      const { file } = action.payload;
+      return {
+        ...state,
+        fileURL: file.source,
+        fileName: file.name,
+        fileSize: file.size,
+        fileType: file.type,
+        fileCode: 'return',
+      };
+    }
+    case UF_FILEIMAGEDLETE: {
+      return {
+        ...state,
+        fileURL: '',
+        fileName: '',
+        fileSize: '',
+        fileType: '',
+        fileCode: '',
       };
     }
     default: {

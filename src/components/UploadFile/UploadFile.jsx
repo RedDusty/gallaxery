@@ -5,7 +5,7 @@ import FileUploader from './FileUploader';
 const UploadFile = (props) => {
   let fileInfo = {};
   try {
-    fileInfo = props.vars.fileInfo[0];
+    fileInfo = props.vars.fileInfo;
     if (!fileInfo) {
       fileInfo = {
         name: '',
@@ -48,6 +48,7 @@ const UploadFile = (props) => {
             clearFile={props.functions.clearFile}
           />
           <FileInfo
+            fileInfo={fileInfo}
             inputName={props.vars.inputName}
             userInfo={props.vars.userInfo}
             currentTime={props.vars.currentTime}

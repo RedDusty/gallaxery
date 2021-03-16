@@ -6,8 +6,15 @@ import './uploadFile.scss';
 import firebase from 'firebase/app';
 import { Redirect } from 'react-router';
 import { UserContext } from '../../UserProvider';
-import { ufTagDelete, ufTagParse } from '../../redux/actions';
+import {
+  ufFileUpload,
+  ufTagDelete,
+  ufTagParse,
+  ufFileImageDelete,
+} from '../../redux/actions';
 import { connect } from 'react-redux';
+
+import tagDelIcon from '../../images/search/tagDelete.svg';
 
 // CARD COLOR
 // MINI-ALUBM (10 FILES IN ONE CARD MAX)
@@ -22,11 +29,9 @@ function currentTimeFunc() {
 }
 
 function UploadFileContainer(props) {
-  const [file, setFile] = useState([]);
   const [currentTime, setCurrentTime] = useState();
   const inputName = useRef(null);
   const { currentUser } = useContext(UserContext);
-  let fileName = 0;
   let tags = 0;
 
   const { getRootProps, getInputProps, open } = useDropzone({
@@ -35,25 +40,13 @@ function UploadFileContainer(props) {
       if (acceptedFiles[0].size > 5242880) {
         return <div>Too large!</div>;
       } else {
-        const reader = new FileReader();
-        const url = reader.readAsDataURL(acceptedFiles[0]);
-        reader.onloadend = () => {
-          setFile(
-            acceptedFiles.map((file) =>
-              Object.assign(file, {
-                source: reader.result,
-              })
-            )
-          );
-        };
+        props.ufFileUpload(acceptedFiles[0]);
       }
     },
     multiple: false,
     noKeyboard: true,
     noClick: true,
   });
-
-  window.file = file;
 
   function queryUpdater(e = '') {
     props.ufTagParse(e, tags);
@@ -127,7 +120,7 @@ function UploadFileContainer(props) {
   }
 
   function clearFile() {
-    setFile([]);
+    props.ufFileImageDelete();
   }
 
   useEffect(() => {
@@ -147,6 +140,14 @@ function UploadFileContainer(props) {
     photo: currentUser.photoURL,
   };
 
+  const fileInfo = {
+    fileURL: props.ufFile.fileURL,
+    fileName: props.ufFile.fileName,
+    fileSize: props.ufFile.fileSize,
+    fileType: props.ufFile.fileType,
+    fileCode: props.ufFile.fileCode,
+  };
+
   const fileTags = props.ufTags
     .filter((tag) => tag !== undefined)
     .map((tag, index) => {
@@ -160,41 +161,22 @@ function UploadFileContainer(props) {
                 e.preventDefault();
                 tagDelete(index);
               }}
-            ></button>
+            >
+              <img src={tagDelIcon} alt="remove" />
+            </button>
           </div>
         );
       }
       return [];
     });
 
-  const fileInfo = file.map((file) => {
-    if (inputName.current.value === '') {
-      inputName.current.value = file.name;
-    }
-    return {
-      name: file.name,
-      source: file.source,
-      type: file.type,
-      code: 'return',
-    };
-  });
-
-  const onFileChange = async (e) => {
-    // console.log(storageRef);
-    // const fileRef = storageRef.child(file.name);
-    // await fileRef.put(file);
-    // console.log(fileRef.getDownloadURL());
-    // setFileUrl(await fileRef.getDownloadURL());
-  };
-
   const onSubmit = async (e) => {
     e.preventDefault();
-    // const file = e.target.files[0];
-    console.log(e.target);
+    const file = e.target.files[0];
     const storageRef = firebase.storage().ref().child('usersImages');
     const getLastId = await firebase
       .firestore()
-      .collection('confirmed')
+      .collection('usersImages')
       .orderBy('id', 'desc')
       .limit(1)
       .get();
@@ -225,12 +207,15 @@ function UploadFileContainer(props) {
 const mapStateToProps = (state) => {
   return {
     ufTags: state.uploadFileReducer.uf_tags,
+    ufFile: state.uploadFileReducer,
   };
 };
 
 const mapDispatchToProps = {
   ufTagParse,
   ufTagDelete,
+  ufFileUpload,
+  ufFileImageDelete,
 };
 
 export default connect(

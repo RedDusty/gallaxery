@@ -43,6 +43,10 @@ html {
   color: var(--button-text);
   text-align: center;
   font-size: 16px;
+  img {
+    width: 16px;
+    height: 16px;
+  }
   &:hover {
     background-color: var(--blue020);
   }

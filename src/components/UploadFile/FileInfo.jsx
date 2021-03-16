@@ -6,7 +6,11 @@ const FileInfo = ({
   currentTime,
   textareaAction,
   fileTags,
+  fileInfo,
 }) => {
+  if (inputName.current !== null && inputName.current.value === '') {
+    inputName.current.value = fileInfo.fileName;
+  }
   return (
     <div className="prew-info">
       <div className="finfo-header">

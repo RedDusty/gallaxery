@@ -255,22 +255,28 @@
   &-delete {
     background-image: url('../../../images/search/tagDelete.svg');
     &:hover {
-      filter: invert(34%) sepia(36%) saturate(4146%) hue-rotate(339deg)
-        brightness(77%) contrast(110%);
+      img {
+        filter: invert(34%) sepia(36%) saturate(4146%) hue-rotate(339deg)
+          brightness(77%) contrast(110%);
+      }
     }
   }
   &-exclude {
     background-image: url('../../../images/search/tagRemove.svg');
     &:hover {
-      filter: invert(34%) sepia(36%) saturate(4146%) hue-rotate(339deg)
-        brightness(77%) contrast(110%);
+      img {
+        filter: invert(34%) sepia(36%) saturate(4146%) hue-rotate(339deg)
+          brightness(77%) contrast(110%);
+      }
     }
   }
   &-add {
     background-image: url('../../../images/search/tagAdd.svg');
     &:hover {
-      filter: invert(54%) sepia(80%) saturate(866%) hue-rotate(74deg)
-        brightness(95%) contrast(102%);
+      img {
+        filter: invert(54%) sepia(80%) saturate(866%) hue-rotate(74deg)
+          brightness(95%) contrast(102%);
+      }
     }
   }
 }

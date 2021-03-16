@@ -8,6 +8,8 @@ import {
   UF_TAG_PARSE,
   UF_TAG_DELETE,
   UF_TEXTAREA,
+  UF_FILEUPLOAD,
+  UF_FILEIMAGEDLETE,
 } from './types';
 
 export const tagParserOnKeyDown = (e = {}, action = '') => ({
@@ -66,4 +68,22 @@ export const ufTagDelete = (tagId) => ({
   payload: {
     tagId,
   },
+});
+
+export const ufFileUpload = (file) => (dispatch) => {
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    Object.assign(file, {
+      source: reader.result,
+    });
+    dispatch({
+      type: UF_FILEUPLOAD,
+      payload: { file },
+    });
+  };
+  reader.readAsDataURL(file);
+};
+
+export const ufFileImageDelete = () => ({
+  type: UF_FILEIMAGEDLETE,
 });

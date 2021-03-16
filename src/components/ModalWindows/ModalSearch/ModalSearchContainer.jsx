@@ -10,6 +10,10 @@ import {
 import ModalSearch from './ModalSearch';
 import './modalSearch.scss';
 
+import tagDelIcon from '../../../images/search/tagDelete.svg';
+import tagAddIcon from '../../../images/search/tagAdd.svg';
+import tagRemoveIcon from '../../../images/search/tagRemove.svg';
+
 function ModalSearchContainer(props) {
   const setIsOpen = props.setIsOpen;
   const isOpen = props.isOpen;
@@ -51,13 +55,17 @@ function ModalSearchContainer(props) {
               onClick={() => {
                 btnSearchDelete(index);
               }}
-            ></button>
+            >
+              <img src={tagDelIcon} alt="delete" />
+            </button>
             <button
               className="tag-exclude btn btn-icon tag-btn"
               onClick={() => {
                 btnSearchRemove(index);
               }}
-            ></button>
+            >
+              <img src={tagRemoveIcon} alt="remove" />
+            </button>
           </div>
         );
       }
@@ -80,13 +88,17 @@ function ModalSearchContainer(props) {
               onClick={() => {
                 btnSearchDelete(index);
               }}
-            ></button>
+            >
+              <img src={tagDelIcon} alt="delete" />
+            </button>
             <button
               className="tag-add btn btn-icon tag-btn"
               onClick={() => {
                 btnSearchAdd(index);
               }}
-            ></button>
+            >
+              <img src={tagAddIcon} alt="add" />
+            </button>
           </div>
         );
       }
