@@ -1,23 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const FileInfo = ({
-  inputName,
-  userInfo,
-  currentTime,
-  textareaAction,
-  fileTags,
-  fileInfo,
-}) => {
-  if (inputName.current !== null && inputName.current.value === '') {
-    inputName.current.value = fileInfo.fileName;
-  }
+function currentTimeFunc() {
+  return new Intl.DateTimeFormat('en-GB', {
+    dateStyle: 'short',
+    timeStyle: 'medium',
+  })
+    .format(new Date(Date.now()))
+    .replace(/\//g, '.');
+}
+
+const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
+  const [currentTime, setCurrentTime] = useState();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentTime(currentTimeFunc());
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [currentTime]);
   return (
     <div className="prew-info">
       <div className="finfo-header">
         <textarea
           className="finfo-name finfo-textarea"
           placeholder="Write name here..."
-          ref={inputName}
           spellCheck="false"
           onKeyPress={(e) => {
             textareaAction(e, 'name');

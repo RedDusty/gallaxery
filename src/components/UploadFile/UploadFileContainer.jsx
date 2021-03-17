@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import UploadFile from './UploadFile';
 import './uploadFile.scss';
@@ -20,17 +20,7 @@ import tagDelIcon from '../../images/search/tagDelete.svg';
 // CARD COLOR
 // MINI-ALUBM (10 FILES IN ONE CARD MAX)
 
-function currentTimeFunc() {
-  return new Intl.DateTimeFormat('en-GB', {
-    dateStyle: 'short',
-    timeStyle: 'medium',
-  })
-    .format(new Date(Date.now()))
-    .replace(/\//g, '.');
-}
-
 function UploadFileContainer(props) {
-  const [currentTime, setCurrentTime] = useState();
   const inputName = useRef(null);
   const { currentUser } = useContext(UserContext);
   let tags = 0;
@@ -100,13 +90,6 @@ function UploadFileContainer(props) {
     props.ufFileImageDelete();
   }
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setCurrentTime(currentTimeFunc());
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [currentTime]);
-
   if (!currentUser) {
     console.log('Redirect');
     return <Redirect to="/" />;
@@ -146,16 +129,62 @@ function UploadFileContainer(props) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('Trying send image...');
-    const file = fileInfo;
-    const storageRef = firebase.storage().ref().child('usersImages');
-    const getLastId = await firebase
-      .firestore()
-      .collection('usersImages')
-      .orderBy('id', 'desc')
-      .limit(1)
-      .get();
-    console.log(getLastId[0].id);
+    const currentTime = Date.now();
+    let imageURL = '';
+    if (
+      fileInfo.fileCode.length !== 0 &&
+      props.ufTags.length > 3 &&
+      props.ufTags.length < 26
+    ) {
+      console.log('Trying send image...');
+      const file = fileInfo;
+      const storageRef = firebase
+        .storage()
+        .ref()
+        .child(
+          '/usersImages/' +
+            '__TIME__' +
+            currentTime +
+            '__NAME__' +
+            file.fileName
+        );
+      const metadata = {
+        name: file.fileName,
+        size: file.fileSize,
+        contentType: file.fileType,
+        time: currentTime,
+      };
+      await storageRef.putString(file.fileURL, 'data_url', metadata);
+      imageURL = await storageRef.getDownloadURL();
+      const firestore = await firebase
+        .firestore()
+        .collection('usersImages')
+        .doc('image' + currentTime)
+        .set({
+          fileURL: imageURL,
+          fileName: fileInfo.fileName,
+          fileSize: fileInfo.fileSize,
+          fileType: fileInfo.fileType,
+          infoDate: currentTime,
+          infoUsername: userInfo.username,
+          infoPhotoURL: userInfo.photo,
+          infoTitle: props.ufFile.textareaTitle,
+          infoDescription: props.ufFile.textareaDescription,
+          infoTags: props.ufTags,
+        });
+    } else {
+      if (fileInfo.fileCode.length === 0) console.log('File empty.');
+      if (props.ufTags.length < 4)
+        console.log(
+          'Not enough tags. Need ' + (4 - props.ufTags.length) + ' more tags.'
+        );
+      if (props.ufTags.length > 25)
+        console.log(
+          'Not enough tags. Remove ' +
+            (props.ufTags.length - 25) +
+            ' more tags.'
+        );
+    }
   };
 
   const vars = {
@@ -165,7 +194,6 @@ function UploadFileContainer(props) {
     fileInfo,
     inputName,
     userInfo,
-    currentTime,
     fileTags,
   };
 

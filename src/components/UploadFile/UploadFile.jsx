@@ -46,10 +46,7 @@ const UploadFile = (props) => {
               clearFile={props.functions.clearFile}
             />
             <FileInfo
-              fileInfo={fileInfo}
-              inputName={props.vars.inputName}
               userInfo={props.vars.userInfo}
-              currentTime={props.vars.currentTime}
               fileTags={props.vars.fileTags}
               textareaAction={props.functions.textareaAction}
             />
