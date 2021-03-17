@@ -172,6 +172,7 @@ function UploadFileContainer(props) {
           infoDescription: props.ufFile.textareaDescription,
           infoTags: props.ufTags,
         });
+      console.log('File uploaded.');
     } else {
       if (fileInfo.fileCode.length === 0) console.log('File empty.');
       if (props.ufTags.length < 4)

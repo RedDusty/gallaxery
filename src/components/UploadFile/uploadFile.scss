@@ -7,9 +7,9 @@
 .iu {
   display: flex;
   flex-flow: column;
-  margin-top: 60px;
+  margin-top: 50px;
   width: 100%;
-  height: calc(100% - 60px);
+  height: 100%;
   border: none;
 }
 
@@ -298,12 +298,12 @@
   .prew {
     &-actions {
       width: 100%;
-      margin: 5px 5px 0 5px;
+      margin: 0 0 0 0;
       border-radius: 0;
     }
     &-container {
       width: 100%;
-      margin: 0 5px 0 5px;
+      margin: 0 0 0 0;
       border-radius: 0;
       &-border {
         width: 100%;
