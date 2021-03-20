@@ -1,3 +1,59 @@
+.g {
+  display: flex;
+  flex-direction: column;
+  margin: 60px 20px 20px 20px;
+}
+
+.cards-container {
+}
+
+.card-p {
+  float: left;
+  margin: 20px;
+  width: 250px;
+  height: auto;
+  &:hover .card-p-top img {
+    border-radius: 0;
+  }
+  &-top {
+    img {
+      width: 250px;
+      height: auto;
+      border-radius: 15px;
+      transition: 0.1s linear;
+    }
+  }
+  &-bottom {
+    display: flex;
+    align-items: center;
+    img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+    }
+    p {
+      width: 100%;
+      margin: 0 0 0 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100px;
+        height: 100%;
+        background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0),
+          rgb(255, 255, 255) 100%
+        );
+      }
+    }
+  }
+}
+
 .imageSrc {
   width: 80%;
   height: auto;

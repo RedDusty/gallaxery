@@ -1,14 +1,26 @@
 import React from 'react';
 import './gallery.scss';
 
+import Masonry from 'react-masonry-component';
+
 function Gallery(props) {
-  const allImageBlocks = props.vars.allImageBlocks;
+  const allCards = props.vars.allCards;
   const loadingElementRef = props.functions.loadingElementRef;
   const checker = props.functions.checker;
 
+  const masonryOptions = {
+    transitionDuration: '0.25s',
+  };
+
   return (
-    <section className="Gallery">
-      {allImageBlocks}
+    <section className="g">
+      <Masonry
+        options={masonryOptions}
+        disableImagesLoaded={false}
+        updateOnEachImageLoad={false}
+      >
+        {allCards}
+      </Masonry>
       {checker(loadingElementRef)}
     </section>
   );

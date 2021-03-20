@@ -4,115 +4,51 @@ import Gallery from './Gallery';
 import { blocksConfirmedLoading } from '../../redux/actions';
 import { connect } from 'react-redux';
 
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+
+async function getImages(key) {
+  try {
+    const data = await firebase
+      .firestore()
+      .collection('usersImages')
+      .orderBy('infoDate', 'desc')
+      .startAfter(key)
+      // .limit(10)
+      .get();
+
+    let cards = [];
+    let lastKey = '';
+    data.forEach((doc) => {
+      cards.push({
+        infoDate: doc.data().infoDate,
+        infoPhotoURL: doc.data().infoPhotoURL,
+        infoTitle: doc.data().infoTitle,
+        fileURL: doc.data().fileURL,
+      });
+      lastKey = doc.data().infoDate;
+    });
+    return { cards, lastKey };
+  } catch (e) {}
+}
 
 const GalleryContainer = (props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isMoreLoading, setIsMoreLoading] = useState(false);
-  const [lastDoc, setLastDoc] = useState(null);
-  const [imagesBlocks, setImagesBlocks] = useState([]);
 
-  const confirmedRef = firebase.firestore().collection('confirmed');
+  const [cards, setCards] = useState([]);
+  const [lastKey, setLastKey] = useState('');
 
   useEffect(() => {
-    getConfirmedImages();
-  }, []);
-
-  async function getConfirmedImages() {
     setIsLoading(true);
-
-    const snapshot = await confirmedRef.orderBy('id', 'asc').limit(1).get();
-
-    if (!snapshot.empty) {
-      let newConfirmedImages = [];
-
-      setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
-
-      const storage = firebase.storage();
-
-      for (let i = 0; i < snapshot.docs.length; i++) {
-        const imagesLength = snapshot.docs[i].data().images.length;
-        let imageLinks = [];
-        for (let j = 0; j < imagesLength; j++) {
-          const imgPath =
-            'confirmed/' + snapshot.docs[i].data().images[0] + '.jpg';
-          const pathRef = storage.ref(imgPath).getDownloadURL();
-          pathRef.then((url) => {
-            imageLinks.push(url);
-          });
-        }
-
-        const data = snapshot.docs[i].data();
-        newConfirmedImages.push({
-          author: data.author,
-          comment: data.comment,
-          data: data.data,
-          id: data.id,
-          images: imageLinks,
-          links: data.links,
-          name: data.name,
-          tags: data.tags,
-        });
-      }
-
-      setImagesBlocks(newConfirmedImages);
-    } else {
-      setLastDoc(null);
-    }
-
-    setIsLoading(false);
-  }
-
-  // async function getMore() {
-  //   if (lastDoc) {
-  //     setIsMoreLoading(true);
-
-  //     let snapshot = await confirmedRef
-  //       .orderBy('id')
-  //       .startAfter(lastDoc.data().id)
-  //       .limit(1)
-  //       .get();
-
-  //     if (!snapshot.empty) {
-  //       let newConfirmedImages = imagesBlocks;
-
-  //       let storage = firebase.storage();
-
-  //       setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
-
-  //       for (let i = 0; i < snapshot.docs.length; i++) {
-  //         const imagesLength = snapshot.docs[i].data().images.length;
-  //         let imageLinks = [];
-  //         for (let j = 0; j < imagesLength; j++) {
-  //           const imgPath =
-  //             'confirmed/' + snapshot.docs[i].data().images[0] + '.jpg';
-  //           const pathRef = storage.ref(imgPath).getDownloadURL();
-  //           pathRef.then((url) => {
-  //             imageLinks.push(url);
-  //           });
-  //           console.log(imageLinks);
-  //         }
-
-  //         let data = snapshot.docs[i].data();
-  //         newConfirmedImages.push({
-  //           author: data.author,
-  //           comment: data.comment,
-  //           data: data.data,
-  //           id: data.id,
-  //           images: imageLinks,
-  //           links: data.links,
-  //           name: data.name,
-  //           tags: data.tags,
-  //         });
-  //       }
-
-  //       setImagesBlocks(newConfirmedImages);
-  //       if (snapshot.docs.length < 1) setLastDoc(null);
-  //     } else {
-  //       setLastDoc(null);
-  //     }
-  //   }
-  // }
+    getImages(lastKey)
+      .then((res) => {
+        setCards(res.cards);
+        setLastKey(res.lastKey);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+      });
+  }, []);
 
   function checker(loadingElementRef) {
     if (isLoading) {
@@ -136,28 +72,22 @@ const GalleryContainer = (props) => {
     }
   }
 
-  const allImageBlocks = imagesBlocks.map((block) => {
+  const allCards = cards.map((block) => {
     return (
-      <div
-        className="imageContainer"
-        key={block.id}
-        style={{
-          backgroundColor: 'gray',
-          width: '350px',
-          height: '200px',
-        }}
-      >
-        <img
-          className="imageSrc"
-          src={block.images[0]}
-          alt={'Submit to support. Link to image: ' + block.images[0]}
-        />
+      <div className="card-p" key={block.infoDate}>
+        <div className="card-p-top">
+          <img src={block.fileURL} alt="" />
+        </div>
+        <div className="card-p-bottom">
+          <img src={block.infoPhotoURL} alt="" />
+          <p>{block.infoTitle}</p>
+        </div>
       </div>
     );
   });
 
   const vars = {
-    allImageBlocks,
+    allCards,
   };
 
   const functions = {

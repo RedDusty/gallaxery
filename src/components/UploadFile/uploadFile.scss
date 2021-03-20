@@ -6,6 +6,7 @@
 
 .iu {
   display: flex;
+  align-items: center;
   flex-flow: column;
   margin-top: 50px;
   width: 100%;
@@ -16,8 +17,8 @@
 .prew {
   &-container {
     background-color: var(--blue010);
-    width: calc(100% - 10px);
-    height: calc(100% - 10px);
+    width: calc(100% - 25px);
+    height: calc(100% - 25px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -238,7 +239,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 10px);
+  width: calc(100% - 25px);
   height: 50px;
   margin: 5px;
   border-radius: 25px;

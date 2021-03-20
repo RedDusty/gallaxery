@@ -12,7 +12,7 @@ function App() {
   const provider = new firebase.auth.GoogleAuthProvider();
 
   const authWithGoogle = () => {
-    firebase.auth().signInWithPopup(provider);
+    firebase.auth().signInWithRedirect(provider);
   };
   const logOut = () => {
     firebase

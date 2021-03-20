@@ -2,11 +2,11 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 export const firebaseConfig = firebase.initializeApp({
-  apiKey: 'AIzaSyDp8yXqLXhG2LjAyPkb18hbKRa98gq14jo',
-  authDomain: 'gallaxery-e6cf4.firebaseapp.com',
-  projectId: 'gallaxery-e6cf4',
-  storageBucket: 'gallaxery-e6cf4.appspot.com',
-  messagingSenderId: '338223913035',
-  appId: '1:338223913035:web:a76ecef5c3d66bdf0695ce',
-  measurementId: 'G-GFH7XM6GKX',
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 });
