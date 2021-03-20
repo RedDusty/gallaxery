@@ -62,15 +62,22 @@
 }
 .actions {
   display: flex;
-  width: 50px;
+  width: 70px;
   justify-content: space-around;
   align-items: center;
   margin-right: 25px;
   &-menu-btn {
-    width: 30px;
-    height: 30px;
-    margin: 0;
-    padding: 0;
+    width: auto;
+    height: 40px;
+    margin: 0px;
+    padding: 0 5px;
+    border-radius: 20px;
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
   }
   &-menu {
     background-color: var(--blueWhite000);
@@ -115,7 +122,7 @@
 
 .search {
   display: flex;
-  width: calc(100% - 300px);
+  width: calc(100% - 330px);
   align-items: center;
   justify-content: flex-start;
   &-div {
@@ -190,7 +197,7 @@
     margin-right: 5px;
   }
   .search {
-    width: calc(100% - 10px);
+    width: calc(100% - 150px);
   }
 }
 

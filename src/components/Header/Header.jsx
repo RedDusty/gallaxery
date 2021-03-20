@@ -33,7 +33,7 @@ function Header(props) {
       />
       <div className="actions">
         <button
-          className="actions-menu-btn btn btn-icon"
+          className="actions-menu-btn btn"
           onClick={() => {
             setModalSearchIsOpen(false);
             props.vars.menuIsOpen === true
@@ -43,7 +43,17 @@ function Header(props) {
           tabIndex="5"
           id="actions-menu-btn"
         >
-          <img src={actions} alt="" id="actions-menu-btn-img" />
+          {props.currentUser.currentUser !== null &&
+          props.currentUser.currentUser !== undefined ? (
+            <img
+              src={props.currentUser.currentUser.photoURL}
+              className="actions-menu-btn-user"
+              alt={props.currentUser.currentUser.displayName}
+            />
+          ) : (
+            <></>
+          )}
+          <img src={actions} data-alt="💙" id="actions-menu-btn-img" />
         </button>
       </div>
       <HeaderActionsMenu

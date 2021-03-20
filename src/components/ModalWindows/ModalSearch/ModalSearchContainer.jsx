@@ -56,7 +56,7 @@ function ModalSearchContainer(props) {
                 btnSearchDelete(index);
               }}
             >
-              <img src={tagDelIcon} alt="delete" />
+              <img src={tagDelIcon} data-alt="✖" />
             </button>
             <button
               className="tag-exclude btn btn-icon tag-btn"
@@ -64,7 +64,7 @@ function ModalSearchContainer(props) {
                 btnSearchRemove(index);
               }}
             >
-              <img src={tagRemoveIcon} alt="remove" />
+              <img src={tagRemoveIcon} data-alt="➖" />
             </button>
           </div>
         );
@@ -89,7 +89,7 @@ function ModalSearchContainer(props) {
                 btnSearchDelete(index);
               }}
             >
-              <img src={tagDelIcon} alt="delete" />
+              <img src={tagDelIcon} data-alt="✖" />
             </button>
             <button
               className="tag-add btn btn-icon tag-btn"
@@ -97,7 +97,7 @@ function ModalSearchContainer(props) {
                 btnSearchAdd(index);
               }}
             >
-              <img src={tagAddIcon} alt="add" />
+              <img src={tagAddIcon} data-alt="➕" />
             </button>
           </div>
         );

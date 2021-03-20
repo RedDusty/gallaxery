@@ -15,7 +15,7 @@ const HeaderActionsMenu = (props) => {
               <NavLink
                 className="btn btn-link actions-btn"
                 to="/file-upload"
-                tabIndex="9"
+                tabIndex="5"
                 onClick={() => {
                   props.setModalSearchIsOpen(false);
                 }}
@@ -25,7 +25,7 @@ const HeaderActionsMenu = (props) => {
               <NavLink
                 className="btn btn-link actions-btn"
                 to="/profile"
-                tabIndex="10"
+                tabIndex="6"
                 onKeyPress={(e) => {
                   e.currentTarget.click();
                 }}
@@ -38,7 +38,7 @@ const HeaderActionsMenu = (props) => {
                   props.logOut();
                   window.location.reload();
                 }}
-                tabIndex="11"
+                tabIndex="7"
               >
                 Log out
               </button>
@@ -49,7 +49,7 @@ const HeaderActionsMenu = (props) => {
               onClick={() => {
                 props.authWithGoogle();
               }}
-              tabIndex="10"
+              tabIndex="5"
             >
               <div className="logo logo-google" />
               <span>Sign in with Google</span>
@@ -61,15 +61,15 @@ const HeaderActionsMenu = (props) => {
               <a
                 className="icons-React icons-ico"
                 href="https://reactjs.org/"
-                tabIndex="1"
+                tabIndex="8"
               ></a>
-              <a className="icons-GitHub icons-ico" tabIndex="2"></a>
+              <a className="icons-GitHub icons-ico" tabIndex="9"></a>
               <a
                 className="icons-FireBase icons-ico"
                 href="https://firebase.google.com/"
-                tabIndex="3"
+                tabIndex="10"
               ></a>
-              <a className="icons-Vercel icons-ico" tabIndex="4"></a>
+              <a className="icons-Vercel icons-ico" tabIndex="11"></a>
             </div>
           </div>
         </div>

@@ -103,8 +103,9 @@ textarea {
   &-gallaxery {
     background-image: url('./images/favicon.svg');
     background-size: 35px;
-    animation: HeaderLogoRotateIn 0.5s 1 linear;
-    &:hover {
+    animation: HeaderLogoRotateIn 0.25s 3 linear;
+    &:hover,
+    &:focus {
       animation: HeaderLogoRotateOut 2.5s infinite linear;
     }
   }

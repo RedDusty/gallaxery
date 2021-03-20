@@ -10,7 +10,14 @@ function currentTimeFunc() {
 }
 
 const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
-  const [currentTime, setCurrentTime] = useState();
+  const [currentTime, setCurrentTime] = useState(
+    Intl.DateTimeFormat('en-GB', {
+      dateStyle: 'short',
+      timeStyle: 'medium',
+    })
+      .format(new Date(Date.now()))
+      .replace(/\//g, '.')
+  );
   useEffect(() => {
     const timer = setTimeout(() => {
       setCurrentTime(currentTimeFunc());

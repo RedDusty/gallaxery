@@ -30,7 +30,7 @@ const FileUploader = ({
     return (
       <div className="prew-files">
         <div className="file-img">
-          <img src={fileInfo.fileURL} alt="" />
+          <img src={fileInfo.fileURL} alt={fileInfo.fileURL} />
           <button
             className="file-action-del"
             onClick={() => {

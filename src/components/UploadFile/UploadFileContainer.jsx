@@ -121,7 +121,7 @@ function UploadFileContainer(props) {
               tagDelete(index);
             }}
           >
-            <img src={tagDelIcon} alt="remove" />
+            <img src={tagDelIcon} data-alt="✖" />
           </button>
         </div>
       );
