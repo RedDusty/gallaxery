@@ -10,6 +10,7 @@ import {
   ufFileUpload,
   ufTagDelete,
   ufTagParse,
+  ufTagKeyUp,
   ufFileImageDelete,
   ufTextArea,
 } from '../../redux/actions';
@@ -42,7 +43,7 @@ function UploadFileContainer(props) {
   function queryUpdater(e = '') {
     props.ufTagParse(e, tags);
     tags = props.ufTags.length;
-    if (tags < 4 || tags >= 25) {
+    if (tags < 2 || tags >= 25) {
       document.documentElement.style.setProperty('--finfoLenTags', 'block');
     } else {
       document.documentElement.style.setProperty('--finfoLenTags', 'none');
@@ -52,7 +53,7 @@ function UploadFileContainer(props) {
   function tagKeyDown(e) {
     if (!(e.target.value.length > 25)) {
       if (tags < 25 && !(tags >= 25)) {
-        if (tags < 4) {
+        if (tags < 2) {
           document.documentElement.style.setProperty('--finfoLenTags', 'block');
         } else {
           document.documentElement.style.setProperty('--finfoLenTags', 'none');
@@ -65,15 +66,13 @@ function UploadFileContainer(props) {
     }
   }
   function tagKeyUp(e) {
-    if (e.key === ' ') {
-      tags = props.ufTags.length;
-      if (tags < 4 || tags >= 25) {
-        document.documentElement.style.setProperty('--finfoLenTags', 'block');
-      } else {
-        document.documentElement.style.setProperty('--finfoLenTags', 'none');
-      }
-      e.target.value = '';
+    tags = props.ufTags.length;
+    if (tags < 2 || tags >= 25) {
+      document.documentElement.style.setProperty('--finfoLenTags', 'block');
+    } else {
+      document.documentElement.style.setProperty('--finfoLenTags', 'none');
     }
+    props.ufTagKeyUp(e);
   }
 
   function tagDelete(tagId) {
@@ -133,7 +132,7 @@ function UploadFileContainer(props) {
     let imageURL = '';
     if (
       fileInfo.fileCode.length !== 0 &&
-      props.ufTags.length > 3 &&
+      props.ufTags.length > 1 &&
       props.ufTags.length < 26
     ) {
       console.log('Trying send image...');
@@ -175,9 +174,9 @@ function UploadFileContainer(props) {
       console.log('File uploaded.');
     } else {
       if (fileInfo.fileCode.length === 0) console.log('File empty.');
-      if (props.ufTags.length < 4)
+      if (props.ufTags.length < 2)
         console.log(
-          'Not enough tags. Need ' + (4 - props.ufTags.length) + ' more tags.'
+          'Not enough tags. Need ' + (2 - props.ufTags.length) + ' more tags.'
         );
       if (props.ufTags.length > 25)
         console.log(
@@ -217,6 +216,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   ufTagParse,
+  ufTagKeyUp,
   ufTagDelete,
   ufFileUpload,
   ufFileImageDelete,

@@ -6,6 +6,7 @@ import {
   MS_TAG_SEARCH_ADD,
   GLR_CARD_LOAD,
   UF_TAG_PARSE,
+  UF_TAG_KEYUP,
   UF_TAG_DELETE,
   UF_TEXTAREA,
   UF_FILEUPLOAD,
@@ -58,6 +59,13 @@ export const blocksConfirmedLoading = (blockId) => ({
 
 export const ufTagParse = (e) => ({
   type: UF_TAG_PARSE,
+  payload: {
+    e,
+  },
+});
+
+export const ufTagKeyUp = (e) => ({
+  type: UF_TAG_KEYUP,
   payload: {
     e,
   },

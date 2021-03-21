@@ -265,11 +265,8 @@
   &-btn {
     width: 16px;
     height: 16px;
-    background-size: contain;
-    background-repeat: no-repeat;
   }
   &-delete {
-    background-image: url('../../../images/search/tagDelete.svg');
     &:hover {
       img {
         filter: invert(34%) sepia(36%) saturate(4146%) hue-rotate(339deg)
@@ -278,7 +275,6 @@
     }
   }
   &-exclude {
-    background-image: url('../../../images/search/tagRemove.svg');
     &:hover {
       img {
         filter: invert(34%) sepia(36%) saturate(4146%) hue-rotate(339deg)
@@ -287,7 +283,6 @@
     }
   }
   &-add {
-    background-image: url('../../../images/search/tagAdd.svg');
     &:hover {
       img {
         filter: invert(54%) sepia(80%) saturate(866%) hue-rotate(74deg)

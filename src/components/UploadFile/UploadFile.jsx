@@ -28,7 +28,7 @@ const UploadFile = (props) => {
         <input
           className="prew-actions-tags"
           placeholder="Add tags to find this..."
-          onKeyDown={props.functions.tagKeyDown}
+          onChange={props.functions.tagKeyDown}
           onKeyUp={props.functions.tagKeyUp}
           minLength="1"
           maxLength="15"

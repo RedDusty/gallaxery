@@ -17,3 +17,4 @@ export const UF_TAG_DELETE = 'UF_TAG_DELETE';
 export const UF_TEXTAREA = 'UF_TEXTAREA';
 export const UF_FILEUPLOAD = 'UF_FILEUPLOAD';
 export const UF_FILEIMAGEDLETE = 'UF_FILEIMAGEDLETE';
+export const UF_TAG_KEYUP = 'UF_TAG_KEYUP';

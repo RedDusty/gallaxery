@@ -64,7 +64,7 @@ const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
       </div>
       <div className="finfo-tags-container">{fileTags}</div>
       <p className="finfo-length-tags finfo-length">
-        There should be 4-25 tags.
+        There should be 2-25 tags.
       </p>
     </div>
   );

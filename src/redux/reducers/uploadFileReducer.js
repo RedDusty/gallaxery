@@ -1,6 +1,7 @@
 import {
   UF_TAG_DELETE,
   UF_TAG_PARSE,
+  UF_TAG_KEYUP,
   UF_TEXTAREA,
   UF_FILEUPLOAD,
   UF_FILEIMAGEDLETE,
@@ -53,6 +54,18 @@ export default function uploadFileReducer(state = initialState, action) {
       return {
         ...state,
         uf_tags: newState,
+      };
+    }
+    case UF_TAG_KEYUP: {
+      const { e, clearAction } = action.payload;
+      if (/\s/.test(e.target.value)) {
+        e.target.value = '';
+      }
+      if (clearAction === 'clear') {
+        e.target.value = '';
+      }
+      return {
+        ...state,
       };
     }
     case UF_TAG_DELETE: {
