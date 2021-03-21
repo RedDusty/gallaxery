@@ -16,8 +16,7 @@ function ModalSearch(props) {
   const lastTags = [];
   const popularTags = [];
 
-  const searches = searchParams.searches;
-  const userAllowed = searchParams.userAllowed;
+  const searches = searchParams;
 
   const setIsOpen = props.vars.setIsOpen;
   const isOpen = props.vars.isOpen;
@@ -39,22 +38,12 @@ function ModalSearch(props) {
               <div className="ms-labels-include">
                 <div className="ms-labels-text">Include results from: </div>
                 <SearchLabel
-                  searchEngine={'Official images'}
-                  color={'blue'}
-                  state={true}
-                  setState={userAllowed.setConfirmedImages}
-                  tabIndex="20"
-                ></SearchLabel>
-                <SearchLabel
-                  searchEngine={'User images'}
-                  color={'green'}
-                  state={true}
-                  setState={userAllowed.setUserImages}
-                  tabIndex="21"
-                ></SearchLabel>
-              </div>
-              <div className="ms-labels-include">
-                <div className="ms-labels-text">Include results from: </div>
+                  searchEngine={'gallaxery'}
+                  color={'blueLight'}
+                  state={searches.searchGallaxery}
+                  setState={searches.setSearchGallaxery}
+                  tabIndex="23"
+                />
                 <SearchLabel
                   searchEngine={'google'}
                   color={'blue'}

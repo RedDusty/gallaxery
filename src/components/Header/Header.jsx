@@ -48,7 +48,8 @@ function Header(props) {
             <img
               src={props.currentUser.currentUser.photoURL}
               className="actions-menu-btn-user"
-              alt={props.currentUser.currentUser.displayName}
+              data-alt="💜"
+              id="actions-menu-btn-user"
             />
           ) : (
             <></>

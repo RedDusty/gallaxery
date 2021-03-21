@@ -5,6 +5,7 @@ import { blocksConfirmedLoading } from '../../redux/actions';
 import { connect } from 'react-redux';
 
 import firebase from 'firebase/app';
+import { NavLink } from 'react-router-dom';
 
 async function getImages(key) {
   try {
@@ -72,16 +73,23 @@ const GalleryContainer = (props) => {
     }
   }
 
-  const allCards = cards.map((block) => {
+  const allCards = cards.map((block, index) => {
     return (
       <div className="card-p" key={block.infoDate}>
-        <div className="card-p-top">
-          <img src={block.fileURL} alt="" />
-        </div>
-        <div className="card-p-bottom">
-          <img src={block.infoPhotoURL} alt="" />
-          <p>{block.infoTitle}</p>
-        </div>
+        <NavLink
+          // to={'card/' + block.infoDate}
+          to="/"
+          className="card-link"
+          tabIndex={100 + index}
+        >
+          <div className="card-p-top">
+            <img src={block.fileURL} alt="" />
+          </div>
+          <div className="card-p-bottom">
+            <img src={block.infoPhotoURL} alt="" />
+            <p>{block.infoTitle}</p>
+          </div>
+        </NavLink>
       </div>
     );
   });

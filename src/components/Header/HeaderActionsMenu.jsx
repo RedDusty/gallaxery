@@ -63,13 +63,21 @@ const HeaderActionsMenu = (props) => {
                 href="https://reactjs.org/"
                 tabIndex="8"
               ></a>
-              <a className="icons-GitHub icons-ico" tabIndex="9"></a>
+              <a
+                className="icons-GitHub icons-ico"
+                href="https://github.com/RedDusty/gallaxery"
+                tabIndex="9"
+              ></a>
               <a
                 className="icons-FireBase icons-ico"
                 href="https://firebase.google.com/"
                 tabIndex="10"
               ></a>
-              <a className="icons-Vercel icons-ico" tabIndex="11"></a>
+              <a
+                className="icons-Vercel icons-ico"
+                href="https://vercel.com/"
+                tabIndex="11"
+              ></a>
             </div>
           </div>
         </div>

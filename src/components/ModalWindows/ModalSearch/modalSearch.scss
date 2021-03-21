@@ -52,6 +52,22 @@
     &:hover {
       background-color: var(--blueWhite000);
     }
+    &-blueLight {
+      &:hover {
+        border-color: var(--blue070);
+        color: var(--blue070);
+      }
+      &-toggle {
+        background: var(--white000);
+        &::after {
+          border-color: var(--white000) !important;
+        }
+        &:checked {
+          background: var(--blue070);
+          border-color: var(--blue060);
+        }
+      }
+    }
     &-blue {
       &:hover {
         border-color: var(--blue090);

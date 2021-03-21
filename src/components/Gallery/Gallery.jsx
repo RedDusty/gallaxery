@@ -10,6 +10,7 @@ function Gallery(props) {
 
   const masonryOptions = {
     transitionDuration: '0.25s',
+    fitWidth: true,
   };
 
   return (
@@ -18,6 +19,7 @@ function Gallery(props) {
         options={masonryOptions}
         disableImagesLoaded={false}
         updateOnEachImageLoad={false}
+        className="cards-container"
       >
         {allCards}
       </Masonry>

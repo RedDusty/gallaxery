@@ -1,54 +1,71 @@
 .g {
   display: flex;
   flex-direction: column;
-  margin: 60px 20px 20px 20px;
+  margin: 60px 10px 20px 10px;
 }
 
 .cards-container {
+  margin: 0 auto;
 }
 
-.card-p {
-  float: left;
-  margin: 20px;
-  width: 250px;
-  height: auto;
-  &:hover .card-p-top img {
-    border-radius: 0;
-  }
-  &-top {
-    img {
-      width: 250px;
-      height: auto;
-      border-radius: 15px;
-      transition: 0.1s linear;
+.card {
+  &-link {
+    cursor: zoom-in;
+    text-decoration: none;
+    color: var(--black000);
+    outline: none;
+    display: block;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 12.5px;
+    &:focus .card-p-top img {
+      filter: brightness(90%);
     }
   }
-  &-bottom {
-    display: flex;
-    align-items: center;
-    img {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
+  &-p {
+    margin: 10px;
+    width: 250px;
+    height: auto;
+    cursor: zoom-in;
+    outline: none;
+    &:hover .card-p-top img {
+      filter: brightness(90%);
     }
-    p {
-      width: 100%;
-      margin: 0 0 0 5px;
-      white-space: nowrap;
-      overflow: hidden;
-      position: relative;
-      &::after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 100px;
-        height: 100%;
-        background: linear-gradient(
-          to right,
-          rgba(255, 255, 255, 0),
-          rgb(255, 255, 255) 100%
-        );
+    &-top {
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+      }
+    }
+    &-bottom {
+      display: flex;
+      align-items: center;
+      img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+      }
+      p {
+        width: 100%;
+        margin: 0 0 0 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        position: relative;
+        &::after {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 100px;
+          height: 100%;
+          background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0),
+            rgb(255, 255, 255) 100%
+          );
+        }
       }
     }
   }
@@ -113,6 +130,25 @@
     font-size: 20px;
     margin-left: 5px;
     color: #1c941c;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .g {
+    margin: 60px 5px 20px 5px;
+  }
+  .card-p {
+    width: 42.5vw;
+    margin: 5px;
+  }
+}
+@media screen and (max-width: 436px) {
+  .g {
+    margin: 60px 5px 20px 5px;
+  }
+  .card-p {
+    width: 90vw;
+    margin: 5px;
   }
 }
 

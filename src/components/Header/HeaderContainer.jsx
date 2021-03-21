@@ -8,12 +8,11 @@ import { UserContext } from '../../UserProvider';
 
 function HeaderContainer(props) {
   const [modalSearchIsOpen, setModalSearchIsOpen] = useState(false);
+  const [searchGallaxery, setSearchGallaxery] = useState(false);
   const [searchGoogle, setSearchGoogle] = useState(false);
   const [searchPinterest, setSearchPinterest] = useState(false);
   const [searchImgur, setSearchImgur] = useState(false);
   const [searchUnsplash, setSearchUnsplash] = useState(false);
-  const [confirmedImages, setConfirmedImages] = useState(true);
-  const [userImages, setUserImages] = useState(false);
 
   const [reloadBtnText, setReloadBtnText] = useState('Reload');
   const [query, setQuery] = useState([]);
@@ -26,7 +25,8 @@ function HeaderContainer(props) {
         if (
           menuRef.current &&
           !menuRef.current.contains(event.target) &&
-          event.target.id !== 'actions-menu-btn-img'
+          event.target.id !== 'actions-menu-btn-img' &&
+          event.target.id !== 'actions-menu-btn-user'
         ) {
           setMenuIsOpen(false);
         }
@@ -50,6 +50,8 @@ function HeaderContainer(props) {
   }
 
   const searches = {
+    searchGallaxery,
+    setSearchGallaxery,
     searchGoogle,
     setSearchGoogle,
     searchPinterest,
@@ -58,18 +60,6 @@ function HeaderContainer(props) {
     setSearchImgur,
     searchUnsplash,
     setSearchUnsplash,
-  };
-
-  const userAllowed = {
-    confirmedImages,
-    setConfirmedImages,
-    userImages,
-    setUserImages,
-  };
-
-  const searchParams = {
-    searches,
-    userAllowed,
   };
 
   const vars = {
@@ -93,7 +83,7 @@ function HeaderContainer(props) {
       authWithGoogle={props.authWithGoogle}
       logOut={props.logOut}
       currentUser={currentUser}
-      searchParams={searchParams}
+      searchParams={searches}
     />
   );
 }

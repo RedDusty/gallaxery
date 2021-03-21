@@ -10,14 +10,7 @@ function currentTimeFunc() {
 }
 
 const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
-  const [currentTime, setCurrentTime] = useState(
-    Intl.DateTimeFormat('en-GB', {
-      dateStyle: 'short',
-      timeStyle: 'medium',
-    })
-      .format(new Date(Date.now()))
-      .replace(/\//g, '.')
-  );
+  const [currentTime, setCurrentTime] = useState(currentTimeFunc());
   useEffect(() => {
     const timer = setTimeout(() => {
       setCurrentTime(currentTimeFunc());
@@ -31,7 +24,7 @@ const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
           className="finfo-name finfo-textarea"
           placeholder="Write name here..."
           spellCheck="false"
-          onKeyPress={(e) => {
+          onChange={(e) => {
             textareaAction(e, 'name');
           }}
           onKeyUp={(e) => {
@@ -49,7 +42,7 @@ const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
         className="finfo-comment finfo-textarea"
         placeholder="Write some comments here..."
         spellCheck="false"
-        onKeyPress={(e) => {
+        onChange={(e) => {
           textareaAction(e, 'comment');
         }}
         onKeyUp={(e) => {
