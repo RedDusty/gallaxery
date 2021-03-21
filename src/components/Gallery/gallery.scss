@@ -58,7 +58,7 @@
           position: absolute;
           right: 0;
           top: 0;
-          width: 100px;
+          width: 35%;
           height: 100%;
           background: linear-gradient(
             to right,
@@ -142,7 +142,7 @@
     margin: 5px;
   }
 }
-@media screen and (max-width: 436px) {
+@media screen and (max-width: 380px) {
   .g {
     margin: 60px 5px 20px 5px;
   }

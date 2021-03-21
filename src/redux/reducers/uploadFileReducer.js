@@ -22,29 +22,31 @@ export default function uploadFileReducer(state = initialState, action) {
     case UF_TAG_PARSE: {
       const { e } = action.payload;
       let queryReturn = [];
-      if (e.key === 'Space' || e.key === 32 || e.key === ' ') {
-        const val = e.target.value.match(/[^ -][^ ]*/g);
-        if (val !== null) {
-          val.map((tag) => {
-            if (
-              tag !== '' ||
-              tag !== ' ' ||
-              tag !== undefined ||
-              tag !== null
-            ) {
-              let canPush = true;
-              for (let index = 0; index < state.uf_tags.length; index++) {
-                if (state.uf_tags[index].tag === tag) {
-                  canPush = false;
+      if (e !== '') {
+        if (/\s/.test(e.target.value)) {
+          const val = e.target.value.match(/[^ -][^ ]*/g);
+          if (val !== null) {
+            val.map((tag) => {
+              if (
+                tag !== '' ||
+                tag !== ' ' ||
+                tag !== undefined ||
+                tag !== null
+              ) {
+                let canPush = true;
+                for (let index = 0; index < state.uf_tags.length; index++) {
+                  if (state.uf_tags[index].tag === tag) {
+                    canPush = false;
+                  }
+                }
+                if (canPush) {
+                  queryReturn.push({
+                    tag,
+                  });
                 }
               }
-              if (canPush) {
-                queryReturn.push({
-                  tag,
-                });
-              }
-            }
-          });
+            });
+          }
         }
       }
       const newState = [...new Set(state.uf_tags.concat(queryReturn))];
