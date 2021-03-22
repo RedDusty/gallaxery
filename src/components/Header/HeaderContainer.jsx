@@ -8,11 +8,6 @@ import { UserContext } from '../../UserProvider';
 
 function HeaderContainer(props) {
   const [modalSearchIsOpen, setModalSearchIsOpen] = useState(false);
-  const [searchGallaxery, setSearchGallaxery] = useState(false);
-  const [searchGoogle, setSearchGoogle] = useState(false);
-  const [searchPinterest, setSearchPinterest] = useState(false);
-  const [searchImgur, setSearchImgur] = useState(false);
-  const [searchUnsplash, setSearchUnsplash] = useState(false);
 
   const [reloadBtnText, setReloadBtnText] = useState('Reload');
   const [query, setQuery] = useState([]);
@@ -49,19 +44,6 @@ function HeaderContainer(props) {
     props.tagParserOnKeyUp(e, action);
   }
 
-  const searches = {
-    searchGallaxery,
-    setSearchGallaxery,
-    searchGoogle,
-    setSearchGoogle,
-    searchPinterest,
-    setSearchPinterest,
-    searchImgur,
-    setSearchImgur,
-    searchUnsplash,
-    setSearchUnsplash,
-  };
-
   const vars = {
     setModalSearchIsOpen,
     modalSearchIsOpen,
@@ -83,7 +65,6 @@ function HeaderContainer(props) {
       authWithGoogle={props.authWithGoogle}
       logOut={props.logOut}
       currentUser={currentUser}
-      searchParams={searches}
     />
   );
 }

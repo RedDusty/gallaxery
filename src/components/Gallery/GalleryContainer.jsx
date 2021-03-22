@@ -12,7 +12,7 @@ async function getImages(key) {
     const data = await firebase
       .firestore()
       .collection('usersImages')
-      .orderBy('infoDate', 'desc')
+      .orderBy('id', 'desc')
       .startAfter(key)
       // .limit(10)
       .get();
@@ -22,11 +22,13 @@ async function getImages(key) {
     data.forEach((doc) => {
       cards.push({
         infoDate: doc.data().infoDate,
+        uid: doc.data().uid,
         infoPhotoURL: doc.data().infoPhotoURL,
         infoTitle: doc.data().infoTitle,
         fileURL: doc.data().fileURL,
+        id: doc.data().id,
       });
-      lastKey = doc.data().infoDate;
+      lastKey = doc.data().id;
     });
     return { cards, lastKey };
   } catch (e) {}
@@ -67,21 +69,20 @@ const GalleryContainer = (props) => {
       return (
         <div className="dataLoaded">
           <div className="dataLoaded-icon"></div>
-          <div className="dataLoaded-text">All data loaded.</div>
+          <div className="dataLoaded-text">All cards loaded.</div>
         </div>
       );
     }
   }
 
   const allCards = cards.map((block, index) => {
+    const href =
+      window.location.pathname.slice(0, 5) === '/card'
+        ? block.id
+        : 'card/' + block.id;
     return (
       <div className="card-p" key={block.infoDate}>
-        <NavLink
-          // to={'card/' + block.infoDate}
-          to="/"
-          className="card-link"
-          tabIndex={100 + index}
-        >
+        <NavLink to={'' + href} className="card-link" tabIndex={100 + index}>
           <div className="card-p-top">
             <img src={block.fileURL} alt="" />
           </div>

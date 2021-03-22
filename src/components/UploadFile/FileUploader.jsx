@@ -14,6 +14,7 @@ const FileUploader = ({
           <div className="uploader-inner">
             <input className="uploader-input" {...getInputProps()} />
             <p>Drag 'n' drop files here or click "Upload" to choose</p>
+            <p>The file must be 5 MB or less.</p>
             <button
               type="button"
               onClick={open}

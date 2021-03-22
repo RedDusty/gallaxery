@@ -68,7 +68,6 @@ function Header(props) {
       <ModalSearchContainer
         isOpen={modalSearchIsOpen}
         setIsOpen={setModalSearchIsOpen}
-        searchParams={props.searchParams}
       />
     </section>
   );
