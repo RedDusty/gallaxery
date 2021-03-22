@@ -45,68 +45,54 @@ async function CreateFile(data) {
   const id = data.id;
   const currentTime = Date.now();
   let imageURL = '';
-  if (
-    fileInfo.fileCode.length !== 0 &&
-    ufTags.length > 1 &&
-    ufTags.length < 26
-  ) {
-    console.log('Trying send image...');
-    const file = fileInfo;
-    const storageRef = firebase
-      .storage()
-      .ref()
-      .child(
-        '/usersImages/' +
-          '__CARD__' +
-          id +
-          '__TIME__' +
-          currentTime +
-          '__NAME__' +
-          file.fileName
-      );
-    const metadata = {
-      name: file.fileName,
-      size: file.fileSize,
-      contentType: file.fileType,
-      time: currentTime,
+  console.log('Trying send image...');
+  const file = fileInfo;
+  const storageRef = firebase
+    .storage()
+    .ref()
+    .child(
+      '/usersImages/' +
+        '__CARD__' +
+        id +
+        '__TIME__' +
+        currentTime +
+        '__NAME__' +
+        file.fileName
+    );
+  const metadata = {
+    name: file.fileName,
+    size: file.fileSize,
+    contentType: file.fileType,
+    time: currentTime,
+    id: id,
+  };
+  await storageRef.putString(file.fileURL, 'data_url', metadata);
+  imageURL = await storageRef.getDownloadURL();
+  const firestore = await firebase
+    .firestore()
+    .collection('usersImages')
+    .doc('image' + id)
+    .set({
+      fileURL: imageURL,
+      fileName: fileInfo.fileName,
+      fileSize: fileInfo.fileSize,
+      fileType: fileInfo.fileType,
+      infoDate: currentTime,
+      uid: userInfo.uid,
+      infoUsername: userInfo.username,
+      infoPhotoURL: userInfo.photo,
+      infoTitle: ufFile.textareaTitle,
+      infoDescription: ufFile.textareaDescription,
+      infoTags: ufTags,
       id: id,
-    };
-    await storageRef.putString(file.fileURL, 'data_url', metadata);
-    imageURL = await storageRef.getDownloadURL();
-    const firestore = await firebase
-      .firestore()
-      .collection('usersImages')
-      .doc('image' + id)
-      .set({
-        fileURL: imageURL,
-        fileName: fileInfo.fileName,
-        fileSize: fileInfo.fileSize,
-        fileType: fileInfo.fileType,
-        infoDate: currentTime,
-        uid: userInfo.uid,
-        infoUsername: userInfo.username,
-        infoPhotoURL: userInfo.photo,
-        infoTitle: ufFile.textareaTitle,
-        infoDescription: ufFile.textareaDescription,
-        infoTags: ufTags,
-        id: id,
-      });
-    console.log('File uploaded.');
-  } else {
-    if (fileInfo.fileCode.length === 0) console.log('File empty.');
-    if (ufTags.length < 2)
-      console.log(
-        'Not enough tags. Need ' + (2 - ufTags.length) + ' more tags.'
-      );
-    if (ufTags.length > 25)
-      console.log(
-        'Not enough tags. Remove ' + (ufTags.length - 25) + ' more tags.'
-      );
-  }
+    });
+  console.log('File uploaded. Redirect to uploaded card...');
+  window.location.pathname = 'card/' + id;
 }
 
 function UploadFileContainer(props) {
   const inputName = useRef(null);
+  const [isUploading, setIsUploading] = useState(false);
   const { currentUser } = useContext(UserContext);
   let tags = 0;
 
@@ -212,19 +198,45 @@ function UploadFileContainer(props) {
     });
 
   const onSubmit = async (e) => {
+    setIsUploading(true);
     e.preventDefault();
-    getLastId()
-      .then((res) => {
-        const data = {
-          fileInfo: fileInfo,
-          ufTags: props.ufTags,
-          ufFile: props.ufFile,
-          userInfo: userInfo,
-          id: Number(res) + 1,
-        };
-        CreateFile(data);
-      })
-      .catch((err) => {});
+    if (
+      fileInfo.fileCode.length !== 0 &&
+      props.ufTags.length > 1 &&
+      props.ufTags.length < 26
+    ) {
+      getLastId()
+        .then((res) => {
+          const data = {
+            fileInfo: fileInfo,
+            ufTags: props.ufTags,
+            ufFile: props.ufFile,
+            userInfo: userInfo,
+            id: Number(res) + 1,
+          };
+          CreateFile(data);
+        })
+        .catch((err) => {});
+    } else {
+      if (fileInfo.fileCode.length === 0) {
+        console.log('File empty.');
+        setIsUploading(false);
+      }
+      if (props.ufTags.length < 2) {
+        console.log(
+          'Not enough tags. Need ' + (2 - props.ufTags.length) + ' more tags.'
+        );
+        setIsUploading(false);
+      }
+      if (props.ufTags.length > 25) {
+        console.log(
+          'Not enough tags. Remove ' +
+            (props.ufTags.length - 25) +
+            ' more tags.'
+        );
+        setIsUploading(false);
+      }
+    }
   };
 
   const vars = {
@@ -235,6 +247,7 @@ function UploadFileContainer(props) {
     inputName,
     userInfo,
     fileTags,
+    isUploading,
   };
 
   const functions = {

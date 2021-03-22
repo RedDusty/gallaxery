@@ -22,19 +22,36 @@ const UploadFile = (props) => {
     };
   }
 
+  let uploadBtn = (
+    <>
+      <input
+        className="prew-actions-tags"
+        placeholder="Add tags to find this..."
+        onChange={props.functions.tagKeyDown}
+        onKeyUp={props.functions.tagKeyUp}
+        minLength="1"
+        maxLength="15"
+      ></input>
+      <button className="prew-actions-done btn">Create</button>
+    </>
+  );
+
+  if (props.vars.isUploading === true) {
+    uploadBtn = (
+      <div className="loading">
+        <div className="lds-ellipsis">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <form className="iu" onSubmit={props.functions.onSubmit}>
-      <div className="prew-actions">
-        <input
-          className="prew-actions-tags"
-          placeholder="Add tags to find this..."
-          onChange={props.functions.tagKeyDown}
-          onKeyUp={props.functions.tagKeyUp}
-          minLength="1"
-          maxLength="15"
-        ></input>
-        <button className="prew-actions-done btn">Create</button>
-      </div>
+      <div className="prew-actions">{uploadBtn}</div>
       <div className="prew-container">
         <div className="prew-container-border">
           <FileUploader
