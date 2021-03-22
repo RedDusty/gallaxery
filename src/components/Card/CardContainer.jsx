@@ -4,6 +4,7 @@ import Card from './Card';
 import './card.scss';
 
 import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 async function getCard(key) {
   const data = await firebase

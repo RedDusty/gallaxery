@@ -6,7 +6,8 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import UploadFileContainer from './components/UploadFile/UploadFileContainer';
 import NotFound from './components/NotFound';
 
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import CardContainer from './components/Card/CardContainer';
 
 function App() {

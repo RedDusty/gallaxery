@@ -4,6 +4,8 @@ import UploadFile from './UploadFile';
 import './uploadFile.scss';
 
 import firebase from 'firebase/app';
+import 'firebase/storage';
+import 'firebase/firestore';
 import { Redirect } from 'react-router';
 import { UserContext } from '../../UserProvider';
 import {

@@ -1,4 +1,6 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/storage';
 import { GLR_CARD_LOAD } from '../types';
 
 const initialState = {

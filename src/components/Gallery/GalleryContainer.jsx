@@ -5,6 +5,8 @@ import { blocksConfirmedLoading } from '../../redux/actions';
 import { connect } from 'react-redux';
 
 import firebase from 'firebase/app';
+import 'firebase/firestore';
+
 import { NavLink } from 'react-router-dom';
 
 async function getImages(key) {
