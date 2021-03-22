@@ -7,6 +7,7 @@ import UploadFileContainer from './components/UploadFile/UploadFileContainer';
 import NotFound from './components/NotFound';
 
 import firebase from 'firebase';
+import CardContainer from './components/Card/CardContainer';
 
 function App() {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -33,6 +34,8 @@ function App() {
         <Route component={GalleryContainer} exact path="/" />
         <Route component={ProfileContainer} exact path="/profile" />
         <Route component={UploadFileContainer} exact path="/file-upload" />
+        <Route component={CardContainer} exact path="/card/:id" />
+        <Route component={GalleryContainer} exact path="/card/:id" />
         <Route component={NotFound}></Route>
       </Switch>
     </div>
