@@ -143,8 +143,19 @@
 
 .finfo {
   &-name {
+    background-color: var(--blue030);
+    box-shadow: 0px 0px 5px 1px var(--blue070);
     font-size: 22px;
     font-weight: 600;
+    text-align: center;
+    &:hover:not(:focus) {
+      background-color: var(--blue010);
+      box-shadow: none;
+      border: 2px solid var(--blue080);
+    }
+    &:focus {
+      background-color: var(--blueWhite000);
+    }
   }
   &-sub {
     display: flex;
@@ -152,7 +163,6 @@
     align-items: flex-end;
     margin-top: 5px;
     &-author {
-      background-color: var(--blue010);
       width: max-content;
       display: flex;
       padding: 3px 10px;
@@ -166,24 +176,33 @@
       &-username {
         margin-left: 5px;
         font-weight: 500;
+        text-decoration: underline 1px var(--black000);
+        color: var(--black000);
       }
     }
     &-time {
       background-color: var(--blue010);
       width: max-content;
       padding: 3px 5px;
-      margin: 2px 0 0 0;
+      margin: 3px 0 0 0;
       border-radius: 25px;
       font-size: 14px;
       font-weight: 500;
     }
   }
   &-comment {
+    background-color: var(--blue020);
     font-size: 18px;
     font-weight: 500;
+    &:hover:not(:focus) {
+      background-color: var(--blue010);
+      border: 2px solid var(--blue080);
+    }
+    &:focus {
+      background-color: var(--blueWhite000);
+    }
   }
   &-textarea {
-    background-color: var(--blue010);
     min-width: 250px;
     width: 95%;
     height: 26px;
@@ -194,13 +213,6 @@
     outline: none;
     word-break: break-all;
     overflow: hidden;
-    &:hover:not(:focus) {
-      background-color: var(--blue020);
-      border: 2px solid var(--blue080);
-    }
-    &:focus {
-      background-color: var(--blueWhite000);
-    }
     &:focus::placeholder {
       color: var(--grey070);
     }

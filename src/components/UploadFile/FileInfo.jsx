@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 function currentTimeFunc() {
   return new Intl.DateTimeFormat('en-GB', {
@@ -56,10 +57,10 @@ const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
         Maximum 750 characters!
       </p>
       <div className="finfo-sub">
-        <div className="finfo-sub-author">
+        <NavLink to="/file-upload" className="finfo-sub-author">
           <img className="finfo-sub-author-icon" src={userInfo.photo}></img>
           <div className="finfo-sub-author-username">{userInfo.username}</div>
-        </div>
+        </NavLink>
         <p className="finfo-sub-time">{currentTime}</p>
       </div>
       <div className="finfo-tags-container">{fileTags}</div>

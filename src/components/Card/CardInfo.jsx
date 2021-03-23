@@ -2,6 +2,22 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const CardInfo = ({ card, cardTags }) => {
+  let description = card.infoDescription;
+  let title = card.infoTitle;
+  description =
+    description.length !== 0 ? (
+      <p className="c-finfo-comment">{card.infoDescription}</p>
+    ) : (
+      <></>
+    );
+  title =
+    title.length !== 0 ? (
+      <div className="c-finfo-header">
+        <p className="c-finfo-header-name">{card.infoTitle}</p>
+      </div>
+    ) : (
+      <></>
+    );
   const time =
     card.infoDate === 'Loading...'
       ? 'Loading'
@@ -13,10 +29,8 @@ const CardInfo = ({ card, cardTags }) => {
           .replace(/\//g, '.');
   return (
     <div className="c-info">
-      <div className="c-finfo-header">
-        <p className="c-finfo-name">{card.infoTitle}</p>
-      </div>
-      <p className="c-finfo-comment">{card.infoDescription}</p>
+      {title}
+      {description}
       <div className="c-finfo-sub">
         <NavLink to={'/profile/' + card.uid} className="c-finfo-sub-profile">
           <div className="c-finfo-sub-author">

@@ -19,8 +19,11 @@
     border-top-right-radius: 15px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 12.5px;
+    &:focus {
+      animation: blinkBorder 5s infinite ease-in-out;
+    }
     &:focus .card-p-top img {
-      filter: brightness(90%);
+      animation: blinkCardImg 5s infinite ease-in-out;
     }
   }
   &-p {
@@ -30,7 +33,7 @@
     cursor: zoom-in;
     outline: none;
     &:hover .card-p-top img {
-      filter: brightness(90%);
+      filter: brightness(75%);
     }
     &-top {
       img {
@@ -174,5 +177,17 @@
   }
   100% {
     transform: translate(32px, 0);
+  }
+}
+
+@keyframes blinkCardImg {
+  0% {
+    filter: brightness(100%);
+  }
+  50% {
+    filter: brightness(75%);
+  }
+  100% {
+    filter: brightness(100%);
   }
 }

@@ -63,9 +63,18 @@
 }
 
 .c-finfo {
-  &-name {
-    font-size: 22px;
-    font-weight: 500;
+  &-header {
+    background-color: var(--blue030);
+    padding: 5px;
+    margin: 15px 0px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0px 0px 5px 1px var(--blue070);
+    &-name {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 500;
+    }
   }
   &-sub {
     display: flex;
@@ -74,9 +83,14 @@
     margin-top: 5px;
     &-profile {
       border-radius: 25px;
+      &:active .c-finfo-sub-author {
+        animation: blinkCardProfileLink 5s infinite linear;
+      }
+      &:active {
+        animation: blinkBorder 5s infinite linear;
+      }
     }
     &-author {
-      background-color: var(--blue010);
       width: max-content;
       display: flex;
       padding: 3px 10px;
@@ -98,13 +112,17 @@
       background-color: var(--blue010);
       width: max-content;
       padding: 3px 5px;
-      margin: 2px 0 0 0;
+      margin: 5px 0 0 0;
       border-radius: 25px;
       font-size: 14px;
       font-weight: 500;
     }
   }
   &-comment {
+    margin: 15px 5px;
+    padding: 5px;
+    background-color: var(--blue020);
+    border-radius: 25px;
     font-size: 18px;
     font-weight: 400;
   }
@@ -177,20 +195,27 @@
       margin: 0;
       img {
         border-radius: 0;
+        z-index: 1;
       }
     }
     &-info {
       margin-left: 0;
     }
-  }
-  .finfo {
-    &-textarea {
-      width: calc(95% - 10px);
-      margin: 5px;
-    }
-    &-tags-container {
-      margin: 0;
-      border-radius: 0;
+    &-finfo {
+      &-header {
+        margin: 0 0 15px 0;
+        border-radius: 0;
+        box-shadow: 0px 0px 5px 1px var(--blue070);
+        z-index: 0;
+      }
+      &-comment {
+        margin: 0;
+        border-radius: 0;
+      }
+      &-tags-container {
+        margin: 0;
+        border-radius: 0;
+      }
     }
   }
 }

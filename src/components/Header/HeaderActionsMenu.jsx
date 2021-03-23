@@ -19,6 +19,9 @@ const HeaderActionsMenu = (props) => {
                 onClick={() => {
                   props.setModalSearchIsOpen(false);
                 }}
+                onKeyPress={(e) => {
+                  e.currentTarget.click();
+                }}
               >
                 Upload file
               </NavLink>

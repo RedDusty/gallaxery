@@ -77,13 +77,19 @@ html {
 
 button,
 a,
-input,
 summary,
-div,
+div {
+  outline: none;
+  &:focus {
+    animation: blinkBackgroundBorder 2.5s infinite ease-in-out;
+  }
+}
+
+input,
 textarea {
   outline: none;
   &:focus {
-    box-shadow: 0 0 0 3px var(--focus);
+    animation: blinkBorder 2.5s infinite ease-in-out;
   }
 }
 
@@ -106,7 +112,8 @@ textarea {
     animation: HeaderLogoRotateIn 0.25s 3 linear;
     &:hover,
     &:focus {
-      animation: HeaderLogoRotateOut 2.5s infinite linear;
+      animation: HeaderLogoRotateOut 2.5s infinite linear,
+        blinkBackgroundBorder 2.5s infinite ease-in-out;
     }
   }
   &-google {
@@ -135,5 +142,44 @@ textarea {
   }
   to {
     transform: rotate(0deg);
+  }
+}
+
+@keyframes blinkBackground {
+  0% {
+    background-color: var(--focusBlueAlt);
+  }
+  50% {
+    background-color: var(--focusBlueLightAlt);
+  }
+  100% {
+    background-color: var(--focusBlueAlt);
+  }
+}
+
+@keyframes blinkBorder {
+  0% {
+    box-shadow: 0px 0px 0px 2px var(--focusBlue);
+  }
+  50% {
+    box-shadow: 0px 0px 0px 2px var(--focusBlueLight);
+  }
+  100% {
+    box-shadow: 0px 0px 0px 2px var(--focusBlue);
+  }
+}
+
+@keyframes blinkBackgroundBorder {
+  0% {
+    background-color: var(--focusBlueAlt);
+    box-shadow: 0px 0px 0px 3px var(--focusBlue);
+  }
+  50% {
+    background-color: var(--focusBlueLightAlt);
+    box-shadow: 0px 0px 0px 3px var(--focusBlueLight);
+  }
+  100% {
+    background-color: var(--focusBlueAlt);
+    box-shadow: 0px 0px 0px 3px var(--focusBlue);
   }
 }
