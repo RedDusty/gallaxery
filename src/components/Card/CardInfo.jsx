@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const CardInfo = ({ card, cardTags }) => {
   const time =
@@ -17,13 +18,17 @@ const CardInfo = ({ card, cardTags }) => {
       </div>
       <p className="c-finfo-comment">{card.infoDescription}</p>
       <div className="c-finfo-sub">
-        <div className="c-finfo-sub-author">
-          <img
-            className="c-finfo-sub-author-icon"
-            src={card.infoPhotoURL}
-          ></img>
-          <div className="c-finfo-sub-author-username">{card.infoUsername}</div>
-        </div>
+        <NavLink to={'/profile/' + card.uid} className="c-finfo-sub-profile">
+          <div className="c-finfo-sub-author">
+            <img
+              className="c-finfo-sub-author-icon"
+              src={card.infoPhotoURL}
+            ></img>
+            <div className="c-finfo-sub-author-username">
+              {card.infoUsername}
+            </div>
+          </div>
+        </NavLink>
         <p className="c-finfo-sub-time">{time}</p>
       </div>
       <div className="c-finfo-tags-container">{cardTags}</div>

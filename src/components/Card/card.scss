@@ -72,6 +72,9 @@
     flex-flow: column;
     align-items: flex-end;
     margin-top: 5px;
+    &-profile {
+      border-radius: 25px;
+    }
     &-author {
       background-color: var(--blue010);
       width: max-content;
@@ -87,6 +90,8 @@
       &-username {
         margin-left: 5px;
         font-weight: 500;
+        color: var(--black000);
+        text-decoration-color: var(--black000);
       }
     }
     &-time {

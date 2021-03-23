@@ -28,6 +28,7 @@ async function getCard(key) {
           infoTags: res.data().infoTags,
           infoTitle: res.data().infoTitle,
           id: res.data().id,
+          uid: res.data().uid,
         });
       })
       .catch((error) => {

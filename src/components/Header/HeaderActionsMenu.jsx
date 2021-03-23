@@ -24,7 +24,7 @@ const HeaderActionsMenu = (props) => {
               </NavLink>
               <NavLink
                 className="btn btn-link actions-btn"
-                to="/profile"
+                to={'/profile/' + props.currentUser.currentUser.uid}
                 tabIndex="6"
                 onKeyPress={(e) => {
                   e.currentTarget.click();

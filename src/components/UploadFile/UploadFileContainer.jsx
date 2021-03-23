@@ -39,7 +39,7 @@ async function getLastId() {
   } catch (e) {}
 }
 
-async function CreateFile(data) {
+async function CreateFile(data, history) {
   const fileInfo = data.fileInfo;
   const ufTags = data.ufTags;
   const ufFile = data.ufFile;
@@ -89,7 +89,7 @@ async function CreateFile(data) {
       id: id,
     });
   console.log('File uploaded. Redirect to uploaded card...');
-  window.location.pathname = 'card/' + id;
+  history.push('/card/' + id);
 }
 
 function UploadFileContainer(props) {
@@ -216,7 +216,7 @@ function UploadFileContainer(props) {
             userInfo: userInfo,
             id: Number(res) + 1,
           };
-          CreateFile(data);
+          CreateFile(data, props.history);
         })
         .catch((err) => {});
     } else {

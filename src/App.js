@@ -33,7 +33,7 @@ function App() {
       <HeaderContainer authWithGoogle={authWithGoogle} logOut={logOut} />
       <Switch>
         <Route component={GalleryContainer} exact path="/" />
-        <Route component={ProfileContainer} exact path="/profile" />
+        <Route component={ProfileContainer} exact path="/profile/:uid" />
         <Route component={UploadFileContainer} exact path="/file-upload" />
         <Route component={CardContainer} exact path="/card/:id" />
         <Route component={GalleryContainer} exact path="/card/:id" />

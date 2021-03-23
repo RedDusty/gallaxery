@@ -81,6 +81,7 @@ input,
 summary,
 div,
 textarea {
+  outline: none;
   &:focus {
     box-shadow: 0 0 0 3px var(--focus);
   }

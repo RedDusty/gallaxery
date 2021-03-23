@@ -103,7 +103,6 @@ const GalleryContainer = (props) => {
 
   const functions = {
     checker,
-    checker,
   };
 
   return <Gallery vars={vars} functions={functions} />;

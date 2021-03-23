@@ -1,5 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { firebaseConfig } from './firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+
+async function addUserToDB(user) {
+  const firestore = await firebase
+    .firestore()
+    .collection('users')
+    .doc(user.uid)
+    .set({
+      banned: false,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      uid: user.uid,
+    });
+}
 
 export const UserContext = React.createContext();
 
@@ -8,7 +23,10 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     firebaseConfig.auth().onAuthStateChanged((user) => {
-      setCurrentUser(user);
+      if (user) {
+        setCurrentUser(user);
+        addUserToDB(user);
+      }
     });
   }, []);
 

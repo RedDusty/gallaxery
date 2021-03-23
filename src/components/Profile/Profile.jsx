@@ -1,43 +1,44 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
-import { UserContext } from '../../UserProvider';
+import React from 'react';
+import Masonry from 'react-masonry-component';
 
 const Profile = (props) => {
-  const [redirect, setRedirect] = useState(null);
-  const currentUser = useContext(UserContext);
+  const userInfo = props.vars.userInfo;
+  const loadingElementRef = props.functions.loadingElementRef;
 
-  useEffect(() => {
-    if (!currentUser) {
-      setRedirect('/');
-    }
-  }, [currentUser]);
+  const displayName = userInfo.displayName;
+  const photoURLAlt = userInfo.photoURLAlt;
+  const photoURL = userInfo.photoURL;
 
-  if (redirect) {
-    <Redirect to={redirect} />;
-  }
-  const userName = props.vars.userName;
-  const photoURLAlt = props.vars.photoURLAlt;
-  const photoURL = props.vars.photoURL;
-  const firstLogin = props.vars.firstLogin;
-  const lastLogin = props.vars.lastLogin;
+  const masonryOptions = {
+    transitionDuration: '0.25s',
+    fitWidth: true,
+  };
+
   return (
     <div className="p">
       <div className="p-info">
-        <div className="p-info-left">
-          <div className="p-info-photo">
-            <img src={photoURL} alt={photoURLAlt} />
-          </div>
+        <div className="p-info-photo">
+          <img src={photoURL} alt={photoURLAlt} />
         </div>
-        <div className="p-info-right">
-          <div className="p-info-username">{userName}</div>
+        <div className="p-info-username">
+          <p>{displayName}</p>
+        </div>
+        <div className="p-info-cards">
+          <p>Cards: {props.vars.allCards.length}</p>
+          <p>Albums: 0</p>
         </div>
       </div>
-      <div className="p-actions">
-        <NavLink className="btn btn-link" to="#" tabIndex="42">
-          Change user
-        </NavLink>
+      <div className="p-images-container">
+        <Masonry
+          options={masonryOptions}
+          disableImagesLoaded={false}
+          updateOnEachImageLoad={false}
+          className="cards-container"
+        >
+          {props.vars.allCards}
+        </Masonry>
+        {props.functions.checker(loadingElementRef)}
       </div>
-      <div className="images"></div>
     </div>
   );
 };
