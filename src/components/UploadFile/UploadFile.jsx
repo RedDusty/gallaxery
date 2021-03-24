@@ -25,14 +25,16 @@ const UploadFile = (props) => {
   let uploadBtn = (
     <>
       <input
-        className="prew-actions-tags"
+        className="prew-actions-tags blinkBorder"
         placeholder="Add tags to find this..."
         onChange={props.functions.tagKeyDown}
         onKeyUp={props.functions.tagKeyUp}
         minLength="1"
         maxLength="15"
       ></input>
-      <button className="prew-actions-done btn">Create</button>
+      <button className="prew-actions-done btn blinkBackgroundBorder">
+        Create
+      </button>
     </>
   );
 

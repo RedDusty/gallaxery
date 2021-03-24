@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import CardActionsContainer from './CardActionsContainer';
 
 const CardInfo = ({ card, cardTags }) => {
   let description = card.infoDescription;
@@ -32,7 +33,11 @@ const CardInfo = ({ card, cardTags }) => {
       {title}
       {description}
       <div className="c-finfo-sub">
-        <NavLink to={'/profile/' + card.uid} className="c-finfo-sub-profile">
+        <NavLink
+          to={'/profile/' + card.uid}
+          className="c-finfo-sub-profile blinkBorder"
+          tabIndex="20"
+        >
           <div className="c-finfo-sub-author">
             <img
               className="c-finfo-sub-author-icon"
@@ -46,6 +51,7 @@ const CardInfo = ({ card, cardTags }) => {
         <p className="c-finfo-sub-time">{time}</p>
       </div>
       <div className="c-finfo-tags-container">{cardTags}</div>
+      {/* <CardActionsContainer card={card} /> */}
     </div>
   );
 };

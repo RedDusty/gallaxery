@@ -97,6 +97,7 @@ function UploadFileContainer(props) {
   const [isUploading, setIsUploading] = useState(false);
   const { currentUser } = useContext(UserContext);
   let tags = 0;
+  document.title = 'File uploader';
 
   const { getRootProps, getInputProps, open } = useDropzone({
     accept: 'image/*',

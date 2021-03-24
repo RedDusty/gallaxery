@@ -18,7 +18,7 @@ const FileUploader = ({
             <button
               type="button"
               onClick={open}
-              className="btn uploader-inner-btn btn"
+              className="btn uploader-inner-btn btn blinkBackgroundBorder"
             >
               Upload
             </button>
@@ -33,7 +33,7 @@ const FileUploader = ({
         <div className="file-img">
           <img src={fileInfo.fileURL} alt={fileInfo.fileURL} />
           <button
-            className="file-action-del"
+            className="file-action-del blinkBorder"
             onClick={() => {
               clearFile();
             }}

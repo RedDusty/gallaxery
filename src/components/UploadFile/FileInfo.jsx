@@ -22,7 +22,7 @@ const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
     <div className="prew-info">
       <div className="finfo-header">
         <textarea
-          className="finfo-name finfo-textarea"
+          className="finfo-name finfo-textarea blinkBorder"
           placeholder="Write name here..."
           spellCheck="false"
           onChange={(e) => {
@@ -40,7 +40,7 @@ const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
         </p>
       </div>
       <textarea
-        className="finfo-comment finfo-textarea"
+        className="finfo-comment finfo-textarea blinkBorder"
         placeholder="Write some comments here..."
         spellCheck="false"
         onChange={(e) => {
@@ -57,7 +57,10 @@ const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
         Maximum 750 characters!
       </p>
       <div className="finfo-sub">
-        <NavLink to="/file-upload" className="finfo-sub-author">
+        <NavLink
+          to="/file-upload"
+          className="finfo-sub-author blinkBackgroundBorder"
+        >
           <img className="finfo-sub-author-icon" src={userInfo.photo}></img>
           <div className="finfo-sub-author-username">{userInfo.username}</div>
         </NavLink>

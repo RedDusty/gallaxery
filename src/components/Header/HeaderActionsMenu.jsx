@@ -13,7 +13,7 @@ const HeaderActionsMenu = (props) => {
           props.currentUser.currentUser !== undefined ? (
             <>
               <NavLink
-                className="btn btn-link actions-btn"
+                className="btn btn-link actions-btn blinkBorder"
                 to="/file-upload"
                 tabIndex="5"
                 onClick={() => {
@@ -26,7 +26,7 @@ const HeaderActionsMenu = (props) => {
                 Upload file
               </NavLink>
               <NavLink
-                className="btn btn-link actions-btn"
+                className="btn btn-link actions-btn blinkBorder"
                 to={'/profile/' + props.currentUser.currentUser.uid}
                 tabIndex="6"
                 onKeyPress={(e) => {
@@ -36,7 +36,7 @@ const HeaderActionsMenu = (props) => {
                 Profile
               </NavLink>
               <button
-                className="btn actions-btn"
+                className="btn actions-btn blinkBorder"
                 onClick={() => {
                   props.logOut();
                   window.location.reload();
@@ -48,7 +48,7 @@ const HeaderActionsMenu = (props) => {
             </>
           ) : (
             <button
-              className="btn actions-btn"
+              className="btn actions-btn blinkBorder"
               onClick={() => {
                 props.authWithGoogle();
               }}
@@ -62,22 +62,22 @@ const HeaderActionsMenu = (props) => {
             <span>Made with: </span>
             <div className="actions-menu-footer-icons">
               <a
-                className="icons-React icons-ico"
+                className="icons-React icons-ico blinkBorder"
                 href="https://reactjs.org/"
                 tabIndex="8"
               ></a>
               <a
-                className="icons-GitHub icons-ico"
+                className="icons-GitHub icons-ico blinkBorder"
                 href="https://github.com/RedDusty/gallaxery"
                 tabIndex="9"
               ></a>
               <a
-                className="icons-FireBase icons-ico"
+                className="icons-FireBase icons-ico blinkBorder"
                 href="https://firebase.google.com/"
                 tabIndex="10"
               ></a>
               <a
-                className="icons-Vercel icons-ico"
+                className="icons-Vercel icons-ico blinkBorder"
                 href="https://vercel.com/"
                 tabIndex="11"
               ></a>

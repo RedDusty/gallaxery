@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Gallery from './Gallery';
 
 import { blocksConfirmedLoading } from '../../redux/actions';
@@ -41,6 +41,8 @@ const GalleryContainer = (props) => {
 
   const [cards, setCards] = useState([]);
   const [lastKey, setLastKey] = useState('');
+
+  document.title = 'Gallaxery';
 
   useEffect(() => {
     setIsLoading(true);

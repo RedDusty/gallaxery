@@ -84,6 +84,11 @@ function ProfileContainer() {
 
     getProfileAsync();
   }, []);
+  if (userInfo.displayName !== 'Loading username...') {
+    document.title = userInfo.displayName;
+  } else {
+    document.title = 'Profile';
+  }
 
   const allCards = cards.map((block, index) => {
     return (

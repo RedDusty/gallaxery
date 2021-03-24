@@ -1,7 +1,7 @@
 import React from 'react';
 import ModalSearchContainer from '../ModalWindows/ModalSearch/ModalSearchContainer';
 
-import { NavLink, Route, Switch } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import actions from '../../images/header/actions.svg';
 import HeaderSearch from './HeaderSearch';
@@ -33,7 +33,7 @@ function Header(props) {
       />
       <div className="actions">
         <button
-          className="actions-menu-btn btn"
+          className="actions-menu-btn btn blinkBorder"
           onClick={() => {
             setModalSearchIsOpen(false);
             props.vars.menuIsOpen === true

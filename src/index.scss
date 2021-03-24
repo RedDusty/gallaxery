@@ -75,18 +75,14 @@ html {
   cursor: pointer;
 }
 
-button,
-a,
-summary,
-div {
+.blinkBackgroundBorder {
   outline: none;
   &:focus {
     animation: blinkBackgroundBorder 2.5s infinite ease-in-out;
   }
 }
 
-input,
-textarea {
+.blinkBorder {
   outline: none;
   &:focus {
     animation: blinkBorder 2.5s infinite ease-in-out;
@@ -172,14 +168,14 @@ textarea {
 @keyframes blinkBackgroundBorder {
   0% {
     background-color: var(--focusBlueAlt);
-    box-shadow: 0px 0px 0px 3px var(--focusBlue);
+    box-shadow: 0px 0px 0px 2px var(--focusBlue);
   }
   50% {
     background-color: var(--focusBlueLightAlt);
-    box-shadow: 0px 0px 0px 3px var(--focusBlueLight);
+    box-shadow: 0px 0px 0px 2px var(--focusBlueLight);
   }
   100% {
     background-color: var(--focusBlueAlt);
-    box-shadow: 0px 0px 0px 3px var(--focusBlue);
+    box-shadow: 0px 0px 0px 2px var(--focusBlue);
   }
 }

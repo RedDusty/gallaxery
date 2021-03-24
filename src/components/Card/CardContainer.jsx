@@ -58,6 +58,11 @@ const CardContainer = () => {
       const data = await getCard(window.location.pathname.substring(6));
       if (data) {
         setCard(data);
+        if (data.infoTitle !== '') {
+          document.title = data.infoTitle;
+        } else {
+          document.title = 'Gallaxery';
+        }
       } else {
         // THROW ERROR
       }

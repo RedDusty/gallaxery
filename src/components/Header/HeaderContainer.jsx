@@ -9,7 +9,6 @@ import { UserContext } from '../../UserProvider';
 function HeaderContainer(props) {
   const [modalSearchIsOpen, setModalSearchIsOpen] = useState(false);
 
-  const [reloadBtnText, setReloadBtnText] = useState('Reload');
   const [query, setQuery] = useState([]);
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -47,7 +46,6 @@ function HeaderContainer(props) {
   const vars = {
     setModalSearchIsOpen,
     modalSearchIsOpen,
-    reloadBtnText,
     menuIsOpen,
     setMenuIsOpen,
   };
