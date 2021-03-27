@@ -2,11 +2,11 @@
 https://gallaxery.vercel.app/
 
 # Doesn't work:
-Search, 404 message for not existing posts.
+Search, 404 message for not existing posts and profiles.
 
 # Next updates: 
 * `full rewrite`
-* `likes, edit, delete`
+* `card functions: likes, edit, delete, report`
 * `search`
 
 ### `yarn start`
