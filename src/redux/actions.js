@@ -4,7 +4,6 @@ import {
   MS_TAG_SEARCH_DELETE,
   MS_TAG_SEARCH_REMOVE,
   MS_TAG_SEARCH_ADD,
-  GLR_CARD_LOAD,
 } from './types';
 
 export const tagParserOnKeyDown = (e = {}, action = '') => ({
@@ -41,12 +40,5 @@ export const tagSearchAdd = (tagId) => ({
   type: MS_TAG_SEARCH_ADD,
   payload: {
     tagId: tagId,
-  },
-});
-
-export const blocksConfirmedLoading = (blockId) => ({
-  type: GLR_CARD_LOAD,
-  payload: {
-    blockId: blockId,
   },
 });

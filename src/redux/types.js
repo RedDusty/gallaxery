@@ -7,6 +7,7 @@ export const MS_TAG_SEARCH_REMOVE = 'MS_TAG_SEARCH_REMOVE';
 export const MS_TAG_SEARCH_ADD = 'MS_TAG_SEARCH_ADD';
 
 // Gallery
+export const GLR_GET_CARDS = 'GLR_GET_CARDS';
 export const GLR_CARD_LOAD = 'GLR_CARD_LOAD';
 
 // Upload card

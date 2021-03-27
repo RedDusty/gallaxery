@@ -1,64 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Gallery from './Gallery';
 
-import { blocksConfirmedLoading } from '../../redux/actions';
+import { getGalleryCards } from '../../redux/actions/actionsGallery';
 import { connect } from 'react-redux';
-
-import firebase from 'firebase/app';
-import 'firebase/firestore';
 
 import { NavLink } from 'react-router-dom';
 
-async function getImages(key) {
-  try {
-    const data = await firebase
-      .firestore()
-      .collection('usersImages')
-      .orderBy('id', 'desc')
-      .startAfter(key)
-      // .limit(10)
-      .get();
-
-    let cards = [];
-    let lastKey = '';
-    data.forEach((doc) => {
-      cards.push({
-        infoDate: doc.data().infoDate,
-        uid: doc.data().uid,
-        infoPhotoURL: doc.data().infoPhotoURL,
-        infoTitle: doc.data().infoTitle,
-        fileURL: doc.data().fileURL,
-        id: doc.data().id,
-      });
-      lastKey = doc.data().id;
-    });
-    return { cards, lastKey };
-  } catch (e) {}
-}
-
 const GalleryContainer = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [cards, setCards] = useState([]);
-  const [lastKey, setLastKey] = useState('');
-
   document.title = 'Gallaxery';
-
   useEffect(() => {
-    setIsLoading(true);
-    getImages(lastKey)
-      .then((res) => {
-        setCards(res.cards);
-        setLastKey(res.lastKey);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-      });
+    props.getGalleryCards(props.cards, props.lastKey);
   }, []);
 
   function checker(loadingElementRef) {
-    if (isLoading) {
+    if (props.isLoadingCards) {
       return (
         <div className="loading">
           <div className="lds-ellipsis">
@@ -79,20 +34,20 @@ const GalleryContainer = (props) => {
     }
   }
 
-  const allCards = cards.map((block, index) => {
+  const allCards = props.cards.map((card, index) => {
     const href =
       window.location.pathname.slice(0, 5) === '/card'
-        ? block.id
-        : 'card/' + block.id;
+        ? card.id
+        : 'card/' + card.id;
     return (
-      <div className="card-p" key={block.infoDate}>
+      <div className="card-p" key={card.infoDate}>
         <NavLink to={'' + href} className="card-link" tabIndex={100 + index}>
           <div className="card-p-top">
-            <img src={block.fileURL} alt="" />
+            <img src={card.fileURL} alt="" />
           </div>
           <div className="card-p-bottom">
-            <img src={block.infoPhotoURL} alt="" />
-            <p>{block.infoTitle}</p>
+            <img src={card.infoPhotoURL} alt="" />
+            <p>{card.infoTitle}</p>
           </div>
         </NavLink>
       </div>
@@ -112,13 +67,14 @@ const GalleryContainer = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    blocks: state.galleryReducer.blocks,
-    update: state.galleryReducer.update,
+    cards: state.galleryReducer.cards,
+    lastKey: state.galleryReducer.lastKey,
+    isLoadingCards: state.galleryReducer.isLoadingCards,
   };
 };
 
 const mapDispatchToProps = {
-  blocksConfirmedLoading,
+  getGalleryCards,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GalleryContainer);

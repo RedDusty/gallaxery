@@ -1,58 +1,26 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/storage';
-import { GLR_CARD_LOAD } from '../types';
+import { GLR_CARD_LOAD, GLR_GET_CARDS } from '../types';
 
 const initialState = {
-  blocks: [],
+  cards: [],
+  lastKey: '',
+  isLoadingCards: true,
 };
 
-export default function blocksReducer(state = initialState, action) {
+export default function galleryReducer(state = initialState, action) {
   switch (action.type) {
+    case GLR_GET_CARDS: {
+      const currentCards = action.payload.currentCards;
+      const cards = action.payload.cards;
+      const lastKey = action.payload.lastKey;
+      const newState = {
+        cards: currentCards.concat(cards),
+        lastKey: lastKey,
+        isLoadingCards: false,
+      };
+      return { ...state, ...newState };
+    }
     case GLR_CARD_LOAD: {
-      const { blockId } = action.payload;
-      let blocks = [];
-      let dataLength = 1;
-      blockLoading(blocks);
-      async function blockLoading(blocks) {
-        const data = await firebase
-          .firestore()
-          .collection('confirmed')
-          .orderBy('id', 'asc')
-          .startAfter(blockId)
-          .limit(1)
-          .get();
-        dataLength = data.size;
-        if (data.size !== 0) {
-          const storage = firebase.storage();
-
-          data.forEach((doc) => {
-            const imgPath = 'confirmed/' + doc.data().images[0] + '.jpg';
-            const pathRef = storage.ref(imgPath).getDownloadURL();
-            pathRef
-              .then((url) => {
-                blocks.push({
-                  id: doc.data().id,
-                  name: doc.data().name,
-                  imageUrl: url,
-                });
-              })
-              .catch((error) => {
-                switch (error.code) {
-                  case 'storage/object-not-found':
-                    return `Image doesn\'t exist.`;
-                  case 'storage/unauthorized':
-                    return `You don\'t have permission.`;
-                  case 'storage/unknown':
-                    return `Unknown error.`;
-                }
-              });
-          });
-        } else {
-          blocks = false;
-        }
-      }
-      return { ...state, blocks: blocks };
+      return { ...state, ...{ isLoadingCards: true } };
     }
     default: {
       return { ...state };
