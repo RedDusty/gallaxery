@@ -10,7 +10,7 @@ function currentTimeFunc() {
     .replace(/\//g, '.');
 }
 
-const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
+const CardInfo = ({ userInfo, textareaAction, cardTags }) => {
   const [currentTime, setCurrentTime] = useState(currentTimeFunc());
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,9 +20,9 @@ const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
   }, [currentTime]);
   return (
     <div className="prew-info">
-      <div className="finfo-header">
+      <div className="cinfo-header">
         <textarea
-          className="finfo-name finfo-textarea blinkBorder"
+          className="cinfo-name cinfo-textarea blinkBorder"
           placeholder="Write name here..."
           spellCheck="false"
           onChange={(e) => {
@@ -35,12 +35,12 @@ const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
             textareaAction(e, 'name');
           }}
         ></textarea>
-        <p className="finfo-length-name finfo-length">
+        <p className="cinfo-length-name cinfo-length">
           Maximum 250 characters!
         </p>
       </div>
       <textarea
-        className="finfo-comment finfo-textarea blinkBorder"
+        className="cinfo-comment cinfo-textarea blinkBorder"
         placeholder="Write some comments here..."
         spellCheck="false"
         onChange={(e) => {
@@ -53,24 +53,24 @@ const FileInfo = ({ userInfo, textareaAction, fileTags }) => {
           textareaAction(e, 'comment');
         }}
       ></textarea>
-      <p className="finfo-length-comment finfo-length">
+      <p className="cinfo-length-comment cinfo-length">
         Maximum 750 characters!
       </p>
-      <div className="finfo-sub">
+      <div className="cinfo-sub">
         <NavLink
-          to="/file-upload"
-          className="finfo-sub-author blinkBackgroundBorder"
+          to="/card-upload"
+          className="cinfo-sub-author blinkBackgroundBorder"
         >
-          <img className="finfo-sub-author-icon" src={userInfo.photo}></img>
-          <div className="finfo-sub-author-username">{userInfo.username}</div>
+          <img className="cinfo-sub-author-icon" src={userInfo.photo}></img>
+          <div className="cinfo-sub-author-username">{userInfo.username}</div>
         </NavLink>
-        <p className="finfo-sub-time">{currentTime}</p>
+        <p className="cinfo-sub-time">{currentTime}</p>
       </div>
-      <div className="finfo-tags-container">{fileTags}</div>
-      <p className="finfo-length-tags finfo-length">
+      <div className="cinfo-tags-container">{cardTags}</div>
+      <p className="cinfo-length-tags cinfo-length">
         There should be 2-25 tags.
       </p>
     </div>
   );
 };
-export default FileInfo;
+export default CardInfo;

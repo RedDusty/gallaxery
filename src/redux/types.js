@@ -10,14 +10,13 @@ export const MS_TAG_SEARCH_ADD = 'MS_TAG_SEARCH_ADD';
 // GLR - GALLERY
 export const GLR_CARD_LOAD = 'GLR_CARD_LOAD';
 
-// uploadFile
-
-export const UF_TAG_PARSE = 'UF_TAG_PARSE';
-export const UF_TAG_DELETE = 'UF_TAG_DELETE';
-export const UF_TEXTAREA = 'UF_TEXTAREA';
-export const UF_FILEUPLOAD = 'UF_FILEUPLOAD';
-export const UF_FILEIMAGEDLETE = 'UF_FILEIMAGEDLETE';
-export const UF_TAG_KEYUP = 'UF_TAG_KEYUP';
+// Upload card
+export const UC_TAG_PARSE = 'UC_TAG_PARSE';
+export const UC_TAG_DELETE = 'UC_TAG_DELETE';
+export const UC_TEXTAREA = 'UC_TEXTAREA';
+export const UC_FILEUPLOAD = 'UC_FILEUPLOAD';
+export const UC_FILEIMAGEDLETE = 'UC_FILEIMAGEDLETE';
+export const UC_TAG_KEYUP = 'UC_TAG_KEYUP';
 
 // Firebase
 export const FB_AUTH_LOGIN = 'FB_AUTH_LOGIN';

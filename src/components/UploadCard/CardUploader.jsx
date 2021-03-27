@@ -1,15 +1,15 @@
 import React from 'react';
 
-const FileUploader = ({
+const CardUploader = ({
   getRootProps,
   getInputProps,
   open,
   fileInfo,
-  clearFile,
+  clearCard,
 }) => {
   if (fileInfo.fileCode !== 'return') {
     return (
-      <div className="prew-files">
+      <div className="prew-cards">
         <div className="uploader-container" {...getRootProps()}>
           <div className="uploader-inner">
             <input className="uploader-input" {...getInputProps()} />
@@ -29,31 +29,31 @@ const FileUploader = ({
   }
   if (fileInfo.fileType.slice(0, 5) === 'image') {
     return (
-      <div className="prew-files">
-        <div className="file-img">
+      <div className="prew-cards">
+        <div className="card-img">
           <img src={fileInfo.fileURL} alt={fileInfo.fileURL} />
           <button
-            className="file-action-del blinkBorder"
+            className="card-action-del blinkBorder"
             onClick={() => {
-              clearFile();
+              clearCard();
             }}
           >
-            <div className="file-action-del-icon" />
+            <div className="card-action-del-icon" />
           </button>
         </div>
       </div>
     );
   } else if (fileInfo.fileType.slice(0, 5) === 'video') {
     return (
-      <div className="prew-files">
-        <div className="file-img">
+      <div className="prew-cards">
+        <div className="card-img">
           <video src={fileInfo.source} controls>
             Your browser does not support the video tag.
           </video>
           <button
-            className="file-action-del"
+            className="card-action-del"
             onClick={() => {
-              clearFile();
+              clearCard();
             }}
           ></button>
         </div>
@@ -62,4 +62,4 @@ const FileUploader = ({
   }
 };
 
-export default FileUploader;
+export default CardUploader;

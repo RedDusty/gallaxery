@@ -1,8 +1,8 @@
 import React from 'react';
-import FileInfo from './FileInfo';
-import FileUploader from './FileUploader';
+import CardInfo from './CardInfo';
+import CardUploader from './CardUploader';
 
-const UploadFile = (props) => {
+const UploadCard = (props) => {
   let fileInfo = {};
   try {
     fileInfo = props.vars.fileInfo;
@@ -56,16 +56,16 @@ const UploadFile = (props) => {
       <div className="prew-actions">{uploadBtn}</div>
       <div className="prew-container">
         <div className="prew-container-border">
-          <FileUploader
+          <CardUploader
             getRootProps={props.vars.getRootProps}
             getInputProps={props.vars.getInputProps}
             open={props.vars.open}
             fileInfo={fileInfo}
-            clearFile={props.functions.clearFile}
+            clearCard={props.functions.clearCard}
           />
-          <FileInfo
+          <CardInfo
             userInfo={props.vars.userInfo}
-            fileTags={props.vars.fileTags}
+            cardTags={props.vars.cardTags}
             textareaAction={props.functions.textareaAction}
           />
         </div>
@@ -74,4 +74,4 @@ const UploadFile = (props) => {
   );
 };
 
-export default UploadFile;
+export default UploadCard;

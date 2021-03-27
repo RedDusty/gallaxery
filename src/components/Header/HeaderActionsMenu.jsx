@@ -13,7 +13,7 @@ const HeaderActionsMenu = (props) => {
             <>
               <NavLink
                 className="btn btn-link actions-btn blinkBorder"
-                to="/file-upload"
+                to="/card-upload"
                 tabIndex="5"
                 onClick={() => {
                   props.setModalSearchIsOpen(false);
@@ -22,7 +22,7 @@ const HeaderActionsMenu = (props) => {
                   e.currentTarget.click();
                 }}
               >
-                Upload file
+                Upload card
               </NavLink>
               <NavLink
                 className="btn btn-link actions-btn blinkBorder"

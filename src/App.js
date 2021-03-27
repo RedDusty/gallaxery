@@ -8,7 +8,7 @@ import GalleryContainer from './components/Gallery/GalleryContainer';
 import CardContainer from './components/Card/CardContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
-import UploadFileContainer from './components/UploadFile/UploadFileContainer';
+import UploadCardContainer from './components/UploadCard/UploadCardContainer';
 import NotFound from './components/NotFound';
 
 import { firebaseAuth } from './redux/actions/actionsAuth';
@@ -37,7 +37,7 @@ function App(props) {
       <Switch>
         <Route component={GalleryContainer} exact path="/" />
         <Route component={ProfileContainer} exact path="/profile/:uid" />
-        <Route component={UploadFileContainer} exact path="/file-upload" />
+        <Route component={UploadCardContainer} exact path="/card-upload" />
         <Route component={CardContainer} exact path="/card/:id" />
         <Route component={GalleryContainer} exact path="/card/:id" />
         <Route component={NotFound}></Route>

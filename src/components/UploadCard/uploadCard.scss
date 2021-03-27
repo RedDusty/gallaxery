@@ -1,7 +1,7 @@
 :root {
-  --finfoLenName: none;
-  --finfoLenComment: none;
-  --finfoLenTags: block;
+  --cinfoLenName: none;
+  --cinfoLenComment: none;
+  --cinfoLenTags: block;
 }
 
 .iu {
@@ -36,7 +36,7 @@
       border-radius: 15px;
     }
   }
-  &-files {
+  &-cards {
     width: 100%;
     height: 100%;
     margin-right: 5px;
@@ -86,7 +86,7 @@
   }
 }
 
-.file {
+.card {
   &-img {
     display: flex;
     width: 100%;
@@ -99,7 +99,7 @@
       &:hover {
         border-radius: 0;
       }
-      &:hover + .file-action-del {
+      &:hover + .card-action-del {
         transition: 0.25s ease;
         opacity: 0.05;
       }
@@ -120,7 +120,7 @@
       border-radius: 50%;
       cursor: pointer;
       &-icon {
-        background-image: url('../../images/uploadFile/fileUploadDel.svg');
+        background-image: url('../../images/uploadCard/cardUploadDel.svg');
         background-size: 35px;
         background-position: -1px;
         background-repeat: no-repeat;
@@ -133,7 +133,7 @@
         border-color: var(--red010);
         box-shadow: 0 0 3px 3px var(--red010);
       }
-      &:hover .file-action-del-icon {
+      &:hover .card-action-del-icon {
         filter: invert(34%) sepia(36%) saturate(4146%) hue-rotate(339deg)
           brightness(77%) contrast(110%);
       }
@@ -141,7 +141,7 @@
   }
 }
 
-.finfo {
+.cinfo {
   &-name {
     background-color: var(--blue030);
     box-shadow: 0px 0px 5px 1px var(--blue070);
@@ -227,13 +227,13 @@
     padding: 3px 5px;
     border-radius: 15px;
     &-name {
-      display: var(--finfoLenName);
+      display: var(--cinfoLenName);
     }
     &-comment {
-      display: var(--finfoLenComment);
+      display: var(--cinfoLenComment);
     }
     &-tags {
-      display: var(--finfoLenTags);
+      display: var(--cinfoLenTags);
     }
   }
   &-tags {
@@ -294,7 +294,7 @@
         flex-flow: column;
       }
     }
-    &-files {
+    &-cards {
       margin-right: 0;
     }
     &-info {
@@ -329,7 +329,7 @@
         border-width: 0;
       }
     }
-    &-files {
+    &-cards {
       margin: 0;
       img {
         border-radius: 0;
@@ -349,7 +349,7 @@
       border-radius: 0;
     }
   }
-  .finfo {
+  .cinfo {
     &-textarea {
       width: calc(95% - 10px);
       margin: 5px;

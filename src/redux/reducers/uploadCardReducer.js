@@ -1,14 +1,14 @@
 import {
-  UF_TAG_DELETE,
-  UF_TAG_PARSE,
-  UF_TAG_KEYUP,
-  UF_TEXTAREA,
-  UF_FILEUPLOAD,
-  UF_FILEIMAGEDLETE,
+  UC_TAG_DELETE,
+  UC_TAG_PARSE,
+  UC_TAG_KEYUP,
+  UC_TEXTAREA,
+  UC_FILEUPLOAD,
+  UC_FILEIMAGEDLETE,
 } from '../types';
 
 const initialState = {
-  uf_tags: [],
+  uc_tags: [],
   fileURL: '',
   fileName: '',
   fileSize: '',
@@ -18,9 +18,9 @@ const initialState = {
   textareaDescription: '',
 };
 
-export default function uploadFileReducer(state = initialState, action) {
+export default function uploadCardReducer(state = initialState, action) {
   switch (action.type) {
-    case UF_TAG_PARSE: {
+    case UC_TAG_PARSE: {
       const { e } = action.payload;
       let queryReturn = [];
       if (e !== '') {
@@ -35,8 +35,8 @@ export default function uploadFileReducer(state = initialState, action) {
                 tag !== null
               ) {
                 let canPush = true;
-                for (let index = 0; index < state.uf_tags.length; index++) {
-                  if (state.uf_tags[index].tag === tag) {
+                for (let index = 0; index < state.uc_tags.length; index++) {
+                  if (state.uc_tags[index].tag === tag) {
                     canPush = false;
                   }
                 }
@@ -50,13 +50,13 @@ export default function uploadFileReducer(state = initialState, action) {
           }
         }
       }
-      const newState = [...new Set(state.uf_tags.concat(queryReturn))];
+      const newState = [...new Set(state.uc_tags.concat(queryReturn))];
       return {
         ...state,
-        uf_tags: newState,
+        uc_tags: newState,
       };
     }
-    case UF_TAG_KEYUP: {
+    case UC_TAG_KEYUP: {
       const { e, clearAction } = action.payload;
       if (/\s/.test(e.target.value)) {
         e.target.value = '';
@@ -68,14 +68,14 @@ export default function uploadFileReducer(state = initialState, action) {
         ...state,
       };
     }
-    case UF_TAG_DELETE: {
+    case UC_TAG_DELETE: {
       const { tagId } = action.payload;
-      state.uf_tags.splice(tagId, 1);
+      state.uc_tags.splice(tagId, 1);
       return {
         ...state,
       };
     }
-    case UF_FILEUPLOAD: {
+    case UC_FILEUPLOAD: {
       const { file } = action.payload;
       return {
         ...state,
@@ -86,7 +86,7 @@ export default function uploadFileReducer(state = initialState, action) {
         fileCode: 'return',
       };
     }
-    case UF_FILEIMAGEDLETE: {
+    case UC_FILEIMAGEDLETE: {
       return {
         ...state,
         fileURL: '',
@@ -96,7 +96,7 @@ export default function uploadFileReducer(state = initialState, action) {
         fileCode: '',
       };
     }
-    case UF_TEXTAREA: {
+    case UC_TEXTAREA: {
       const { textarea, areaAction } = action.payload;
       if (textarea.key === 'Enter' || textarea.key === 13) {
         textarea.preventDefault();

@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import UploadFile from './UploadFile';
-import './uploadFile.scss';
+import UploadCard from './UploadCard';
+import './uploadCard.scss';
 
 import firebase from 'firebase/app';
 import 'firebase/storage';
@@ -9,19 +9,19 @@ import 'firebase/firestore';
 import { Redirect } from 'react-router';
 import { UserContext } from '../../UserProvider';
 import {
-  ufFileUpload,
-  ufTagDelete,
-  ufTagParse,
-  ufTagKeyUp,
-  ufFileImageDelete,
-  ufTextArea,
-} from '../../redux/actions';
+  ucFileUpload,
+  ucTagDelete,
+  ucTagParse,
+  ucTagKeyUp,
+  ucFileImageDelete,
+  ucTextArea,
+} from '../../redux/actions/actionsUploadCard';
 import { connect } from 'react-redux';
 
 import tagDelIcon from '../../images/search/tagDelete.svg';
 
 // CARD COLOR
-// MINI-ALUBM (10 FILES IN ONE CARD MAX)
+// MINI-ALUBM (10 CARDS IN ONE CARD MAX)
 
 async function getLastId() {
   try {
@@ -39,10 +39,10 @@ async function getLastId() {
   } catch (e) {}
 }
 
-async function CreateFile(data, history) {
+async function CreateCard(data, history) {
   const fileInfo = data.fileInfo;
-  const ufTags = data.ufTags;
-  const ufFile = data.ufFile;
+  const ucTags = data.ucTags;
+  const ucCard = data.ucCard;
   const userInfo = data.userInfo;
   const id = data.id;
   const currentTime = Date.now();
@@ -83,21 +83,21 @@ async function CreateFile(data, history) {
       uid: userInfo.uid,
       infoUsername: userInfo.username,
       infoPhotoURL: userInfo.photo,
-      infoTitle: ufFile.textareaTitle,
-      infoDescription: ufFile.textareaDescription,
-      infoTags: ufTags,
+      infoTitle: ucCard.textareaTitle,
+      infoDescription: ucCard.textareaDescription,
+      infoTags: ucTags,
       id: id,
     });
-  console.log('File uploaded. Redirect to uploaded card...');
+  console.log('Card uploaded. Redirect to uploaded card...');
   history.push('/card/' + id);
 }
 
-function UploadFileContainer(props) {
+function UploadCardContainer(props) {
   const inputName = useRef(null);
   const [isUploading, setIsUploading] = useState(false);
   const { currentUser } = useContext(UserContext);
   let tags = 0;
-  document.title = 'File uploader';
+  document.title = 'Card uploader';
 
   const { getRootProps, getInputProps, open } = useDropzone({
     accept: 'image/*',
@@ -105,7 +105,7 @@ function UploadFileContainer(props) {
       if (acceptedFiles[0].size > 5242880) {
         return <div>Too large!</div>;
       } else {
-        props.ufFileUpload(acceptedFiles[0]);
+        props.ucFileUpload(acceptedFiles[0]);
       }
     },
     multiple: false,
@@ -114,12 +114,12 @@ function UploadFileContainer(props) {
   });
 
   function queryUpdater(e = '') {
-    props.ufTagParse(e, tags);
-    tags = props.ufTags.length;
+    props.ucTagParse(e, tags);
+    tags = props.ucTags.length;
     if (tags < 2 || tags >= 25) {
-      document.documentElement.style.setProperty('--finfoLenTags', 'block');
+      document.documentElement.style.setProperty('--cinfoLenTags', 'block');
     } else {
-      document.documentElement.style.setProperty('--finfoLenTags', 'none');
+      document.documentElement.style.setProperty('--cinfoLenTags', 'none');
     }
   }
 
@@ -127,39 +127,39 @@ function UploadFileContainer(props) {
     if (!(e.target.value.length > 25)) {
       if (tags < 25 && !(tags >= 25)) {
         if (tags < 2) {
-          document.documentElement.style.setProperty('--finfoLenTags', 'block');
+          document.documentElement.style.setProperty('--cinfoLenTags', 'block');
         } else {
-          document.documentElement.style.setProperty('--finfoLenTags', 'none');
+          document.documentElement.style.setProperty('--cinfoLenTags', 'none');
         }
-        props.ufTagParse(e, tags);
+        props.ucTagParse(e, tags);
         queryUpdater();
       } else {
-        document.documentElement.style.setProperty('--finfoLenTags', 'block');
+        document.documentElement.style.setProperty('--cinfoLenTags', 'block');
       }
     }
   }
   function tagKeyUp(e) {
-    tags = props.ufTags.length;
+    tags = props.ucTags.length;
     if (tags < 2 || tags >= 25) {
-      document.documentElement.style.setProperty('--finfoLenTags', 'block');
+      document.documentElement.style.setProperty('--cinfoLenTags', 'block');
     } else {
-      document.documentElement.style.setProperty('--finfoLenTags', 'none');
+      document.documentElement.style.setProperty('--cinfoLenTags', 'none');
     }
-    props.ufTagKeyUp(e);
+    props.ucTagKeyUp(e);
   }
 
   function tagDelete(tagId) {
-    props.ufTagDelete(tagId, tags);
-    tags = props.ufTags.length;
+    props.ucTagDelete(tagId, tags);
+    tags = props.ucTags.length;
     queryUpdater();
   }
 
   function textareaAction(textarea, areaAction) {
-    props.ufTextArea(textarea, areaAction);
+    props.ucTextArea(textarea, areaAction);
   }
 
-  function clearFile() {
-    props.ufFileImageDelete();
+  function clearCard() {
+    props.ucFileImageDelete();
   }
 
   if (!currentUser) {
@@ -174,14 +174,14 @@ function UploadFileContainer(props) {
   };
 
   const fileInfo = {
-    fileURL: props.ufFile.fileURL,
-    fileName: props.ufFile.fileName,
-    fileSize: props.ufFile.fileSize,
-    fileType: props.ufFile.fileType,
-    fileCode: props.ufFile.fileCode,
+    fileURL: props.ucCard.fileURL,
+    fileName: props.ucCard.fileName,
+    fileSize: props.ucCard.fileSize,
+    fileType: props.ucCard.fileType,
+    fileCode: props.ucCard.fileCode,
   };
 
-  const fileTags = props.ufTags
+  const cardTags = props.ucTags
     .filter((tag) => tag !== undefined)
     .map((tag, index) => {
       return (
@@ -205,36 +205,36 @@ function UploadFileContainer(props) {
     e.preventDefault();
     if (
       fileInfo.fileCode.length !== 0 &&
-      props.ufTags.length > 1 &&
-      props.ufTags.length < 26
+      props.ucTags.length > 1 &&
+      props.ucTags.length < 26
     ) {
       getLastId()
         .then((res) => {
           const data = {
             fileInfo: fileInfo,
-            ufTags: props.ufTags,
-            ufFile: props.ufFile,
+            ucTags: props.ucTags,
+            ucCard: props.ucCard,
             userInfo: userInfo,
             id: Number(res) + 1,
           };
-          CreateFile(data, props.history);
+          CreateCard(data, props.history);
         })
         .catch((err) => {});
     } else {
-      if (fileInfo.fileCode.length === 0) {
-        console.log('File empty.');
+      if (fileInfo.cardCode.length === 0) {
+        console.log('Card empty.');
         setIsUploading(false);
       }
-      if (props.ufTags.length < 2) {
+      if (props.ucTags.length < 2) {
         console.log(
-          'Not enough tags. Need ' + (2 - props.ufTags.length) + ' more tags.'
+          'Not enough tags. Need ' + (2 - props.ucTags.length) + ' more tags.'
         );
         setIsUploading(false);
       }
-      if (props.ufTags.length > 25) {
+      if (props.ucTags.length > 25) {
         console.log(
           'Not enough tags. Remove ' +
-            (props.ufTags.length - 25) +
+            (props.ucTags.length - 25) +
             ' more tags.'
         );
         setIsUploading(false);
@@ -249,37 +249,37 @@ function UploadFileContainer(props) {
     fileInfo,
     inputName,
     userInfo,
-    fileTags,
+    cardTags,
     isUploading,
   };
 
   const functions = {
-    clearFile,
+    clearCard,
     textareaAction,
     tagKeyDown,
     tagKeyUp,
     onSubmit,
   };
-  return <UploadFile vars={vars} functions={functions} />;
+  return <UploadCard vars={vars} functions={functions} />;
 }
 
 const mapStateToProps = (state) => {
   return {
-    ufTags: state.uploadFileReducer.uf_tags,
-    ufFile: state.uploadFileReducer,
+    ucTags: state.uploadCardReducer.uc_tags,
+    ucCard: state.uploadCardReducer,
   };
 };
 
 const mapDispatchToProps = {
-  ufTagParse,
-  ufTagKeyUp,
-  ufTagDelete,
-  ufFileUpload,
-  ufFileImageDelete,
-  ufTextArea,
+  ucTagParse,
+  ucTagKeyUp,
+  ucTagDelete,
+  ucFileUpload,
+  ucFileImageDelete,
+  ucTextArea,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UploadFileContainer);
+)(UploadCardContainer);
