@@ -17,6 +17,7 @@ export const UC_TEXTAREA = 'UC_TEXTAREA';
 export const UC_FILEUPLOAD = 'UC_FILEUPLOAD';
 export const UC_FILEIMAGEDLETE = 'UC_FILEIMAGEDLETE';
 export const UC_TAG_KEYUP = 'UC_TAG_KEYUP';
+export const UC_CARD_CLEANER = 'UC_CARD_CLEANER';
 
 // Firebase
 export const FB_AUTH_LOGIN = 'FB_AUTH_LOGIN';

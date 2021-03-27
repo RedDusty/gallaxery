@@ -5,6 +5,7 @@ import {
   UC_TEXTAREA,
   UC_FILEUPLOAD,
   UC_FILEIMAGEDLETE,
+  UC_CARD_CLEANER,
 } from '../types';
 
 const initialState = {
@@ -162,6 +163,22 @@ export default function uploadCardReducer(state = initialState, action) {
       }
       return {
         ...state,
+      };
+    }
+    case UC_CARD_CLEANER: {
+      const newState = {
+        uc_tags: [],
+        fileURL: '',
+        fileName: '',
+        fileSize: '',
+        fileType: '',
+        fileCode: '',
+        textareaTitle: '',
+        textareaDescription: '',
+      };
+      return {
+        ...state,
+        ...newState,
       };
     }
     default: {

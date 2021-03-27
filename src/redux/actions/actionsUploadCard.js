@@ -5,7 +5,12 @@ import {
   UC_FILEUPLOAD,
   UC_FILEIMAGEDLETE,
   UC_TEXTAREA,
+  UC_CARD_CLEANER,
 } from '../types';
+
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/storage';
 
 export const ucTagParse = (e) => ({
   type: UC_TAG_PARSE,
@@ -53,3 +58,78 @@ export const ucTextArea = (textarea, areaAction) => ({
     areaAction,
   },
 });
+
+export const ucCreateCard = (data, history) => {
+  return async (dispatch) => {
+    let lastId = '';
+    let imageURL = '';
+
+    // Get lastId
+    const getLastId = await firebase
+      .firestore()
+      .collection('usersImages')
+      .orderBy('id', 'desc')
+      .limit(1)
+      .get();
+    getLastId.forEach((doc) => {
+      lastId = doc.data().id;
+    });
+
+    const fileInfo = data.fileInfo;
+    const ucTags = data.ucTags;
+    const ucCard = data.ucCard;
+    const userInfo = data.userInfo;
+    const id = Number(lastId) + 1;
+    const currentTime = Date.now();
+    console.log('Trying send image...');
+    const file = fileInfo;
+
+    // FB Storage image
+    const storageRef = firebase
+      .storage()
+      .ref()
+      .child(
+        '/usersImages/' +
+          '__CARD__' +
+          id +
+          '__TIME__' +
+          currentTime +
+          '__NAME__' +
+          file.fileName
+      );
+    const metadata = {
+      name: file.fileName,
+      size: file.fileSize,
+      contentType: file.fileType,
+      time: currentTime,
+      id: id,
+    };
+    await storageRef.putString(file.fileURL, 'data_url', metadata);
+    imageURL = await storageRef.getDownloadURL();
+
+    // Create Firestore Doc
+    const firestore = await firebase
+      .firestore()
+      .collection('usersImages')
+      .doc('image' + id)
+      .set({
+        fileURL: imageURL,
+        fileName: fileInfo.fileName,
+        fileSize: fileInfo.fileSize,
+        fileType: fileInfo.fileType,
+        infoDate: currentTime,
+        uid: userInfo.uid,
+        infoUsername: userInfo.username,
+        infoPhotoURL: userInfo.photo,
+        infoTitle: ucCard.textareaTitle,
+        infoDescription: ucCard.textareaDescription,
+        infoTags: ucTags,
+        id: id,
+      });
+
+    dispatch({
+      type: UC_CARD_CLEANER,
+    });
+    history.push('/card/' + id);
+  };
+};
