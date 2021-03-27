@@ -43,16 +43,15 @@ function Header(props) {
           tabIndex="5"
           id="actions-menu-btn"
         >
-          {props.currentUser.currentUser !== null &&
-          props.currentUser.currentUser !== undefined ? (
+          {props.currentUser.uid === '' ? (
+            <></>
+          ) : (
             <img
-              src={props.currentUser.currentUser.photoURL}
+              src={props.currentUser.photoURL}
               className="actions-menu-btn-user"
               data-alt="💜"
               id="actions-menu-btn-user"
             />
-          ) : (
-            <></>
           )}
           <img src={actions} data-alt="💙" id="actions-menu-btn-img" />
         </button>

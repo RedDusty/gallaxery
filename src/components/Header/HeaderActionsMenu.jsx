@@ -9,8 +9,7 @@ const HeaderActionsMenu = (props) => {
     <>
       {props.menuIsOpen === true ? (
         <div className="actions-menu" ref={actionMenu}>
-          {props.currentUser.currentUser !== null &&
-          props.currentUser.currentUser !== undefined ? (
+          {props.currentUser.uid !== '' ? (
             <>
               <NavLink
                 className="btn btn-link actions-btn blinkBorder"
@@ -27,7 +26,7 @@ const HeaderActionsMenu = (props) => {
               </NavLink>
               <NavLink
                 className="btn btn-link actions-btn blinkBorder"
-                to={'/profile/' + props.currentUser.currentUser.uid}
+                to={'/profile/' + props.currentUser.uid}
                 tabIndex="6"
                 onKeyPress={(e) => {
                   e.currentTarget.click();

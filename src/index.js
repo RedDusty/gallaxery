@@ -1,20 +1,17 @@
-// react
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-
-// redux
 import { applyMiddleware, createStore } from 'redux';
-import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer from './redux/reducers/rootReducer';
 
-// app other
 import './index.scss';
 import App from './App';
-import { UserProvider } from './UserProvider';
+
+import rootReducer from './redux/reducers/rootReducer';
+import UserProvider from './UserProvider';
 
 const store = createStore(
   rootReducer,
@@ -23,13 +20,13 @@ const store = createStore(
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserProvider>
-      <Provider store={store}>
+    <Provider store={store}>
+      <UserProvider>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </Provider>
-    </UserProvider>
+      </UserProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

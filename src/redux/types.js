@@ -18,3 +18,6 @@ export const UF_TEXTAREA = 'UF_TEXTAREA';
 export const UF_FILEUPLOAD = 'UF_FILEUPLOAD';
 export const UF_FILEIMAGEDLETE = 'UF_FILEIMAGEDLETE';
 export const UF_TAG_KEYUP = 'UF_TAG_KEYUP';
+
+// Firebase
+export const FB_AUTH_LOGIN = 'FB_AUTH_LOGIN';

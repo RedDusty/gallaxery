@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { firebaseConfig } from './firebase';
+import firebaseConfig from './firebase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import { firebaseAuth } from './redux/actions/actionsAuth';
+import { connect } from 'react-redux';
 
 async function addUserToDB(user) {
   const firestore = await firebase
@@ -18,7 +20,7 @@ async function addUserToDB(user) {
 
 export const UserContext = React.createContext();
 
-export const UserProvider = ({ children }) => {
+const UserProvider = (props) => {
   const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
@@ -26,13 +28,20 @@ export const UserProvider = ({ children }) => {
       if (user) {
         setCurrentUser(user);
         addUserToDB(user);
+        props.firebaseAuth(user);
       }
     });
   }, []);
 
   return (
     <UserContext.Provider value={{ currentUser }}>
-      {children}
+      {props.children}
     </UserContext.Provider>
   );
 };
+
+const mapDispatchToProps = {
+  firebaseAuth,
+};
+
+export default connect(null, mapDispatchToProps)(UserProvider);

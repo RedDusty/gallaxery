@@ -83,6 +83,25 @@ function ProfileContainer() {
     }
 
     getProfileAsync();
+  }, [window.location.pathname.substring(9)]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    async function getProfileAsync() {
+      const data = await getProfile(
+        window.location.pathname.substring(9),
+        lastKey
+      );
+
+      if (data) {
+        setCards(data.cards);
+        setLastKey(data.lastKey);
+        setUserInfo(data.profile);
+        setIsLoading(false);
+      }
+    }
+
+    getProfileAsync();
   }, []);
   if (userInfo.displayName !== 'Loading username...') {
     document.title = userInfo.displayName;

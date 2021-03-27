@@ -4,7 +4,7 @@ import './header.scss';
 
 import { connect } from 'react-redux';
 import { tagParserOnKeyDown, tagParserOnKeyUp } from '../../redux/actions';
-import { UserContext } from '../../UserProvider';
+import { firebaseAuth } from '../../redux/actions/actionsAuth';
 
 function HeaderContainer(props) {
   const [modalSearchIsOpen, setModalSearchIsOpen] = useState(false);
@@ -12,6 +12,8 @@ function HeaderContainer(props) {
   const [query, setQuery] = useState([]);
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+  const currentUser = props.currentUser;
 
   function ActionMenuCloser(menuRef) {
     useEffect(() => {
@@ -31,8 +33,6 @@ function HeaderContainer(props) {
       };
     }, [menuRef]);
   }
-
-  const currentUser = useContext(UserContext);
 
   function btnOnKeyDown(e) {
     props.tagParserOnKeyDown(e);
@@ -70,12 +70,14 @@ function HeaderContainer(props) {
 const mapStateToProps = (state) => {
   return {
     searchTags: state.headerReducer.tags,
+    currentUser: state.userReducer,
   };
 };
 
 const mapDispatchToProps = {
   tagParserOnKeyDown,
   tagParserOnKeyUp,
+  firebaseAuth,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

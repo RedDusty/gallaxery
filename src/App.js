@@ -1,16 +1,19 @@
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 import './App.scss';
 import GalleryContainer from './components/Gallery/GalleryContainer';
+import CardContainer from './components/Card/CardContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UploadFileContainer from './components/UploadFile/UploadFileContainer';
 import NotFound from './components/NotFound';
 
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import CardContainer from './components/Card/CardContainer';
+import { firebaseAuth } from './redux/actions/actionsAuth';
 
-function App() {
+function App(props) {
   const provider = new firebase.auth.GoogleAuthProvider();
 
   const authWithGoogle = () => {
@@ -43,4 +46,14 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.userReducer,
+  };
+};
+
+const mapDispatchToProps = {
+  firebaseAuth,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
