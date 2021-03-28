@@ -1,12 +1,12 @@
 import React from 'react';
 
-const CardImage = ({ card }) => {
+const CardImage = ({ fileInfo }) => {
   let style = {};
   if (
-    card.fileURL === '' ||
-    card.fileURL === undefined ||
-    card.fileURL === null ||
-    card.fileURL === 'Loading...'
+    fileInfo.fileURL === '' ||
+    fileInfo.fileURL === undefined ||
+    fileInfo.fileURL === null ||
+    fileInfo.fileURL === 'Loading...'
   ) {
     style = {
       width: '100%',
@@ -18,7 +18,7 @@ const CardImage = ({ card }) => {
   return (
     <div className="c-files">
       <div className="c-file-img">
-        <img src={card.fileURL} alt={card.fileURL} style={style} />
+        <img src={fileInfo.fileURL} alt={fileInfo.fileURL} style={style} />
       </div>
     </div>
   );

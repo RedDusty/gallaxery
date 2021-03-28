@@ -26,3 +26,7 @@ export const FB_AUTH_LOGIN = 'FB_AUTH_LOGIN';
 export const PR_USER_INFO = 'PR_USER_INFO';
 export const PR_USER_CARDS = 'PR_USER_CARDS';
 export const PR_CARDS_LOAD = 'PR_CARDS_LOAD';
+
+// Card
+export const CA_CARD_INFO = 'CA_CARD_INFO';
+export const CA_CARD_LOAD = 'CA_CARD_LOAD';

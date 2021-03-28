@@ -1,77 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import GalleryContainer from '../Gallery/GalleryContainer';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getCardInfo } from '../../redux/actions/actionsCard';
 import Card from './Card';
 import './card.scss';
 
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-
-async function getCard(key) {
-  const data = await firebase
-    .firestore()
-    .collection('usersImages')
-    .doc('image' + key);
-
-  return new Promise((resolve, reject) => {
-    data
-      .get()
-      .then((res) => {
-        resolve({
-          fileName: res.data().fileName,
-          fileSize: res.data().fileSize,
-          fileType: res.data().fileType,
-          fileURL: res.data().fileURL,
-          infoUsername: res.data().infoUsername,
-          infoPhotoURL: res.data().infoPhotoURL,
-          infoDate: res.data().infoDate,
-          infoDescription: res.data().infoDescription,
-          infoTags: res.data().infoTags,
-          infoTitle: res.data().infoTitle,
-          id: res.data().id,
-          uid: res.data().uid,
-        });
-      })
-      .catch((error) => {
-        reject(error);
-        console.log('Oops! Something is wrong!\n' + error);
-      });
-  });
-}
-
-const CardContainer = () => {
-  const [card, setCard] = useState({
-    fileName: 'Loading...',
-    fileSize: 'Loading...',
-    fileType: 'Loading...',
-    fileURL: 'Loading...',
-    infoUsername: 'Loading...',
-    infoPhotoURL: 'Loading...',
-    infoDate: 'Loading...',
-    infoDescription: 'Loading...',
-    infoTags: [],
-    infoTitle: 'Loading...',
-    id: 'Loading...',
-  });
-
+function CardContainer(props) {
   useEffect(() => {
-    async function getCardAsync() {
-      const data = await getCard(window.location.pathname.substring(6));
-      if (data) {
-        setCard(data);
-        if (data.infoTitle !== '') {
-          document.title = data.infoTitle;
-        } else {
-          document.title = 'Gallaxery';
-        }
-      } else {
-        // THROW ERROR
-      }
-    }
-
-    getCardAsync();
+    props.getCardInfo(window.location.pathname.substring(6));
   }, []);
 
-  const cardTags = card.infoTags.map((tag, index) => {
+  const cardTags = props.cardInfo.infoTags.map((tag, index) => {
     return (
       <div className={`tag-container-standard tag-container`} key={index}>
         <div className={`tag-text tag-text-standard`}>{tag.tag}</div>
@@ -81,9 +19,27 @@ const CardContainer = () => {
 
   return (
     <>
-      <Card card={card} cardTags={cardTags} />
+      <Card
+        cardInfo={props.cardInfo}
+        userInfo={props.userInfo}
+        fileInfo={props.fileInfo}
+        cardTags={cardTags}
+      />
     </>
   );
+}
+
+const mapStateToProps = (state) => {
+  return {
+    cardInfo: state.cardReducer.cardInfo,
+    userInfo: state.cardReducer.userInfo,
+    fileInfo: state.cardReducer.fileInfo,
+    isLoading: state.cardReducer.isLoadingCard,
+  };
 };
 
-export default CardContainer;
+const mapDispatchToProps = {
+  getCardInfo,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardContainer);

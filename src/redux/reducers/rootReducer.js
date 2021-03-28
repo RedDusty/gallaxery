@@ -4,6 +4,7 @@ import galleryReducer from './galleryReducer';
 import uploadCardReducer from './uploadCardReducer';
 import userReducer from './userReducer';
 import profileReducer from './profileReducer';
+import cardReducer from './cardReducer';
 
 export default combineReducers({
   headerReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   uploadCardReducer,
   userReducer,
   profileReducer,
+  cardReducer,
 });
