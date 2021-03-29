@@ -34,15 +34,36 @@ export const ucTagDelete = (tagId) => ({
 });
 
 export const ucFileUpload = (file) => (dispatch) => {
+  const image = new Image();
+  const webpImage = new Image();
+  const ctx = document.createElement('canvas');
   const reader = new FileReader();
   reader.onloadend = () => {
-    Object.assign(file, {
-      source: reader.result,
-    });
-    dispatch({
-      type: UC_FILEUPLOAD,
-      payload: { file },
-    });
+    if (file.type.substring(6) !== 'gif') {
+      image.onload = () => {
+        ctx.width = image.width;
+        ctx.height = image.height;
+        ctx.getContext('2d').drawImage(image, 0, 0);
+        webpImage.src = ctx.toDataURL('image/webp');
+        Object.assign(file, {
+          source: webpImage.src,
+        });
+        dispatch({
+          type: UC_FILEUPLOAD,
+          payload: { file },
+        });
+      };
+    } else {
+      Object.assign(file, {
+        source: reader.result,
+      });
+      dispatch({
+        type: UC_FILEUPLOAD,
+        payload: { file },
+      });
+    }
+
+    image.src = reader.result;
   };
   reader.readAsDataURL(file);
 };

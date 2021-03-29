@@ -78,12 +78,29 @@ export default function uploadCardReducer(state = initialState, action) {
     }
     case UC_FILEUPLOAD: {
       const { file } = action.payload;
+      const types3 = 'xbm tif pjp jpg ico svg png bmp';
+      const types4 = 'svgz jpeg tiff jfif avif';
+      const types5 = 'pjpeg';
+      let newFileName = file.name;
+      let newFileType = file.type;
+      if (types3.includes(file.name.slice(-3))) {
+        newFileName = file.name.slice(0, -3) + 'webp';
+        newFileType = 'image/webp';
+      }
+      if (types4.includes(file.name.slice(-4))) {
+        newFileName = file.name.slice(0, -4) + 'webp';
+        newFileType = 'image/webp';
+      }
+      if (types5.includes(file.name.slice(-5))) {
+        newFileName = file.name.slice(0, -5) + 'webp';
+        newFileType = 'image/webp';
+      }
       return {
         ...state,
         fileURL: file.source,
-        fileName: file.name,
+        fileName: newFileName,
         fileSize: file.size,
-        fileType: file.type,
+        fileType: newFileType,
         fileCode: 'return',
       };
     }
