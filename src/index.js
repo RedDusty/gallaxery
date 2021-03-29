@@ -7,8 +7,8 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+import './main.scss';
 import './index.scss';
-import './newIndex.scss';
 import './fill.scss';
 import App from './App';
 
