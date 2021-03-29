@@ -1,13 +1,9 @@
 .p {
-  display: flex;
-  flex-direction: column;
-  margin-top: 60px;
+  width: 100%;
+  margin-top: 10px;
 }
 
 .p-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
   margin-left: 4px;
   &-photo {
@@ -31,4 +27,8 @@
       margin: 0 auto;
     }
   }
+}
+
+.p-cards {
+  width: 100%;
 }

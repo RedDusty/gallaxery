@@ -4,7 +4,7 @@ import ProfileUserInfo from './ProfileUserInfo';
 
 const Profile = (props) => {
   return (
-    <div className="p">
+    <div className="p fcj">
       <ProfileUserInfo
         userInfo={props.vars.userInfo}
         cardsCount={props.vars.allCards.length}

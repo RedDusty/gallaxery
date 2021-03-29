@@ -10,7 +10,7 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: var(--black000025);
+    background-color: var(--blackTransparent);
     transition: 0.25s ease;
     z-index: 5;
     &:hover {
@@ -21,11 +21,11 @@
     }
   }
   &-window {
-    background-color: var(--blueWhite000);
+    background-color: var(--bgLightTransparent95);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     width: 75vw;
-    height: 75vh;
+    height: max-content;
     margin-top: 40px;
     padding-top: 8px;
     transition: 0.25s ease;
@@ -45,31 +45,16 @@
       flex-flow: row wrap;
     }
     &-col {
-      background-color: var(--blue020);
       display: flex;
       flex-flow: column;
       border-radius: 10px;
       min-width: 100px;
-      width: 19.25%;
+      width: auto;
       margin: 5px;
-      &[open] {
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-      }
-      &[open] .ms-tags-text {
-        border-radius: 0;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        user-select: none;
-      }
     }
-    &-summary {
-      cursor: pointer;
-      border-radius: 10px;
-      background-color: var(--blue060);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    &-title {
+      margin-top: 2px;
+      margin-bottom: 0;
       outline: none;
       padding: 2px;
     }
@@ -84,19 +69,10 @@
 
 .tag {
   &-container {
-    background-color: var(--white000);
-    margin: 4px 2px;
-    padding: 1px 3px;
-    border-radius: 15px;
-    width: max-content;
-    height: max-content;
-    display: flex;
-    align-items: center;
-    float: left;
     &-removed {
-      background-color: var(--grey020);
+      background-color: var(--red010);
       &:hover {
-        background-color: var(--white000);
+        background-color: var(--white);
       }
       &:hover .tag-text-removed {
         text-decoration: none;
@@ -105,17 +81,12 @@
   }
   &-text {
     color: var(--black000);
-    width: max-content;
     &-removed {
       text-decoration-style: solid;
       text-decoration-line: line-through;
       text-decoration-thickness: 1.5px;
       text-decoration-color: var(--grey070);
     }
-  }
-  &-btn {
-    width: 16px;
-    height: 16px;
   }
   &-delete {
     &:hover {
@@ -151,13 +122,10 @@
 
 @media screen and (max-width: 650px) {
   .ms {
-    &-close {
-      display: none;
-    }
     &-window {
       width: 100%;
-      height: calc(100% - 50px);
       overflow: auto;
+      border-radius: 0;
     }
   }
 }

@@ -114,36 +114,41 @@ function UploadCardContainer(props) {
     .filter((tag) => tag !== undefined)
     .map((tag, index) => {
       return (
-        <div className={`tag-container-standard tag-container`} key={index}>
-          <div className={`tag-text tag-text-standard`}>{tag.tag}</div>
+        <div
+          className={`tag-container-standard tag-container fa br25`}
+          key={index}
+        >
+          <p className={`tag-text tag-text-standard fW500`}>{tag.tag}</p>
           <button
-            className="tag-delete btn btn-icon tag-btn"
+            className="btn-img-core btn-img-fill"
             onClick={(e) => {
               e.preventDefault();
               tagDelete(index);
             }}
           >
-            <img src={tagDelIcon} data-alt="✖" />
+            <img src={tagDelIcon} data-alt="✖" data-btn="btn-icon" />
           </button>
         </div>
       );
     });
 
   const onSubmit = async (e) => {
-    setIsUploading(true);
     e.preventDefault();
     if (
       fileInfo.fileCode.length !== 0 &&
       props.ucTags.length > 1 &&
       props.ucTags.length < 26
     ) {
-      const data = {
-        fileInfo: fileInfo,
-        ucTags: props.ucTags,
-        ucCard: props.ucCard,
-        userInfo: userInfo,
-      };
-      props.ucCreateCard(data, props.history);
+      if (!isUploading) {
+        setIsUploading(true);
+        const data = {
+          fileInfo: fileInfo,
+          ucTags: props.ucTags,
+          ucCard: props.ucCard,
+          userInfo: userInfo,
+        };
+        props.ucCreateCard(data, props.history);
+      }
     } else {
       setIsUploading(false);
     }

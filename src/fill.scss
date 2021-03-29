@@ -1,0 +1,117 @@
+input {
+  &::placeholder {
+    color: var(--inputPlaceholder);
+  }
+}
+
+.bgLight {
+  background-color: var(--bgLight);
+}
+.bgLightAlt {
+  background-color: var(--bgLightAlt);
+}
+.bgHigh {
+  background-color: var(--bgHigh);
+}
+.bgHighAlt {
+  background-color: var(--bgHighAlt);
+}
+
+.brdGray {
+  border-color: var(--brdGray);
+}
+
+.shadowLight {
+  box-shadow: 0 0 4px 2px var(--bgLight);
+}
+.shadowHigh {
+  box-shadow: 0 0 4px 2px var(--bgHigh);
+}
+.shadowDark {
+  box-shadow: 0 0 4px 2px var(--bgDark);
+}
+
+.logo-fill {
+  &:hover {
+    filter: hue-rotate(167deg) sepia(75%) saturate(500%) contrast(100%)
+      brightness(140%);
+  }
+  &:focus {
+    filter: hue-rotate(167deg) sepia(85%) saturate(1000%) contrast(150%)
+      brightness(150%);
+  }
+}
+
+.input-fill {
+  &:hover {
+    background-color: var(--white);
+    border-color: var(--btnHoverBr);
+  }
+  &:focus {
+    background-color: var(--white);
+    animation: brdFocus 2.5s infinite;
+  }
+}
+
+.btn-fill {
+  background-color: var(--btnBg);
+  border-color: var(--btnBr);
+  color: var(--black);
+  img[data-btn='btn-icon'] {
+    filter: invert(41%) sepia(19%) saturate(1569%) hue-rotate(194deg)
+      brightness(99%) contrast(87%);
+  }
+  &:hover img[data-btn='btn-icon'] {
+    filter: var(--svgHover);
+  }
+  &:focus img[data-btn='btn-icon'] {
+    filter: var(--svgFocus);
+  }
+  &:hover {
+    background-color: var(--btnHoverBg);
+    border-color: var(--btnHoverBr);
+  }
+  &:focus {
+    animation: allFocus 2.5s infinite;
+  }
+}
+
+.btn-img-fill {
+  img[data-btn='btn-icon'] {
+    filter: invert(41%) sepia(19%) saturate(1569%) hue-rotate(194deg)
+      brightness(99%) contrast(87%);
+  }
+  &:hover img[data-btn='btn-icon'] {
+    filter: var(--svgHover);
+  }
+  &:focus img[data-btn='btn-icon'] {
+    filter: var(--svgFocus);
+  }
+}
+
+@keyframes allFocus {
+  0% {
+    background-color: var(--btnHoverBg);
+    border-color: var(--btnHoverBr);
+  }
+  50% {
+    background-color: var(--btnFocusBg);
+    border-color: var(--btnFocusBr);
+  }
+  100% {
+    background-color: var(--btnHoverBg);
+    border-color: var(--btnHoverBr);
+  }
+}
+
+@keyframes brdFocus {
+  0% {
+    border-color: var(--btnHoverBr);
+  }
+  50% {
+    border-color: var(--btnFocusBr);
+  }
+  100% {
+    border-color: var(--btnHoverBr);
+  }
+}

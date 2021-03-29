@@ -1,9 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import './header.scss';
 
 import { connect } from 'react-redux';
-import { tagParserOnKeyDown, tagParserOnKeyUp } from '../../redux/actions';
+import {
+  tagParserOnKeyDown,
+  tagParserOnKeyUp,
+} from '../../redux/actions/actionsHeader';
 import { firebaseAuth } from '../../redux/actions/actionsAuth';
 
 function HeaderContainer(props) {

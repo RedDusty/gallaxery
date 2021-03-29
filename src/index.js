@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import './index.scss';
+import './newIndex.scss';
+import './fill.scss';
 import App from './App';
 
 import rootReducer from './redux/reducers/rootReducer';

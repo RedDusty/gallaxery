@@ -7,14 +7,18 @@ const CardInfo = ({ cardInfo, userInfo, cardTags }) => {
   let title = cardInfo.infoTitle;
   description =
     description.length !== 0 ? (
-      <p className="c-finfo-comment">{cardInfo.infoDescription}</p>
+      <p className="cvpci-comment cvpci-text br25 fS18 fW500 bgLight">
+        {cardInfo.infoDescription}
+      </p>
     ) : (
       <></>
     );
   title =
     title.length !== 0 ? (
-      <div className="c-finfo-header">
-        <p className="c-finfo-header-name">{cardInfo.infoTitle}</p>
+      <div className="cvpci-header">
+        <p className="cvpci-name cvpci-text br25 fS18 fW600 shadowDark">
+          {cardInfo.infoTitle}
+        </p>
       </div>
     ) : (
       <></>
@@ -29,28 +33,21 @@ const CardInfo = ({ cardInfo, userInfo, cardTags }) => {
           .format(new Date(cardInfo.infoDate))
           .replace(/\//g, '.');
   return (
-    <div className="c-info">
+    <div className="cvpci">
       {title}
       {description}
-      <div className="c-finfo-sub">
+      <div className="cvpci-sub fcj mtop">
         <NavLink
           to={'/profile/' + userInfo.uid}
-          className="c-finfo-sub-profile blinkBorder"
+          className="cvpci-sub-l btn-core btn-fill fja br25 mtop"
           tabIndex="20"
         >
-          <div className="c-finfo-sub-author">
-            <img
-              className="c-finfo-sub-author-icon"
-              src={userInfo.infoPhotoURL}
-            ></img>
-            <div className="c-finfo-sub-author-username">
-              {userInfo.infoUsername}
-            </div>
-          </div>
+          <img className="br100" src={userInfo.infoPhotoURL}></img>
+          <p className="cvpci-sub-lu fW500">{userInfo.infoUsername}</p>
         </NavLink>
-        <p className="c-finfo-sub-time">{time}</p>
+        <p className="cvpci-sub-time mtop fW500">{time}</p>
       </div>
-      <div className="c-finfo-tags-container">{cardTags}</div>
+      <div className="cvpci-tags-container bgHighAlt br25">{cardTags}</div>
       {/* <CardActionsContainer card={card} /> */}
     </div>
   );

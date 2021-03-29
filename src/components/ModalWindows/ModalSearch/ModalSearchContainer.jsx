@@ -6,7 +6,7 @@ import {
   tagParserOnKeyUp,
   tagSearchRemove,
   tagSearchAdd,
-} from '../../../redux/actions';
+} from '../../../redux/actions/actionsHeader';
 import ModalSearch from './ModalSearch';
 import './modalSearch.scss';
 
@@ -46,12 +46,12 @@ function ModalSearchContainer(props) {
       if (!tag.removed) {
         return (
           <div
-            className={`tag-container-${styleTag} tag-container`}
+            className={`tag-container-${styleTag} tag-container fa br25`}
             key={index}
           >
-            <div className={`tag-text tag-text-${styleTag}`}>{tag.tag}</div>
+            <p className={`tag-text tag-text-${styleTag} fW500`}>{tag.tag}</p>
             <button
-              className="tag-delete btn btn-icon tag-btn"
+              className="tag-delete btn-img-core btn-img-fill"
               onClick={() => {
                 btnSearchDelete(index);
               }}
@@ -59,7 +59,7 @@ function ModalSearchContainer(props) {
               <img src={tagDelIcon} data-alt="✖" />
             </button>
             <button
-              className="tag-exclude btn btn-icon tag-btn"
+              className="tag-exclude btn-img-core btn-img-fill"
               onClick={() => {
                 btnSearchRemove(index);
               }}
@@ -79,12 +79,12 @@ function ModalSearchContainer(props) {
       if (tag.removed) {
         return (
           <div
-            className={`tag-container-${styleTag} tag-container`}
+            className={`tag-container-${styleTag} tag-container  fa br25`}
             key={index}
           >
-            <div className={`tag-text tag-text-${styleTag}`}>{tag.tag}</div>
+            <p className={`tag-text tag-text-${styleTag} fW500`}>{tag.tag}</p>
             <button
-              className="tag-delete btn btn-icon tag-btn"
+              className="tag-delete btn-img-core btn-img-fill"
               onClick={() => {
                 btnSearchDelete(index);
               }}
@@ -92,7 +92,7 @@ function ModalSearchContainer(props) {
               <img src={tagDelIcon} data-alt="✖" />
             </button>
             <button
-              className="tag-add btn btn-icon tag-btn"
+              className="tag-add btn-img-core btn-img-fill"
               onClick={() => {
                 btnSearchAdd(index);
               }}

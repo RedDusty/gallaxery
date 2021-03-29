@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProfileUserInfo = ({ userInfo, cardsCount }) => {
   return (
-    <div className="p-info">
+    <div className="p-info fcj">
       <div className="p-info-photo">
         <img src={userInfo.photoURL} alt={userInfo.photoURLAlt} />
       </div>

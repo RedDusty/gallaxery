@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 
 import { NavLink } from 'react-router-dom';
 
+import loadingSvg from '../../images/loading.svg';
+
 const GalleryContainer = (props) => {
   document.title = 'Gallaxery';
   useEffect(() => {
@@ -15,13 +17,12 @@ const GalleryContainer = (props) => {
   function checker(loadingElementRef) {
     if (props.isLoadingCards) {
       return (
-        <div className="loading">
-          <div className="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
+        <div className="gl-loading fja">
+          <img
+            src={loadingSvg}
+            alt="Loading"
+            className="gl-loading-svg br100"
+          />
         </div>
       );
     } else {

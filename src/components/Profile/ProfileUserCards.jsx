@@ -8,7 +8,7 @@ const ProfileUserCards = ({ loadingElementRef, cards, checker }) => {
     fitWidth: true,
   };
   return (
-    <div className="p-images-container">
+    <div className="p-cards">
       <Masonry
         options={masonryOptions}
         disableImagesLoaded={false}

@@ -1,6 +1,11 @@
 import React, { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import reactIcon from '../../images/header/React.png';
+import githubIcon from '../../images/header/GitHubNight.png';
+import firebaseIcon from '../../images/header/FireBase.png';
+import vercelIcon from '../../images/header/Vercel.png';
+
 const HeaderActionsMenu = (props) => {
   const ActionMenuCloser = props.ActionMenuCloser;
   const actionMenu = useRef(null);
@@ -8,11 +13,11 @@ const HeaderActionsMenu = (props) => {
   return (
     <>
       {props.menuIsOpen === true ? (
-        <div className="actions-menu" ref={actionMenu}>
+        <div className="actions-menu bgLight fcj shadowLight" ref={actionMenu}>
           {props.currentUser.uid !== '' ? (
             <>
               <NavLink
-                className="btn btn-link actions-btn blinkBorder"
+                className="btn-core btn-fill fW600 mtopX3"
                 to="/card-upload"
                 tabIndex="5"
                 onClick={() => {
@@ -25,7 +30,7 @@ const HeaderActionsMenu = (props) => {
                 Upload card
               </NavLink>
               <NavLink
-                className="btn btn-link actions-btn blinkBorder"
+                className="btn-core btn-fill fW600 mtopX3"
                 to={'/profile/' + props.currentUser.uid}
                 tabIndex="6"
                 onKeyPress={(e) => {
@@ -35,7 +40,7 @@ const HeaderActionsMenu = (props) => {
                 Profile
               </NavLink>
               <button
-                className="btn actions-btn blinkBorder"
+                className="btn-core btn-fill fS16 fW600 mtopX3"
                 onClick={() => {
                   props.logOut();
                   window.location.reload();
@@ -47,7 +52,7 @@ const HeaderActionsMenu = (props) => {
             </>
           ) : (
             <button
-              className="btn actions-btn blinkBorder"
+              className="btn-core btn-fill fS16 fW600 mtopX3"
               onClick={() => {
                 props.authWithGoogle();
               }}
@@ -57,29 +62,37 @@ const HeaderActionsMenu = (props) => {
               <span>Sign in with Google</span>
             </button>
           )}
-          <div className="actions-menu-footer">
-            <span>Made with: </span>
-            <div className="actions-menu-footer-icons">
+          <div className="actions-menu-footer brdGray mtopX3 mbottom fa">
+            <span className="mtop">Made with: </span>
+            <div className="fjs mtop">
               <a
-                className="icons-React icons-ico blinkBorder"
+                className="logo-header logo-header-react br100"
                 href="https://reactjs.org/"
                 tabIndex="8"
-              ></a>
+              >
+                <img src={reactIcon} data-alt="R" className="br100" />
+              </a>
               <a
-                className="icons-GitHub icons-ico blinkBorder"
+                className="logo-header logo-header-github br100"
                 href="https://github.com/RedDusty/gallaxery"
                 tabIndex="9"
-              ></a>
+              >
+                <img src={githubIcon} data-alt="G" className="br100" />
+              </a>
               <a
-                className="icons-FireBase icons-ico blinkBorder"
+                className="logo-header logo-header-firebase br100"
                 href="https://firebase.google.com/"
                 tabIndex="10"
-              ></a>
+              >
+                <img src={firebaseIcon} data-alt="F" className="br100" />
+              </a>
               <a
-                className="icons-Vercel icons-ico blinkBorder"
+                className="logo-header logo-header-vercel br100"
                 href="https://vercel.com/"
                 tabIndex="11"
-              ></a>
+              >
+                <img src={vercelIcon} data-alt="V" className="br100" />
+              </a>
             </div>
           </div>
         </div>

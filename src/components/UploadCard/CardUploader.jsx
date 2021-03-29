@@ -1,4 +1,5 @@
 import React from 'react';
+import delIcon from '../../images/uploadCard/cardUploadDel.svg';
 
 const CardUploader = ({
   getRootProps,
@@ -9,16 +10,16 @@ const CardUploader = ({
 }) => {
   if (fileInfo.fileCode !== 'return') {
     return (
-      <div className="prew-cards">
-        <div className="uploader-container" {...getRootProps()}>
-          <div className="uploader-inner">
-            <input className="uploader-input" {...getInputProps()} />
+      <div className="ucpc">
+        <div className="ucpc-container bgHigh fja br25" {...getRootProps()}>
+          <div className="ucpc-inner fcj br25 fW500">
+            <input className="ucpc-input" {...getInputProps()} />
             <p>Drag 'n' drop files here or click "Upload" to choose</p>
             <p>The file must be 5 MB or less.</p>
             <button
               type="button"
               onClick={open}
-              className="btn uploader-inner-btn btn blinkBackgroundBorder"
+              className="btn-core btn-fill fS16 fW600"
             >
               Upload
             </button>
@@ -29,33 +30,21 @@ const CardUploader = ({
   }
   if (fileInfo.fileType.slice(0, 5) === 'image') {
     return (
-      <div className="prew-cards">
-        <div className="card-img">
-          <img src={fileInfo.fileURL} alt={fileInfo.fileURL} />
+      <div className="ucpc">
+        <div className="ucpc-img">
+          <img
+            src={fileInfo.fileURL}
+            alt={fileInfo.fileURL}
+            data-btn="ucp-img"
+          />
           <button
-            className="card-action-del blinkBorder"
+            className="ucpc-img-del btn-img-core btn-img-fill br25 bgLight"
             onClick={() => {
               clearCard();
             }}
           >
-            <div className="card-action-del-icon" />
+            <img src={delIcon} alt="❌" data-btn="btn-icon" />
           </button>
-        </div>
-      </div>
-    );
-  } else if (fileInfo.fileType.slice(0, 5) === 'video') {
-    return (
-      <div className="prew-cards">
-        <div className="card-img">
-          <video src={fileInfo.source} controls>
-            Your browser does not support the video tag.
-          </video>
-          <button
-            className="card-action-del"
-            onClick={() => {
-              clearCard();
-            }}
-          ></button>
         </div>
       </div>
     );

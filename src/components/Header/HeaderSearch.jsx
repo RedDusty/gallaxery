@@ -1,4 +1,6 @@
 import React from 'react';
+import searchExt from '../../images/search/searchExtended.svg';
+import searchMag from '../../images/search/searchIcon.svg';
 
 const HeaderSearch = ({
   modalSearchIsOpen,
@@ -8,19 +10,19 @@ const HeaderSearch = ({
 }) => {
   return (
     <div className="search">
-      <div className="search-div">
+      <div className="bgHigh fja br25 search-inner">
         <button
-          className="search-icon search-icon-extended btn blinkBorder"
+          className="btn-img-core btn-img-fill search-btn"
           tabIndex="2"
           onClick={() => {
             setModalSearchIsOpen(!modalSearchIsOpen);
           }}
         >
-          <div />
+          <img src={searchExt} data-alt="📝" data-btn="btn-icon" />
         </button>
         <input
           type="text"
-          className="search-input search-btn blinkBorder"
+          className="search-input brdGray fS18 fW600 input-fill"
           placeholder="Search..."
           onKeyUp={btnOnKeyUp}
           onChange={btnOnKeyDown}
@@ -29,11 +31,8 @@ const HeaderSearch = ({
           }}
           tabIndex="3"
         ></input>
-        <button
-          className="search-icon search-icon-magnifier btn btn-icon blinkBorder"
-          tabIndex="4"
-        >
-          <div />
+        <button className="btn-img-core btn-img-fill search-btn" tabIndex="4">
+          <img src={searchMag} data-alt="🔎" data-btn="btn-icon" />
         </button>
       </div>
     </div>

@@ -1,10 +1,12 @@
 .g {
   display: flex;
   flex-direction: column;
-  margin: 60px 10px 20px 10px;
+  margin: 0 10px 20px 10px;
+  width: 100%;
 }
 
 .cards-container {
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -79,44 +81,6 @@
   height: auto;
 }
 
-.loading {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.lds-ellipsis {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-  div {
-    position: absolute;
-    top: 33px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: rgb(103, 154, 235);
-    animation-timing-function: cubic-bezier(0, 1, 1, 0);
-    &:nth-child(1) {
-      left: 8px;
-      animation: lds-ellipsis1 0.6s infinite;
-    }
-    &:nth-child(2) {
-      left: 8px;
-      animation: lds-ellipsis2 0.6s infinite;
-    }
-    &:nth-child(3) {
-      left: 40px;
-      animation: lds-ellipsis2 0.6s infinite;
-    }
-    &:nth-child(4) {
-      left: 72px;
-      animation: lds-ellipsis3 0.6s infinite;
-    }
-  }
-}
-
 .dataLoaded {
   display: flex;
   justify-content: center;
@@ -138,56 +102,19 @@
 
 @media screen and (max-width: 650px) {
   .g {
-    margin: 60px 5px 20px 5px;
+    margin: 0 2px 20px 2px;
   }
   .card-p {
-    width: 42.5vw;
-    margin: 5px;
+    width: 46vw;
+    margin: 2px 4px;
   }
 }
 @media screen and (max-width: 380px) {
   .g {
-    margin: 60px 5px 20px 5px;
+    margin: 0 5px 20px 5px;
   }
   .card-p {
     width: 90vw;
     margin: 5px;
-  }
-}
-
-@keyframes lds-ellipsis1 {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes lds-ellipsis3 {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0);
-  }
-}
-@keyframes lds-ellipsis2 {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(32px, 0);
-  }
-}
-
-@keyframes blinkCardImg {
-  0% {
-    filter: brightness(100%);
-  }
-  50% {
-    filter: brightness(75%);
-  }
-  100% {
-    filter: brightness(100%);
   }
 }

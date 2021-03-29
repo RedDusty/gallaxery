@@ -1,280 +1,186 @@
 .card {
-  display: flex;
-  align-items: center;
-  flex-flow: column;
-  margin-top: 60px;
   width: 100%;
   height: 100%;
   border: none;
 }
 
-.c {
+.cv {
+  width: 100%;
+  height: 100%;
+  &-input-tags {
+    height: 25px;
+    border: 2px solid var(--btnBr);
+    padding: 2px;
+  }
+  &-loading {
+    z-index: 1;
+    background-color: var(--blackTransparent);
+    position: fixed;
+    width: 100%;
+    height: calc(100vh - 50px);
+    top: 50px;
+    left: 0;
+    &-svg {
+      background-color: var(--bgLightTransparent);
+      width: 250px;
+      height: 250px;
+    }
+  }
+}
+
+.cvp {
   &-container {
-    background-color: var(--blue010);
     width: calc(100% - 25px);
     max-width: 1366px;
+    margin: 10px 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px;
-    border-radius: 15px;
-    box-shadow: 0 0 5px 2.5px var(--blue020);
     &-border {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
       width: 95%;
       height: 95%;
-      display: flex;
       margin: 15px;
       padding: 15px;
-      justify-content: space-between;
-      border: 3px solid var(--blue070);
-      border-radius: 15px;
+      border: 3px solid var(--btnBr);
     }
   }
-  &-files {
-    width: 100%;
-    height: 100%;
-    margin-right: 5px;
+}
+
+.cvpc {
+  width: 100%;
+  height: 100%;
+  margin-right: 4px;
+  &-container {
+    background-color: var(--bgHighAlt);
+    width: 500px;
+    height: 500px;
   }
-  &-info {
-    width: 100%;
-    height: 100%;
-    margin-left: 5px;
+  &-inner {
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    margin: 6px;
+    padding: 6px;
+    border: 3px dashed var(--btnBr);
   }
-  &-file {
-    &-img {
-      display: flex;
+  &-img {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    img[data-btn='cvp-img'] {
       width: 100%;
-      img,
-      video {
-        border-radius: 15px;
-        width: 100%;
-        height: auto;
+      height: auto;
+      transition: 0.1s ease-in-out;
+      border-radius: 25px;
+      &:hover {
+        border-radius: 0;
+      }
+      &:hover + .cvpc-img-del {
         transition: 0.25s ease;
-        &:hover {
-          border-radius: 0;
-        }
-        &:hover + .file-action-del {
-          transition: 0.25s ease;
-          opacity: 0.05;
-        }
+        opacity: 0.05;
       }
     }
   }
 }
 
-.c-finfo {
-  &-header {
-    background-color: var(--blue030);
+.cvpci {
+  width: 100%;
+  height: 100%;
+  margin-left: 4px;
+  &-text {
+    min-width: 250px;
+    width: 95%;
+    height: 26px;
+    margin-top: 5px;
     padding: 5px;
-    margin: 15px 0px;
-    border-radius: 25px;
+    border: 2px solid var(--transparent);
+    outline: none;
+    word-break: break-all;
+    overflow: hidden;
+  }
+  &-name {
+    background-color: var(--bgHighAlt);
     text-align: center;
-    box-shadow: 0px 0px 5px 1px var(--blue070);
-    &-name {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 500;
-    }
   }
   &-sub {
-    display: flex;
-    flex-flow: column;
+    margin-right: 8px;
     align-items: flex-end;
-    margin-top: 5px;
-    &-profile {
-      border-radius: 25px;
-      &:active .c-finfo-sub-author {
-        animation: blinkCardProfileLink 5s infinite linear;
-      }
-      &:active {
-        animation: blinkBorder 5s infinite linear;
-      }
+    p {
+      margin-top: 2px;
+      margin-bottom: 2px;
     }
-    &-author {
-      width: max-content;
-      display: flex;
-      padding: 3px 10px;
-      border-radius: 25px;
-      align-items: center;
-      &-icon {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-      }
-      &-username {
-        margin-left: 5px;
-        font-weight: 500;
-        color: var(--black000);
-        text-decoration-color: var(--black000);
-      }
+    &-lu {
+      margin-left: 4px;
+      text-decoration: 1px solid var(--black);
+      color: var(--black);
     }
     &-time {
-      background-color: var(--blue010);
-      width: max-content;
-      padding: 3px 5px;
-      margin: 5px 0 0 0;
-      border-radius: 25px;
       font-size: 14px;
-      font-weight: 500;
+    }
+    img {
+      width: 30px;
+      height: 30px;
     }
   }
-  &-comment {
-    margin: 15px 5px;
+  &-tags-container {
+    min-height: 25px;
     padding: 5px;
-    background-color: var(--blue020);
-    border-radius: 25px;
-    font-size: 18px;
-    font-weight: 400;
-  }
-  &-length {
-    background-color: var(--red010);
-    width: max-content;
-    margin: 5px 5px 5px 5px;
-    padding: 3px 5px;
-    border-radius: 15px;
-    &-name {
-      display: var(--finfoLenName);
-    }
-    &-comment {
-      display: var(--finfoLenComment);
-    }
-    &-tags {
-      display: var(--finfoLenTags);
-    }
-  }
-  &-tags {
-    &-container {
-      background-color: var(--blue030);
-      min-height: 25px;
-      overflow-y: auto;
-      padding: 5px;
-      margin: 5px 0;
-      border-radius: 25px;
-    }
-  }
-}
-
-.c-a {
-  background-color: var(--transparent);
-  margin: 5px;
-  padding: 5px;
-  &-likes {
-    display: flex;
-    align-items: center;
-    &-img {
-      background-color: var(--transparent);
-      border: none;
-      outline: none;
-      margin-right: 5px;
-      &:hover svg path:nth-child(1),
-      &:focus svg path:nth-child(1) {
-        animation: blinkLikeFill 2.5s infinite linear;
-      }
-      &:hover svg path:nth-child(2),
-      &:focus svg path:nth-child(2) {
-        animation: blinkLikeBorder 2.5s infinite linear;
-      }
-      svg {
-        width: 50px;
-        height: 50px;
-        cursor: pointer;
-      }
-    }
-    &-count {
-      margin: 0;
-      font-size: 45px;
-      font-weight: 500;
-    }
+    margin: 5px 0;
+    overflow-y: auto;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  .card {
-    align-items: center;
-  }
-  .c {
+  .cvp {
     &-container {
       width: 512px;
       &-border {
-        flex-flow: column;
+        flex-direction: column;
       }
     }
-    &-files {
-      margin-right: 0;
-    }
-    &-info {
-      margin-left: 0;
+    &c {
+      &-container {
+        width: 100%;
+      }
+      &i {
+        margin-top: 5px;
+      }
     }
   }
 }
-
 @media screen and (max-width: 532px) {
-  .card {
-    align-items: center;
-  }
-  .c {
+  .cvp {
     &-container {
       width: 100%;
-      margin: 0 0 0 0;
       border-radius: 0;
       &-border {
         width: 100%;
-        height: 100%;
         margin: 0;
         padding: 0;
-        border-width: 0;
+        border: none;
       }
     }
-    &-files {
+    &c {
       margin: 0;
-      img {
+      &-container {
         border-radius: 0;
-        z-index: 1;
       }
-    }
-    &-info {
-      margin-left: 0;
-    }
-    &-finfo {
-      &-header {
-        margin: 0 0 15px 0;
+      &-img img[data-btn='cvp-img'] {
         border-radius: 0;
-        box-shadow: 0px 0px 5px 1px var(--blue070);
-        z-index: 0;
       }
-      &-comment {
+      &i {
         margin: 0;
-        border-radius: 0;
-      }
-      &-tags-container {
-        margin: 0;
-        border-radius: 0;
+        &-text {
+          width: calc(100% - 14px);
+          margin: 0;
+          box-shadow: none;
+          border-radius: 0;
+        }
+        &-tags-container {
+          border-radius: 0;
+          margin-bottom: 0;
+        }
       }
     }
-  }
-}
-
-@keyframes blinkLikeFill {
-  0% {
-    // background-color: #d82525;
-    fill: #ffc7c7;
-  }
-  50% {
-    fill: #ff9e9e;
-  }
-  100% {
-    fill: #ffc7c7;
-  }
-}
-@keyframes blinkLikeBorder {
-  0% {
-    // background-color: #d82525;
-    fill: #ff6363;
-  }
-  50% {
-    fill: #c91818;
-  }
-  100% {
-    fill: #ff6363;
   }
 }

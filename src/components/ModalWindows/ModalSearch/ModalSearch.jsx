@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import Modal from '../../Modal';
-import SearchLabel from './SearchLabel';
 import TagsCol from './TagsCol';
 
 function ModalSearch(props) {
@@ -29,10 +28,10 @@ function ModalSearch(props) {
             setIsOpen(false);
           }}
         ></div>
-        <div className="ms-window">
+        <div className="ms-window bgLight">
           <div className="ms-actions">
             <button
-              className="btn"
+              className="btn-core btn-fill fS18 fW600"
               onClick={() => {
                 setIsOpen(false);
               }}

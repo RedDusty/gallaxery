@@ -14,10 +14,10 @@ function Header(props) {
   const btnOnKeyUp = props.functions.btnOnKeyUp;
 
   return (
-    <section className="h">
-      <div className="icons">
+    <section className="fja h bgLight">
+      <div className="h-icon fja">
         <NavLink
-          className="logo logo-gallaxery"
+          className="logo logo-gal logo-fill br100"
           to="/"
           tabIndex="1"
           onKeyPress={(e) => {
@@ -31,9 +31,9 @@ function Header(props) {
         btnOnKeyUp={btnOnKeyUp}
         btnOnKeyDown={btnOnKeyDown}
       />
-      <div className="actions">
+      <div className="actions fa">
         <button
-          className="actions-menu-btn btn blinkBorder"
+          className="btn-core btn-fill fjs"
           onClick={() => {
             setModalSearchIsOpen(false);
             props.vars.menuIsOpen === true
@@ -48,12 +48,18 @@ function Header(props) {
           ) : (
             <img
               src={props.currentUser.photoURL}
-              className="actions-menu-btn-user"
+              className="userIcon32 br100"
               data-alt="💜"
               id="actions-menu-btn-user"
+              style={{ marginRight: '4px' }}
             />
           )}
-          <img src={actions} data-alt="💙" id="actions-menu-btn-img" />
+          <img
+            src={actions}
+            data-alt="💙"
+            id="actions-menu-btn-img"
+            data-btn="btn-icon"
+          />
         </button>
       </div>
       <HeaderActionsMenu

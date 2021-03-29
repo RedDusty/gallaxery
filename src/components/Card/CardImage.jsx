@@ -16,9 +16,14 @@ const CardImage = ({ fileInfo }) => {
     };
   }
   return (
-    <div className="c-files">
-      <div className="c-file-img">
-        <img src={fileInfo.fileURL} alt={fileInfo.fileURL} style={style} />
+    <div className="cvpc">
+      <div className="cvpc-img">
+        <img
+          src={fileInfo.fileURL}
+          alt={fileInfo.fileURL}
+          style={style}
+          data-btn="cvp-img"
+        />
       </div>
     </div>
   );

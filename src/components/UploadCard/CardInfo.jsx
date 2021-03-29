@@ -19,10 +19,10 @@ const CardInfo = ({ userInfo, textareaAction, cardTags }) => {
     return () => clearTimeout(timer);
   }, [currentTime]);
   return (
-    <div className="prew-info">
-      <div className="cinfo-header">
+    <div className="ucpci">
+      <div className="ucpci-header">
         <textarea
-          className="cinfo-name cinfo-textarea blinkBorder"
+          className="ucpci-name ucpci-textarea input-fill br25 fS18 fW600 shadowDark"
           placeholder="Write name here..."
           spellCheck="false"
           onChange={(e) => {
@@ -35,12 +35,12 @@ const CardInfo = ({ userInfo, textareaAction, cardTags }) => {
             textareaAction(e, 'name');
           }}
         ></textarea>
-        <p className="cinfo-length-name cinfo-length">
+        <p className="ucpci-error-name ucpci-error ucpci-error-show br15">
           Maximum 250 characters!
         </p>
       </div>
       <textarea
-        className="cinfo-comment cinfo-textarea blinkBorder"
+        className="ucpci-comment ucpci-textarea input-fill br25 fS18 fW500 bgLight"
         placeholder="Write some comments here..."
         spellCheck="false"
         onChange={(e) => {
@@ -53,21 +53,21 @@ const CardInfo = ({ userInfo, textareaAction, cardTags }) => {
           textareaAction(e, 'comment');
         }}
       ></textarea>
-      <p className="cinfo-length-comment cinfo-length">
+      <p className="ucpci-error-comment ucpci-error ucpci-error-show br15">
         Maximum 750 characters!
       </p>
-      <div className="cinfo-sub">
+      <div className="ucpci-sub fcj mtop">
         <NavLink
           to="/card-upload"
-          className="cinfo-sub-author blinkBackgroundBorder"
+          className="ucpci-sub-l btn-core btn-fill fja br25 mtop"
         >
-          <img className="cinfo-sub-author-icon" src={userInfo.photo}></img>
-          <div className="cinfo-sub-author-username">{userInfo.username}</div>
+          <img className="br100" src={userInfo.photo}></img>
+          <p className="ucpci-sub-lu fW500">{userInfo.username}</p>
         </NavLink>
-        <p className="cinfo-sub-time">{currentTime}</p>
+        <p className="ucpci-sub-time mtop fW500">{currentTime}</p>
       </div>
-      <div className="cinfo-tags-container">{cardTags}</div>
-      <p className="cinfo-length-tags cinfo-length">
+      <div className="ucpci-tags-container bgHighAlt br25">{cardTags}</div>
+      <p className="ucpci-error-tags ucpci-error ucpci-error-show br15">
         There should be 2-25 tags.
       </p>
     </div>

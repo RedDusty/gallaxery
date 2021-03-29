@@ -1,6 +1,7 @@
 import React from 'react';
 import CardInfo from './CardInfo';
 import CardUploader from './CardUploader';
+import loadingSvg from '../../images/loading.svg';
 
 const UploadCard = (props) => {
   let fileInfo = {};
@@ -22,40 +23,32 @@ const UploadCard = (props) => {
     };
   }
 
-  let uploadBtn = (
-    <>
-      <input
-        className="prew-actions-tags blinkBorder"
-        placeholder="Add tags to find this..."
-        onChange={props.functions.tagKeyDown}
-        onKeyUp={props.functions.tagKeyUp}
-        minLength="1"
-        maxLength="15"
-      ></input>
-      <button className="prew-actions-done btn blinkBackgroundBorder">
-        Create
-      </button>
-    </>
-  );
+  let uploadSvg = <></>;
 
   if (props.vars.isUploading === true) {
-    uploadBtn = (
-      <div className="loading">
-        <div className="lds-ellipsis">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+    uploadSvg = (
+      <div className="uc-loading fja">
+        <img src={loadingSvg} alt="Loading" className="uc-loading-svg br100" />
       </div>
     );
   }
 
   return (
-    <form className="iu" onSubmit={props.functions.onSubmit}>
-      <div className="prew-actions">{uploadBtn}</div>
-      <div className="prew-container">
-        <div className="prew-container-border">
+    <form className="uc fcj" onSubmit={props.functions.onSubmit}>
+      {uploadSvg}
+      <div className="ucp-actions bgLightAlt fa br25">
+        <input
+          className="input-fill brd uc-input-tags bgHigh br25 fS16"
+          placeholder="Add tags to find this..."
+          onChange={props.functions.tagKeyDown}
+          onKeyUp={props.functions.tagKeyUp}
+          minLength="1"
+          maxLength="20"
+        ></input>
+        <button className="btn-core btn-fill fS16 fW600">Create</button>
+      </div>
+      <div className="ucp-container bgLightAlt br25">
+        <div className="ucp-container-border br25 fa">
           <CardUploader
             getRootProps={props.vars.getRootProps}
             getInputProps={props.vars.getInputProps}

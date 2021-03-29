@@ -9,14 +9,17 @@ const TagsCol = (props) => {
   });
 
   return (
-    <details className="ms-tags-col" open>
-      <summary className="ms-tags-summary" tabIndex={props.tabIndex}>
+    <div className="ms-tags-col bgLightAlt" open>
+      <p
+        className="ms-tags-title br15 fja bgHighAlt fS18 fW500"
+        tabIndex={props.tabIndex}
+      >
         {tagsText}
-      </summary>
+      </p>
       <div className="ms-tags-query">
         {queryTags.length === 0 ? 'There are no tags.' : queryTags}
       </div>
-    </details>
+    </div>
   );
 };
 

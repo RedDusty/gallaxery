@@ -11,8 +11,11 @@ function CardContainer(props) {
 
   const cardTags = props.cardInfo.infoTags.map((tag, index) => {
     return (
-      <div className={`tag-container-standard tag-container`} key={index}>
-        <div className={`tag-text tag-text-standard`}>{tag.tag}</div>
+      <div
+        className={`tag-container-standard tag-container fa br25`}
+        key={index}
+      >
+        <p className={`tag-text tag-text-standard fW500`}>{tag.tag}</p>
       </div>
     );
   });
@@ -24,6 +27,7 @@ function CardContainer(props) {
         userInfo={props.userInfo}
         fileInfo={props.fileInfo}
         cardTags={cardTags}
+        isLoading={props.isLoading}
       />
     </>
   );

@@ -32,7 +32,7 @@ function App(props) {
   };
 
   return (
-    <div className="App">
+    <div className="fcj">
       <HeaderContainer authWithGoogle={authWithGoogle} logOut={logOut} />
       <Switch>
         <Route component={GalleryContainer} exact path="/" />

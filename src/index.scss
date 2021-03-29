@@ -93,35 +93,35 @@ textarea {
   resize: none;
 }
 
-.logo {
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 45px;
-  height: 45px;
-  outline: none;
-  border: none;
-  border-radius: 50%;
-  &-gallaxery {
-    background-image: url('./images/favicon.svg');
-    background-size: 35px;
-    animation: HeaderLogoRotateIn 0.25s 3 linear;
-    &:hover,
-    &:focus {
-      animation: HeaderLogoRotateOut 2.5s infinite linear,
-        blinkBackgroundBorder 2.5s infinite ease-in-out;
-    }
-  }
-  &-google {
-    background-image: url('./images/header/Google.svg');
-    background-size: 25px;
-    width: 30px;
-    height: 30px;
-  }
-  &:hover {
-    background-color: var(--blue020);
-  }
-}
+// .logo {
+//   background-size: 30px;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   width: 45px;
+//   height: 45px;
+//   outline: none;
+//   border: none;
+//   border-radius: 50%;
+//   &-gallaxery {
+//     background-image: url('./images/favicon.svg');
+//     background-size: 35px;
+//     animation: HeaderLogoRotateIn 0.25s 3 linear;
+//     &:hover,
+//     &:focus {
+//       animation: HeaderLogoRotateOut 2.5s infinite linear,
+//         blinkBackgroundBorder 2.5s infinite ease-in-out;
+//     }
+//   }
+//   &-google {
+//     background-image: url('./images/header/Google.svg');
+//     background-size: 25px;
+//     width: 30px;
+//     height: 30px;
+//   }
+//   &:hover {
+//     background-color: var(--blue020);
+//   }
+// }
 
 @keyframes HeaderLogoRotateIn {
   from {

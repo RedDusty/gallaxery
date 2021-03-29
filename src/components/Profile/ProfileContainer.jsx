@@ -9,6 +9,8 @@ import {
   getProfileUserInfo,
 } from '../../redux/actions/actionsProfile';
 
+import loadingSvg from '../../images/loading.svg';
+
 function ProfileContainer(props) {
   useEffect(() => {
     props.getProfileUserInfo(window.location.pathname.substring(9));
@@ -47,12 +49,13 @@ function ProfileContainer(props) {
   function checker(loadingElementRef) {
     if (props.isLoadingUserCards) {
       return (
-        <div className="loading">
-          <div className="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div className="gl-loading fja">
+          <div className="glloading">
+            <img
+              src={loadingSvg}
+              alt="Loading"
+              className="cv-loading-svg br100"
+            />
           </div>
         </div>
       );
