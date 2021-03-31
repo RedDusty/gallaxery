@@ -18,8 +18,8 @@ export const getGalleryCards = (currentCards, lastKey = 0) => {
       .collection('usersImages')
       .orderBy('id', 'desc')
       .startAfter(lastKey)
+      // .limit(5)
       .get();
-    // .limit(10)
 
     data.forEach((doc) => {
       cards.push({
@@ -29,6 +29,7 @@ export const getGalleryCards = (currentCards, lastKey = 0) => {
         infoTitle: doc.data().infoTitle,
         fileURL: doc.data().fileURL,
         id: doc.data().id,
+        height: doc.data().height,
       });
       newLastKey = doc.data().id;
     });

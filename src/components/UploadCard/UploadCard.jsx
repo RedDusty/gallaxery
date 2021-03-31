@@ -1,7 +1,7 @@
 import React from 'react';
 import CardInfo from './CardInfo';
 import CardUploader from './CardUploader';
-import loadingSvg from '../../images/loading.svg';
+import Loading from '../Loading';
 
 const UploadCard = (props) => {
   let fileInfo = {};
@@ -26,11 +26,7 @@ const UploadCard = (props) => {
   let uploadSvg = <></>;
 
   if (props.vars.isUploading === true) {
-    uploadSvg = (
-      <div className="uc-loading fja">
-        <img src={loadingSvg} alt="Loading" className="uc-loading-svg br100" />
-      </div>
-    );
+    uploadSvg = <Loading />;
   }
 
   return (

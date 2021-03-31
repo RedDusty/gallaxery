@@ -18,6 +18,8 @@ const initialState = {
     infoTags: [],
     infoTitle: '',
     id: '',
+    likesCount: 0,
+    isLiked: false,
   },
   isLoadingCard: true,
 };

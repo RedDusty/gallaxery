@@ -30,3 +30,4 @@ export const PR_CARDS_LOAD = 'PR_CARDS_LOAD';
 // Card
 export const CA_CARD_INFO = 'CA_CARD_INFO';
 export const CA_CARD_LOAD = 'CA_CARD_LOAD';
+export const CA_CARD_LIKE = 'CA_CARD_LIKE';

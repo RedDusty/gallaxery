@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getCardInfo } from '../../redux/actions/actionsCard';
+import NotFound from '../NotFound';
 import Card from './Card';
 import './card.scss';
 
@@ -8,6 +9,10 @@ function CardContainer(props) {
   useEffect(() => {
     props.getCardInfo(window.location.pathname.substring(6));
   }, []);
+
+  if (props.cardInfo.id === undefined) {
+    return <NotFound />;
+  }
 
   const cardTags = props.cardInfo.infoTags.map((tag, index) => {
     return (

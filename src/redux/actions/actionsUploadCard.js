@@ -47,6 +47,7 @@ export const ucFileUpload = (file) => (dispatch) => {
         webpImage.src = ctx.toDataURL('image/webp');
         Object.assign(file, {
           source: webpImage.src,
+          height: image.height,
         });
         dispatch({
           type: UC_FILEUPLOAD,
@@ -54,13 +55,16 @@ export const ucFileUpload = (file) => (dispatch) => {
         });
       };
     } else {
-      Object.assign(file, {
-        source: reader.result,
-      });
-      dispatch({
-        type: UC_FILEUPLOAD,
-        payload: { file },
-      });
+      image.onload = () => {
+        Object.assign(file, {
+          source: reader.result,
+          height: image.height,
+        });
+        dispatch({
+          type: UC_FILEUPLOAD,
+          payload: { file },
+        });
+      };
     }
 
     image.src = reader.result;
@@ -146,6 +150,7 @@ export const ucCreateCard = (data, history) => {
         infoDescription: ucCard.textareaDescription,
         infoTags: ucTags,
         id: id,
+        height: data.height,
       });
 
     dispatch({

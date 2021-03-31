@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Gallery from './Gallery';
 
 import { getGalleryCards } from '../../redux/actions/actionsGallery';
@@ -9,6 +9,11 @@ import { NavLink } from 'react-router-dom';
 import loadingSvg from '../../images/loading.svg';
 
 const GalleryContainer = (props) => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isSmallMobile, setIsSmallMobile] = useState(false);
+  const [deviceWidth, setDeviceWidth] = useState(
+    window.screen.width * window.devicePixelRatio
+  );
   document.title = 'Gallaxery';
   useEffect(() => {
     props.getGalleryCards(props.cards, props.lastKey);
@@ -35,16 +40,67 @@ const GalleryContainer = (props) => {
     }
   }
 
+  useEffect(() => {
+    if (window.screen.width * window.devicePixelRatio <= 650) {
+      setIsMobile(true);
+      setDeviceWidth(window.screen.width * window.devicePixelRatio);
+    } else {
+      setIsMobile(false);
+    }
+    if (window.screen.width * window.devicePixelRatio <= 380) {
+      setIsSmallMobile(true);
+      setDeviceWidth(window.screen.width * window.devicePixelRatio);
+    } else {
+      setIsSmallMobile(false);
+    }
+    function isMobileChecker() {
+      if (window.screen.width * window.devicePixelRatio <= 650) {
+        setIsMobile(true);
+        setDeviceWidth(window.screen.width * window.devicePixelRatio);
+      } else {
+        setIsMobile(false);
+      }
+      if (window.screen.width * window.devicePixelRatio <= 380) {
+        setIsSmallMobile(true);
+        setDeviceWidth(window.screen.width * window.devicePixelRatio);
+      } else {
+        setIsSmallMobile(false);
+      }
+    }
+    window.addEventListener('resize', isMobileChecker);
+  }, []);
+
   const allCards = props.cards.map((card, index) => {
     const href =
       window.location.pathname.slice(0, 5) === '/card'
         ? card.id
         : 'card/' + card.id;
+    let cardHeight = 0;
+    let cardWidth = 250;
+    if (isMobile) {
+      if (isSmallMobile) {
+        cardWidth = deviceWidth - 24;
+        cardHeight = (card.height * ((cardWidth * 100) / 250)) / 100;
+      } else {
+        cardWidth = deviceWidth / 2 - 24;
+        cardHeight = (card.height * ((cardWidth * 100) / 250)) / 100;
+      }
+    } else {
+      cardHeight = card.height + 'px';
+    }
     return (
-      <div className="card-p" key={card.infoDate}>
+      <div
+        className="card-p card-gutter"
+        key={card.infoDate}
+        style={{ width: cardWidth + 'px' }}
+      >
         <NavLink to={'' + href} className="card-link" tabIndex={100 + index}>
           <div className="card-p-top">
-            <img src={card.fileURL} alt="" />
+            <img
+              src={card.fileURL}
+              alt=""
+              style={{ height: cardHeight, width: cardWidth + 'px' }}
+            />
           </div>
           <div className="card-p-bottom">
             <img src={card.infoPhotoURL} alt="" />
@@ -55,15 +111,7 @@ const GalleryContainer = (props) => {
     );
   });
 
-  const vars = {
-    allCards,
-  };
-
-  const functions = {
-    checker,
-  };
-
-  return <Gallery vars={vars} functions={functions} />;
+  return <Gallery allCards={allCards} checker={checker} />;
 };
 
 const mapStateToProps = (state) => {

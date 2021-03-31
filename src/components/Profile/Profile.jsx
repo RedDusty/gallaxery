@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileUserCards from './ProfileUserCards';
+import Gallery from '../Gallery/Gallery';
 import ProfileUserInfo from './ProfileUserInfo';
 
 const Profile = (props) => {
@@ -9,11 +9,11 @@ const Profile = (props) => {
         userInfo={props.vars.userInfo}
         cardsCount={props.vars.allCards.length}
       />
-      <ProfileUserCards
-        loadingElementRef={props.functions.loadingElementRef}
-        cards={props.vars.allCards}
+      <Gallery
+        allCards={props.vars.allCards}
         checker={props.functions.checker}
-      />
+        loadingElementRef={props.functions.loadingElementRef}
+      ></Gallery>
     </div>
   );
 };

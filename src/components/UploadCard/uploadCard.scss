@@ -12,19 +12,6 @@
     border: 2px solid var(--btnBr);
     padding: 2px;
   }
-  &-loading {
-    z-index: 1;
-    background-color: var(--blackTransparent);
-    position: fixed;
-    width: 100%;
-    height: calc(100vh - 50px);
-    top: 50px;
-    &-svg {
-      background-color: var(--bgLightTransparent);
-      width: 250px;
-      height: 250px;
-    }
-  }
 }
 
 .ucp-actions {
@@ -67,6 +54,9 @@
     margin: 6px;
     padding: 6px;
     border: 3px dashed var(--btnBr);
+    p {
+      text-align: center;
+    }
   }
   &-img {
     width: 100%;

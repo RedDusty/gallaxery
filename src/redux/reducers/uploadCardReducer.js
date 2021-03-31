@@ -17,6 +17,7 @@ const initialState = {
   fileCode: '',
   textareaTitle: '',
   textareaDescription: '',
+  height: '',
 };
 
 export default function uploadCardReducer(state = initialState, action) {
@@ -102,6 +103,7 @@ export default function uploadCardReducer(state = initialState, action) {
         fileSize: file.size,
         fileType: newFileType,
         fileCode: 'return',
+        height: file.height,
       };
     }
     case UC_FILEIMAGEDLETE: {
@@ -192,6 +194,7 @@ export default function uploadCardReducer(state = initialState, action) {
         fileCode: '',
         textareaTitle: '',
         textareaDescription: '',
+        height: '',
       };
       return {
         ...state,

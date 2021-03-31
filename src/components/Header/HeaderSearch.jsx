@@ -12,7 +12,7 @@ const HeaderSearch = ({
     <div className="search">
       <div className="bgHigh fja br25 search-inner">
         <button
-          className="btn-img-core btn-img-fill search-btn"
+          className="btn-img-core btn-img-fill search-btn search-btn-ext"
           tabIndex="2"
           onClick={() => {
             setModalSearchIsOpen(!modalSearchIsOpen);
@@ -31,7 +31,10 @@ const HeaderSearch = ({
           }}
           tabIndex="3"
         ></input>
-        <button className="btn-img-core btn-img-fill search-btn" tabIndex="4">
+        <button
+          className="btn-img-core btn-img-fill search-btn search-btn-magn"
+          tabIndex="4"
+        >
           <img src={searchMag} data-alt="🔎" data-btn="btn-icon" />
         </button>
       </div>

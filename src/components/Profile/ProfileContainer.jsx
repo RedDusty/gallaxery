@@ -10,6 +10,7 @@ import {
 } from '../../redux/actions/actionsProfile';
 
 import loadingSvg from '../../images/loading.svg';
+import NotFound from '../NotFound';
 
 function ProfileContainer(props) {
   useEffect(() => {
@@ -20,6 +21,10 @@ function ProfileContainer(props) {
     );
   }, [window.location.pathname.substring(9)]);
 
+  if (props.userInfoState.uid === undefined) {
+    return <NotFound />;
+  }
+
   if (props.userInfoState.uid !== '') {
     document.title = props.userInfoState.displayName;
   } else {
@@ -28,7 +33,7 @@ function ProfileContainer(props) {
 
   const allCards = props.userCardsState.map((card, index) => {
     return (
-      <div className="card-p" key={card.infoDate}>
+      <div className="card-p card-gutter" key={card.infoDate}>
         <NavLink
           to={'/card/' + card.id}
           className="card-link"

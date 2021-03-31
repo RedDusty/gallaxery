@@ -18,7 +18,7 @@ function NotFound() {
           It looks like you've visited a page that doesn't exist.
         </div>
         <div className="nf-bottom-button">
-          <NavLink to="/" className="btn btn-link">
+          <NavLink to="/" className="btn-core btn-fill">
             Back to main page
           </NavLink>
         </div>

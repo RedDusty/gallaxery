@@ -1,17 +1,24 @@
+import React, { Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import firebase from 'firebase/app';
+import { firebaseAuth } from './redux/actions/actionsAuth';
 import 'firebase/auth';
 
 import './App.scss';
-import GalleryContainer from './components/Gallery/GalleryContainer';
-import CardContainer from './components/Card/CardContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import UploadCardContainer from './components/UploadCard/UploadCardContainer';
-import NotFound from './components/NotFound';
-
-import { firebaseAuth } from './redux/actions/actionsAuth';
+import Loading from './components/Loading';
+const NotFound = lazy(() => import('./components/NotFound'));
+const UploadCardContainer = lazy(() =>
+  import('./components/UploadCard/UploadCardContainer')
+);
+const ProfileContainer = lazy(() =>
+  import('./components/Profile/ProfileContainer')
+);
+const CardContainer = lazy(() => import('./components/Card/CardContainer'));
+const GalleryContainer = lazy(() =>
+  import('./components/Gallery/GalleryContainer')
+);
 
 function App(props) {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -34,14 +41,37 @@ function App(props) {
   return (
     <div className="fcj">
       <HeaderContainer authWithGoogle={authWithGoogle} logOut={logOut} />
-      <Switch>
-        <Route component={GalleryContainer} exact path="/" />
-        <Route component={ProfileContainer} exact path="/profile/:uid" />
-        <Route component={UploadCardContainer} exact path="/card-upload" />
-        <Route component={CardContainer} exact path="/card/:id" />
-        <Route component={GalleryContainer} exact path="/card/:id" />
-        <Route component={NotFound}></Route>
-      </Switch>
+      <Suspense fallback={<Loading />}>
+        <Switch>
+          <Route component={GalleryContainer} exact path="/" />
+          <Route
+            render={() => {
+              return <ProfileContainer />;
+            }}
+            exact
+            path="/profile/:uid"
+          />
+          <Route
+            render={() => {
+              return <UploadCardContainer />;
+            }}
+            exact
+            path="/card-upload"
+          />
+          <Route
+            render={() => {
+              return <CardContainer />;
+            }}
+            exact
+            path="/card/:id"
+          />
+          <Route
+            render={() => {
+              return <NotFound />;
+            }}
+          />
+        </Switch>
+      </Suspense>
     </div>
   );
 }

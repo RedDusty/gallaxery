@@ -28,8 +28,10 @@
       animation: blinkCardImg 5s infinite ease-in-out;
     }
   }
+  &-gutter {
+    margin: 25px 10px 10px 10px;
+  }
   &-p {
-    margin: 10px;
     width: 250px;
     height: auto;
     cursor: zoom-in;
@@ -39,6 +41,7 @@
     }
     &-top {
       img {
+        background-color: var(--bgDark);
         width: 100%;
         height: auto;
         border-radius: 15px;
@@ -101,20 +104,18 @@
 }
 
 @media screen and (max-width: 650px) {
+  .card-gutter {
+    margin: 25px 4px 2px 4px;
+  }
   .g {
     margin: 0 2px 20px 2px;
   }
-  .card-p {
-    width: 46vw;
-    margin: 2px 4px;
-  }
 }
 @media screen and (max-width: 380px) {
+  .card-gutter {
+    margin: 35px 4px 4px 4px;
+  }
   .g {
     margin: 0 5px 20px 5px;
-  }
-  .card-p {
-    width: 90vw;
-    margin: 5px;
   }
 }

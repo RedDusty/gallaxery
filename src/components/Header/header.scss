@@ -36,6 +36,14 @@
       border-style: solid;
     }
   }
+  &-btn {
+    &-ext {
+      padding-left: 8px;
+    }
+    &-magn {
+      padding-right: 8px;
+    }
+  }
 }
 
 .actions {
