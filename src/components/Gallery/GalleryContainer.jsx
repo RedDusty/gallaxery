@@ -10,10 +10,7 @@ import loadingSvg from '../../images/loading.svg';
 
 const GalleryContainer = (props) => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isSmallMobile, setIsSmallMobile] = useState(false);
-  const [deviceWidth, setDeviceWidth] = useState(
-    window.screen.width * window.devicePixelRatio
-  );
+  const [deviceWidth, setDeviceWidth] = useState(window.screen.width);
   document.title = 'Gallaxery';
   useEffect(() => {
     props.getGalleryCards(props.cards, props.lastKey);
@@ -41,30 +38,18 @@ const GalleryContainer = (props) => {
   }
 
   useEffect(() => {
-    if (window.screen.width * window.devicePixelRatio <= 650) {
+    if (window.screen.width <= 650) {
       setIsMobile(true);
-      setDeviceWidth(window.screen.width * window.devicePixelRatio);
+      setDeviceWidth(window.screen.width);
     } else {
       setIsMobile(false);
     }
-    if (window.screen.width * window.devicePixelRatio <= 380) {
-      setIsSmallMobile(true);
-      setDeviceWidth(window.screen.width * window.devicePixelRatio);
-    } else {
-      setIsSmallMobile(false);
-    }
     function isMobileChecker() {
-      if (window.screen.width * window.devicePixelRatio <= 650) {
+      if (window.screen.width <= 650) {
         setIsMobile(true);
-        setDeviceWidth(window.screen.width * window.devicePixelRatio);
+        setDeviceWidth(window.screen.width);
       } else {
         setIsMobile(false);
-      }
-      if (window.screen.width * window.devicePixelRatio <= 380) {
-        setIsSmallMobile(true);
-        setDeviceWidth(window.screen.width * window.devicePixelRatio);
-      } else {
-        setIsSmallMobile(false);
       }
     }
     window.addEventListener('resize', isMobileChecker);
@@ -78,13 +63,8 @@ const GalleryContainer = (props) => {
     let cardHeight = 0;
     let cardWidth = 250;
     if (isMobile) {
-      if (isSmallMobile) {
-        cardWidth = deviceWidth - 24;
-        cardHeight = (card.height * ((cardWidth * 100) / 250)) / 100;
-      } else {
-        cardWidth = deviceWidth / 2 - 24;
-        cardHeight = (card.height * ((cardWidth * 100) / 250)) / 100;
-      }
+      cardWidth = deviceWidth / 2 - 8;
+      cardHeight = (card.height * ((cardWidth * 100) / 250)) / 100;
     } else {
       cardHeight = card.height + 'px';
     }
