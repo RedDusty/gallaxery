@@ -14,8 +14,10 @@ export default function galleryReducer(state = initialState, action) {
       const cards = action.payload.cards;
       const lastKey = action.payload.lastKey;
       const endLoadData = action.payload.endLoadData;
+      let concatedCards =
+        currentCards !== undefined ? currentCards.concat(cards) : cards;
       const newState = {
-        cards: currentCards.concat(cards),
+        cards: concatedCards,
         lastKey: lastKey,
         isLoadingCards: false,
         endLoadData: endLoadData,
@@ -26,7 +28,7 @@ export default function galleryReducer(state = initialState, action) {
       return { ...state, ...{ isLoadingCards: true } };
     }
     case GLR_CARD_NEWLOAD: {
-      return { ...state, ...initialState };
+      return { ...initialState };
     }
     default: {
       return { ...state };

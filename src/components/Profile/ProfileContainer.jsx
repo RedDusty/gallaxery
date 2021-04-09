@@ -19,6 +19,12 @@ function ProfileContainer(props) {
   const [deviceWidth, setDeviceWidth] = useState(window.screen.width);
   const [scrollPercent, setScrollPercent] = useState(false);
 
+  function refresh() {
+    props.newProfileLoad();
+    props.getProfileUserInfo(window.location.pathname.substring(9));
+    props.getProfileUserCards(window.location.pathname.substring(9), 0, []);
+  }
+
   useEffect(() => {
     props.newProfileLoad();
     props.getProfileUserInfo(window.location.pathname.substring(9));
@@ -144,10 +150,11 @@ function ProfileContainer(props) {
   const vars = {
     userInfo: props.userInfoState,
     allCards,
+    isLoading: props.isLoadingCards,
   };
   const functions = {
     checker,
-    refresh: props.newProfileLoad,
+    refresh,
   };
 
   return <Profile vars={vars} functions={functions} />;

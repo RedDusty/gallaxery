@@ -19,6 +19,11 @@ const GalleryContainer = (props) => {
 
   window.document.title = 'Gallaxery';
 
+  function refresh() {
+    props.updateGalleryCards();
+    props.getGalleryCards();
+  }
+
   useEffect(() => {
     if (!props.endLoadData) {
       let checkHeightInterval = setInterval(() => {
@@ -28,15 +33,12 @@ const GalleryContainer = (props) => {
           document.documentElement.clientHeight;
         const scrolled = (winScroll / height) * 100;
         setScrollPercent(scrolled.toFixed(0));
-
-        console.log(scrollPercent);
         if (
           scrollPercent >= 60 ||
           scrollPercent === 'NaN' ||
           scrollPercent === false
         ) {
           if (!isLoading) {
-            console.log('load more');
             props.getGalleryCards(props.cards, props.lastKey);
           }
           setIsLoading(props.isLoadingCards);
@@ -125,7 +127,7 @@ const GalleryContainer = (props) => {
   return (
     <>
       <Gallery allCards={allCards} checker={checker} />
-      <GallaryActions refresh={props.updateGalleryCards} />
+      <GallaryActions refresh={refresh} isLoading={props.isLoadingCards} />
     </>
   );
 };

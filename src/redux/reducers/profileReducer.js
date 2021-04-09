@@ -37,8 +37,10 @@ export default function uploadCardReducer(state = initialState, action) {
       const cards = action.payload.cards;
       const lastId = action.payload.lastId + 1;
       const outOfBounds = action.payload.outOfBounds;
+      let concatedCards =
+        currentCards !== undefined ? currentCards.concat(cards) : cards;
       const newState = {
-        userCards: currentCards.concat(cards),
+        userCards: concatedCards,
         lastId: lastId,
         endLoadData: outOfBounds,
         isLoadingCards: false,

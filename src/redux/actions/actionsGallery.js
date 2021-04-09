@@ -4,7 +4,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
 
-export const getGalleryCards = (currentCards, lastKey = 0) => {
+export const getGalleryCards = (currentCards, lastKey = '') => {
   return async (dispatch) => {
     dispatch({
       type: GLR_CARD_LOAD,

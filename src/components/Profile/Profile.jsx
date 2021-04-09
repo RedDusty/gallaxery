@@ -11,7 +11,10 @@ const Profile = (props) => {
         allCards={props.vars.allCards}
         checker={props.functions.checker}
       ></Gallery>
-      <ProfileActions refresh={props.functions.refresh} />
+      <ProfileActions
+        refresh={props.functions.refresh}
+        isLoading={props.vars.isLoading}
+      />
     </div>
   );
 };
