@@ -6,16 +6,32 @@ import { firebaseAuth } from './redux/actions/actionsAuth';
 import { connect } from 'react-redux';
 
 async function addUserToDB(user) {
-  const firestore = await firebase
+  const checkUser = await firebase
     .firestore()
     .collection('users')
-    .doc(user.uid)
-    .set({
-      banned: false,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      uid: user.uid,
-    });
+    .doc(user.uid);
+  if ((await checkUser.get()).exists) {
+    const updateUser = await firebase
+      .firestore()
+      .collection('users')
+      .doc(user.uid)
+      .update({
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+      });
+  } else {
+    const setUser = await firebase
+      .firestore()
+      .collection('users')
+      .doc(user.uid)
+      .set({
+        banned: false,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        uid: user.uid,
+        cardId: [],
+      });
+  }
 }
 
 export const UserContext = React.createContext();

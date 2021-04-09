@@ -48,6 +48,7 @@ export const ucFileUpload = (file) => (dispatch) => {
         Object.assign(file, {
           source: webpImage.src,
           height: image.height,
+          width: image.width,
         });
         dispatch({
           type: UC_FILEUPLOAD,
@@ -59,6 +60,7 @@ export const ucFileUpload = (file) => (dispatch) => {
         Object.assign(file, {
           source: reader.result,
           height: image.height,
+          width: image.width,
         });
         dispatch({
           type: UC_FILEUPLOAD,
@@ -133,7 +135,7 @@ export const ucCreateCard = (data, history) => {
     imageURL = await storageRef.getDownloadURL();
 
     // Create Firestore Doc
-    const firestore = await firebase
+    const storeUsersImages = await firebase
       .firestore()
       .collection('usersImages')
       .doc('image' + id)
@@ -150,8 +152,29 @@ export const ucCreateCard = (data, history) => {
         infoDescription: ucCard.textareaDescription,
         infoTags: ucTags,
         id: id,
-        height: data.height,
+        height: ucCard.height,
+        width: ucCard.width,
       });
+
+    // add card id to profile
+    const storeProfileImages = await firebase
+      .firestore()
+      .collection('users')
+      .doc(userInfo.uid);
+
+    if ((await storeProfileImages.get()).data().cardId) {
+      let getArrayCards = (await storeProfileImages.get()).data();
+
+      getArrayCards.cardId.push(id);
+
+      const updateArrayCards = storeProfileImages.update({
+        cardId: getArrayCards.cardId,
+      });
+    } else {
+      const setArrayCards = storeProfileImages.update({
+        cardId: [id],
+      });
+    }
 
     dispatch({
       type: UC_CARD_CLEANER,

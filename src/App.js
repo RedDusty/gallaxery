@@ -46,7 +46,11 @@ function App(props) {
           <Route component={GalleryContainer} exact path="/" />
           <Route
             render={() => {
-              return <ProfileContainer />;
+              return (
+                <ProfileContainer
+                  keyUID={window.location.pathname.substring(9)}
+                />
+              );
             }}
             exact
             path="/profile/:uid"

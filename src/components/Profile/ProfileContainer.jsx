@@ -2,24 +2,76 @@ import React, { useState, useEffect } from 'react';
 import Profile from './Profile';
 import './profile.scss';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   getProfileUserCards,
   getProfileUserInfo,
+  newProfileLoad,
 } from '../../redux/actions/actionsProfile';
 
 import loadingSvg from '../../images/loading.svg';
 import NotFound from '../NotFound';
 
 function ProfileContainer(props) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [deviceWidth, setDeviceWidth] = useState(window.screen.width);
+  const [scrollPercent, setScrollPercent] = useState(false);
+
   useEffect(() => {
+    props.newProfileLoad();
     props.getProfileUserInfo(window.location.pathname.substring(9));
-    props.getProfileUserCards(
-      window.location.pathname.substring(9),
-      props.userLastKey
-    );
-  }, [window.location.pathname.substring(9)]);
+    props.getProfileUserCards(window.location.pathname.substring(9), 0, []);
+  }, [props.keyUID]);
+
+  useEffect(() => {
+    if (!props.endLoadData) {
+      let checkHeightInterval = setInterval(() => {
+        const winScroll = document.documentElement.scrollTop;
+        const height =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        setScrollPercent(scrolled.toFixed(0));
+
+        if (scrollPercent >= 60 || scrollPercent === 'NaN') {
+          if (!isLoading) {
+            props.getProfileUserInfo(window.location.pathname.substring(9));
+            props.getProfileUserCards(
+              window.location.pathname.substring(9),
+              props.lastId,
+              props.userCardsState,
+              props.userCardId
+            );
+          }
+          setIsLoading(props.isLoadingCards);
+        }
+      }, 1000);
+
+      return () => {
+        clearInterval(checkHeightInterval);
+      };
+    }
+  });
+
+  useEffect(() => {
+    if (window.screen.width <= 650) {
+      setIsMobile(true);
+      setDeviceWidth(window.screen.width);
+    } else {
+      setIsMobile(false);
+    }
+    function isMobileChecker() {
+      if (window.screen.width <= 650) {
+        setIsMobile(true);
+        setDeviceWidth(window.screen.width);
+      } else {
+        setIsMobile(false);
+      }
+    }
+    window.addEventListener('resize', isMobileChecker);
+  }, []);
 
   if (props.userInfoState.uid === undefined) {
     return <NotFound />;
@@ -31,16 +83,54 @@ function ProfileContainer(props) {
     document.title = 'Profile';
   }
 
+  function checker() {
+    if (!props.endLoadData) {
+      return (
+        <div className="s-loading fja">
+          <img src={loadingSvg} alt="Loading" className="s-loading-svg br100" />
+        </div>
+      );
+    } else {
+      return (
+        <div className="dataLoaded">
+          <div className="dataLoaded-icon"></div>
+          <div className="dataLoaded-text">Loaded.</div>
+        </div>
+      );
+    }
+  }
+
   const allCards = props.userCardsState.map((card, index) => {
+    const href =
+      window.location.pathname.slice(0, 5) === '/card'
+        ? card.id
+        : '/card/' + card.id;
+    let cardHeight = 0;
+    let cardWidth = 250;
+    if (isMobile) {
+      cardWidth = deviceWidth / 2 - 10;
+      let cardWidthPerc = (cardWidth * 100) / card.width;
+      cardHeight = (card.height * cardWidthPerc) / 100 + 'px';
+    } else {
+      let cardWidthPerc = (cardWidth * 100) / card.width;
+      cardHeight = (card.height * cardWidthPerc) / 100 + 'px';
+    }
     return (
-      <div className="card-p card-gutter" key={card.infoDate}>
-        <NavLink
-          to={'/card/' + card.id}
-          className="card-link"
-          tabIndex={100 + index}
-        >
+      <div
+        className="card-p card-gutter"
+        key={card.infoDate}
+        style={{ width: cardWidth + 'px' }}
+      >
+        <NavLink to={'' + href} className="card-link" tabIndex={100 + index}>
           <div className="card-p-top">
-            <img src={card.fileURL} alt="" />
+            <img
+              src={card.fileURL}
+              alt={card.fileURL}
+              style={{
+                height: cardHeight,
+                width: cardWidth + 'px',
+              }}
+            />
           </div>
           <div className="card-p-bottom">
             <img src={card.infoPhotoURL} alt="" />
@@ -51,32 +141,13 @@ function ProfileContainer(props) {
     );
   });
 
-  function checker(loadingElementRef) {
-    if (props.isLoadingUserCards) {
-      return (
-        <div className="gl-loading fja">
-          <div className="glloading">
-            <img
-              src={loadingSvg}
-              alt="Loading"
-              className="cv-loading-svg br100"
-            />
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="dataLoaded">
-          <div className="dataLoaded-icon"></div>
-          <div className="dataLoaded-text">All cards loaded.</div>
-        </div>
-      );
-    }
-  }
-
-  const vars = { userInfo: props.userInfoState, allCards };
+  const vars = {
+    userInfo: props.userInfoState,
+    allCards,
+  };
   const functions = {
     checker,
+    refresh: props.newProfileLoad,
   };
 
   return <Profile vars={vars} functions={functions} />;
@@ -86,14 +157,17 @@ const mapStateToProps = (state) => {
   return {
     userInfoState: state.profileReducer.userInfo,
     userCardsState: state.profileReducer.userCards,
-    userLastKey: state.profileReducer.lastKey,
-    isLoadingUserCards: state.profileReducer.isLoadingCards,
+    lastId: state.profileReducer.lastId,
+    isLoadingCards: state.profileReducer.isLoadingCards,
+    endLoadData: state.profileReducer.endLoadData,
+    userCardId: state.profileReducer.cardId,
   };
 };
 
 const mapDispatchToProps = {
   getProfileUserInfo,
   getProfileUserCards,
+  newProfileLoad,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

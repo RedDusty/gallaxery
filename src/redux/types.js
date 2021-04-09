@@ -9,6 +9,7 @@ export const MS_TAG_SEARCH_ADD = 'MS_TAG_SEARCH_ADD';
 // Gallery
 export const GLR_GET_CARDS = 'GLR_GET_CARDS';
 export const GLR_CARD_LOAD = 'GLR_CARD_LOAD';
+export const GLR_CARD_NEWLOAD = 'GLR_CARD_NEWLOAD';
 
 // Upload card
 export const UC_TAG_PARSE = 'UC_TAG_PARSE';
@@ -26,6 +27,7 @@ export const FB_AUTH_LOGIN = 'FB_AUTH_LOGIN';
 export const PR_USER_INFO = 'PR_USER_INFO';
 export const PR_USER_CARDS = 'PR_USER_CARDS';
 export const PR_CARDS_LOAD = 'PR_CARDS_LOAD';
+export const PR_CARDS_NEWLOAD = 'PR_CARDS_NEWLOAD';
 
 // Card
 export const CA_CARD_INFO = 'CA_CARD_INFO';

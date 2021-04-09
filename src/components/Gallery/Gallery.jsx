@@ -3,7 +3,7 @@ import './gallery.scss';
 
 import Masonry from 'react-masonry-component';
 
-function Gallery({ allCards, checker, loadingElementRef }) {
+function Gallery({ allCards, checker }) {
   const masonryOptions = {
     transitionDuration: '0.25s',
     fitWidth: true,
@@ -19,7 +19,7 @@ function Gallery({ allCards, checker, loadingElementRef }) {
       >
         {allCards}
       </Masonry>
-      {checker(loadingElementRef)}
+      {checker()}
     </section>
   );
 }

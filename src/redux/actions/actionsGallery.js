@@ -1,4 +1,4 @@
-import { GLR_CARD_LOAD, GLR_GET_CARDS } from '../types';
+import { GLR_CARD_LOAD, GLR_GET_CARDS, GLR_CARD_NEWLOAD } from '../types';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -12,13 +12,14 @@ export const getGalleryCards = (currentCards, lastKey = 0) => {
 
     let cards = [];
     let newLastKey = lastKey;
+    let endLoadData = false;
 
     const data = await firebase
       .firestore()
       .collection('usersImages')
       .orderBy('id', 'desc')
       .startAfter(lastKey)
-      // .limit(5)
+      .limit(6)
       .get();
 
     data.forEach((doc) => {
@@ -30,16 +31,27 @@ export const getGalleryCards = (currentCards, lastKey = 0) => {
         fileURL: doc.data().fileURL,
         id: doc.data().id,
         height: doc.data().height,
+        width: doc.data().width,
       });
       newLastKey = doc.data().id;
     });
+    if (cards.length === 0) {
+      endLoadData = true;
+    } else {
+      endLoadData = false;
+    }
     dispatch({
       type: GLR_GET_CARDS,
       payload: {
         cards,
         currentCards,
         lastKey: newLastKey,
+        endLoadData,
       },
     });
   };
 };
+
+export const updateGalleryCards = () => ({
+  type: GLR_CARD_NEWLOAD,
+});

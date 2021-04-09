@@ -17,7 +17,7 @@ function Header(props) {
     <section className="fja h bgLight">
       <div className="h-icon fja">
         <NavLink
-          className="logo logo-gal logo-fill br100"
+          className="logo logo-gal logo-fill br100 selNot"
           to="/"
           tabIndex="1"
           onKeyPress={(e) => {

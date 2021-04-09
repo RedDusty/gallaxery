@@ -1,13 +1,13 @@
 .g {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 0 10px 20px 10px;
   width: 100%;
 }
 
 .cards-container {
   width: 100%;
-  margin: 0 auto;
 }
 
 .card {
@@ -89,6 +89,8 @@
   justify-content: center;
   align-items: center;
   margin: 5px;
+  width: 100%;
+  height: 100px;
   &-icon {
     background-image: url('../../images/gallery/dataLoaded.png');
     background-repeat: no-repeat;
@@ -100,6 +102,25 @@
     font-size: 20px;
     margin-left: 5px;
     color: #1c941c;
+  }
+}
+
+.ga {
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  opacity: 0.75;
+  padding: 5px;
+  &:hover {
+    opacity: 1;
+  }
+  &-btn {
+    width: 50px;
+    height: 50px;
+    img {
+      width: 40px;
+      height: 40px;
+    }
   }
 }
 

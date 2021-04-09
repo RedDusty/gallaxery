@@ -88,6 +88,12 @@
   }
 }
 
+.btn-big {
+  padding: 8px 12px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
 .btn-img-core {
   background-color: var(--transparent);
   min-height: 30px;
@@ -156,6 +162,23 @@
     height: 250px;
   }
 }
+
+.s-loading {
+  width: 100%;
+  height: 100px;
+  margin: 5px;
+  &-svg {
+    background-color: var(--bgLightTransparent);
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.selNot {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 @keyframes HeaderLogoRotateIn {
   from {
     transform: rotate(0deg);

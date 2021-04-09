@@ -1,4 +1,9 @@
-import { PR_USER_CARDS, PR_USER_INFO, PR_CARDS_LOAD } from '../types';
+import {
+  PR_USER_CARDS,
+  PR_USER_INFO,
+  PR_CARDS_LOAD,
+  PR_CARDS_NEWLOAD,
+} from '../types';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -20,6 +25,7 @@ export const getProfileUserInfo = (uid) => {
         photoURLAlt: doc.data().photoURLAlt,
         photoURL: doc.data().photoURL,
         uid: doc.data().uid,
+        cardId: doc.data().cardId,
       });
     });
 
@@ -27,38 +33,50 @@ export const getProfileUserInfo = (uid) => {
   };
 };
 
-export const getProfileUserCards = (uid, lastKey) => {
+export const getProfileUserCards = (uid, lastKey, currentCards) => {
   return async (dispatch) => {
     dispatch({ type: PR_CARDS_LOAD });
 
     let cards = [];
-    let lastKey = '';
 
-    const cardsData = await firebase
+    const getCardIdArray = await firebase
       .firestore()
-      .collection('usersImages')
+      .collection('users')
       .where('uid', '==', uid)
-      // .limit(10)
       .get();
 
-    cardsData.forEach((doc) => {
-      cards.push({
-        infoDate: doc.data().infoDate,
-        uid: doc.data().uid,
-        infoPhotoURL: doc.data().infoPhotoURL,
-        infoTitle: doc.data().infoTitle,
-        fileURL: doc.data().fileURL,
-        id: doc.data().id,
-      });
-      lastKey = doc.data().id;
-    });
+    let cardIdArray = getCardIdArray.docs[0].data().cardId;
+    let lastId = lastKey;
+    const endIndex = lastKey + 4;
+    let outOfBounds = false;
+
+    for (let index = lastKey; index < endIndex; index++) {
+      if (cardIdArray[index] === undefined) {
+        outOfBounds = true;
+        break;
+      }
+      const cardsData = await firebase
+        .firestore()
+        .collection('usersImages')
+        .where('id', '==', cardIdArray[index])
+        .get();
+
+      cards.push(cardsData.docs[0].data());
+      lastId = index;
+    }
 
     dispatch({
       type: PR_USER_CARDS,
       payload: {
+        currentCards,
         cards,
-        lastKey,
+        lastId,
+        outOfBounds,
       },
     });
   };
 };
+
+export const newProfileLoad = () => ({
+  type: PR_CARDS_NEWLOAD,
+});

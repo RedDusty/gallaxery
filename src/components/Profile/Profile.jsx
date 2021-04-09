@@ -1,19 +1,17 @@
 import React from 'react';
 import Gallery from '../Gallery/Gallery';
 import ProfileUserInfo from './ProfileUserInfo';
+import ProfileActions from './ProfileActions';
 
 const Profile = (props) => {
   return (
     <div className="p fcj">
-      <ProfileUserInfo
-        userInfo={props.vars.userInfo}
-        cardsCount={props.vars.allCards.length}
-      />
+      <ProfileUserInfo userInfo={props.vars.userInfo} />
       <Gallery
         allCards={props.vars.allCards}
         checker={props.functions.checker}
-        loadingElementRef={props.functions.loadingElementRef}
       ></Gallery>
+      <ProfileActions refresh={props.functions.refresh} />
     </div>
   );
 };

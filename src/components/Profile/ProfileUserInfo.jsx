@@ -10,8 +10,8 @@ const ProfileUserInfo = ({ userInfo, cardsCount }) => {
         <p>{userInfo.displayName}</p>
       </div>
       <div className="p-info-cards">
-        <p>Cards: {cardsCount}</p>
-        <p>Albums: 0</p>
+        <p>Cards: {userInfo.cardId.length}</p>
+        {/* <p>Albums: 0</p> */}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import UploadCard from './UploadCard';
 import './uploadCard.scss';
 
 import { Redirect } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../UserProvider';
 import {
   ucFileUpload,
@@ -25,6 +26,7 @@ function UploadCardContainer(props) {
   const inputName = useRef(null);
   const [isUploading, setIsUploading] = useState(false);
   const { currentUser } = useContext(UserContext);
+  const history = useHistory();
   let tags = 0;
   document.title = 'Card uploader';
 
@@ -147,7 +149,7 @@ function UploadCardContainer(props) {
           ucCard: props.ucCard,
           userInfo: userInfo,
         };
-        props.ucCreateCard(data, props.history);
+        props.ucCreateCard(data, history);
       }
     } else {
       setIsUploading(false);

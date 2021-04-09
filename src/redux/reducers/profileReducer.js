@@ -1,4 +1,9 @@
-import { PR_USER_CARDS, PR_USER_INFO, PR_CARDS_LOAD } from '../types';
+import {
+  PR_USER_CARDS,
+  PR_USER_INFO,
+  PR_CARDS_LOAD,
+  PR_CARDS_NEWLOAD,
+} from '../types';
 
 const initialState = {
   userInfo: {
@@ -6,10 +11,12 @@ const initialState = {
     photoURLAlt: 'Loading photo...',
     photoURL: 'Loading photo...',
     uid: '',
+    cardId: 0,
   },
   userCards: [],
-  lastKey: 0,
+  lastId: 0,
   isLoadingCards: true,
+  endLoadData: false,
 };
 
 export default function uploadCardReducer(state = initialState, action) {
@@ -21,20 +28,28 @@ export default function uploadCardReducer(state = initialState, action) {
         photoURLAlt: profile.photoURLAlt,
         photoURL: profile.photoURL,
         uid: profile.uid,
+        cardId: profile.cardId,
       };
       return { ...state, userInfo: userState };
     }
     case PR_USER_CARDS: {
+      const currentCards = action.payload.currentCards;
       const cards = action.payload.cards;
-      const lastKey = action.payload.lastKey;
+      const lastId = action.payload.lastId + 1;
+      const outOfBounds = action.payload.outOfBounds;
       const newState = {
-        userCards: cards,
-        lastKey: lastKey,
+        userCards: currentCards.concat(cards),
+        lastId: lastId,
+        endLoadData: outOfBounds,
+        isLoadingCards: false,
       };
-      return { ...state, ...newState, ...{ isLoadingCards: false } };
+      return { ...state, ...newState };
     }
     case PR_CARDS_LOAD: {
       return { ...state, ...{ isLoadingCards: true } };
+    }
+    case PR_CARDS_NEWLOAD: {
+      return { ...state, ...initialState };
     }
     default:
       return { ...state };
