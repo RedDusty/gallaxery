@@ -17,6 +17,7 @@ const HeaderSearch = ({
           onClick={() => {
             setModalSearchIsOpen(!modalSearchIsOpen);
           }}
+          title="Search menu"
         >
           <img src={searchExt} data-alt="📝" data-btn="btn-icon" />
         </button>
@@ -34,6 +35,7 @@ const HeaderSearch = ({
         <button
           className="btn-img-core btn-img-fill search-btn search-btn-magn"
           tabIndex="4"
+          title="Search"
         >
           <img src={searchMag} data-alt="🔎" data-btn="btn-icon" />
         </button>

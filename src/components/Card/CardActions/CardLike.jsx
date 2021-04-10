@@ -9,6 +9,7 @@ const CardLike = ({ cardInfo, userInfo, setLike }) => {
     : 'c-a-likes-img';
   const likeFillColor = cardInfo.isLiked ? '#b3ff93' : '#ffc7e3';
   const likeBorderColor = cardInfo.isLiked ? '#2fe20f' : '#ff6392';
+  const titleText = cardInfo.isLiked ? 'Remove like' : 'Add like';
   return (
     <div className="c-a-likes">
       <button
@@ -19,6 +20,7 @@ const CardLike = ({ cardInfo, userInfo, setLike }) => {
             setLike(cardInfo, userInfo.uid);
           }
         }}
+        title={titleText}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

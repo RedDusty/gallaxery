@@ -11,6 +11,7 @@ const GallaryActions = ({ refresh, isLoading }) => {
           if (isLoading === false) refresh();
         }}
         style={{ cursor: style }}
+        title="Refresh"
       >
         <img src={reloadSvg} alt="refresh" data-btn="btn-icon" />
       </button>

@@ -60,6 +60,7 @@ const CardInfo = ({ userInfo, textareaAction, cardTags }) => {
         <NavLink
           to="/card-upload"
           className="ucpci-sub-l btn-core btn-fill fja br25 mtop"
+          title={userInfo.username + "'s profile"}
         >
           <img className="br100" src={userInfo.photo}></img>
           <p className="ucpci-sub-lu fW500">{userInfo.username}</p>

@@ -37,6 +37,7 @@ const CardInfo = ({ cardInfo, userInfo, cardTags }) => {
       to={'/profile/' + userInfo.uid}
       className="cvpci-sub-l btn-core btn-fill fja br25 mtop"
       tabIndex="20"
+      title={userInfo.infoUsername + "'s profile"}
     >
       <img className="br100" src={userInfo.infoPhotoURL}></img>
       <p className="cvpci-sub-lu fW500">{userInfo.infoUsername}</p>

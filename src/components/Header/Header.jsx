@@ -23,6 +23,7 @@ function Header(props) {
           onKeyPress={(e) => {
             e.currentTarget.click();
           }}
+          title="Main page"
         ></NavLink>
       </div>
       <HeaderSearch
@@ -42,6 +43,7 @@ function Header(props) {
           }}
           tabIndex="5"
           id="actions-menu-btn"
+          title="Menu"
         >
           {props.currentUser.uid === '' ? (
             <></>

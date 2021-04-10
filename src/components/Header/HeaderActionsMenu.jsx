@@ -69,6 +69,7 @@ const HeaderActionsMenu = (props) => {
                 className="logo-header logo-header-react br100"
                 href="https://reactjs.org/"
                 tabIndex="8"
+                title="React js"
               >
                 <img src={reactIcon} data-alt="R" className="br100" />
               </a>
@@ -76,6 +77,7 @@ const HeaderActionsMenu = (props) => {
                 className="logo-header logo-header-github br100"
                 href="https://github.com/RedDusty/gallaxery"
                 tabIndex="9"
+                title="GitHub repository"
               >
                 <img src={githubIcon} data-alt="G" className="br100" />
               </a>
@@ -83,6 +85,7 @@ const HeaderActionsMenu = (props) => {
                 className="logo-header logo-header-firebase br100"
                 href="https://firebase.google.com/"
                 tabIndex="10"
+                title="Firebase"
               >
                 <img src={firebaseIcon} data-alt="F" className="br100" />
               </a>
@@ -90,6 +93,7 @@ const HeaderActionsMenu = (props) => {
                 className="logo-header logo-header-vercel br100"
                 href="https://vercel.com/"
                 tabIndex="11"
+                title="Vercel"
               >
                 <img src={vercelIcon} data-alt="V" className="br100" />
               </a>
