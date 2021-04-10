@@ -62,6 +62,8 @@ function ProfileContainer(props) {
   });
 
   useEffect(() => {
+    let isMounted = true;
+    window.removeEventListener('resize', isMobileChecker);
     if (window.screen.width <= 650) {
       setIsMobile(true);
       setDeviceWidth(window.screen.width);
@@ -77,6 +79,9 @@ function ProfileContainer(props) {
       }
     }
     window.addEventListener('resize', isMobileChecker);
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   if (props.userInfoState.uid === undefined) {

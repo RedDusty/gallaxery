@@ -52,6 +52,8 @@ const GalleryContainer = (props) => {
   });
 
   useEffect(() => {
+    let isMounted = true;
+    window.removeEventListener('resize', isMobileChecker);
     if (window.screen.width <= 650) {
       setIsMobile(true);
       setDeviceWidth(window.screen.width);
@@ -67,6 +69,9 @@ const GalleryContainer = (props) => {
       }
     }
     window.addEventListener('resize', isMobileChecker);
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   function checker() {
