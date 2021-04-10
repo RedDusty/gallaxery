@@ -8,8 +8,8 @@ Search
 
 # Next updates:
 
-- `card functions: edit, delete, report`
 - `search`
+- `API`
 
 ### `yarn start`
 

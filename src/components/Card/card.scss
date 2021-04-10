@@ -189,6 +189,7 @@
   background-color: var(--transparent);
   margin: 5px;
   padding: 5px;
+  justify-content: space-between;
   &-likes {
     display: flex;
     align-items: center;
@@ -233,6 +234,12 @@
     background-color: var(--bgLightTransparent);
     width: 35px;
     height: 35px;
+  }
+  &-del {
+    img {
+      width: 45px;
+      height: 45px;
+    }
   }
 }
 

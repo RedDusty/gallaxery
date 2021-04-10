@@ -29,10 +29,11 @@ function CardContainer(props) {
     <>
       <Card
         cardInfo={props.cardInfo}
-        userInfo={props.userInfo}
+        cardUserInfo={props.cardUserInfo}
         fileInfo={props.fileInfo}
         cardTags={cardTags}
         isLoading={props.isLoading}
+        cardDelete={props.cardDelete}
       />
     </>
   );
@@ -41,9 +42,10 @@ function CardContainer(props) {
 const mapStateToProps = (state) => {
   return {
     cardInfo: state.cardReducer.cardInfo,
-    userInfo: state.cardReducer.userInfo,
+    cardUserInfo: state.cardReducer.userInfo,
     fileInfo: state.cardReducer.fileInfo,
     isLoading: state.cardReducer.isLoadingCard,
+    cardDelete: state.cardReducer.deleteProcess,
   };
 };
 

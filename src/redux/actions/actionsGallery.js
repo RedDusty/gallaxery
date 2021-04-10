@@ -27,6 +27,7 @@ export const getGalleryCards = (currentCards, lastKey = '') => {
         infoDate: doc.data().infoDate,
         uid: doc.data().uid,
         infoPhotoURL: doc.data().infoPhotoURL,
+        infoUsername: doc.data().infoUsername,
         infoTitle: doc.data().infoTitle,
         fileURL: doc.data().fileURL,
         id: doc.data().id,

@@ -12,6 +12,39 @@
     border: 2px solid var(--btnBr);
     padding: 2px;
   }
+  &-a {
+    background-color: var(--transparent);
+    margin: 5px;
+    padding: 5px;
+    justify-content: space-between;
+    &-likes {
+      display: flex;
+      align-items: center;
+      &-img {
+        background-color: var(--transparent);
+        border: none;
+        outline: none;
+        &:hover svg path:nth-child(1),
+        &:focus svg path:nth-child(1) {
+          animation: blinkLikeFill 2.5s infinite linear;
+        }
+        &:hover svg path:nth-child(2),
+        &:focus svg path:nth-child(2) {
+          animation: blinkLikeBorder 2.5s infinite linear;
+        }
+        svg {
+          width: 35px;
+          height: 35px;
+          cursor: pointer;
+        }
+      }
+      &-count {
+        margin: 0;
+        font-size: 35px;
+        font-weight: 500;
+      }
+    }
+  }
 }
 
 .ucp-actions {
@@ -224,5 +257,28 @@
         }
       }
     }
+  }
+}
+
+@keyframes blinkLikeFill {
+  0% {
+    fill: #ffc7e3;
+  }
+  50% {
+    fill: #e7c291;
+  }
+  100% {
+    fill: #ffc7e3;
+  }
+}
+@keyframes blinkLikeBorder {
+  0% {
+    fill: #ff6392;
+  }
+  50% {
+    fill: #ff8614;
+  }
+  100% {
+    fill: #ff6392;
   }
 }

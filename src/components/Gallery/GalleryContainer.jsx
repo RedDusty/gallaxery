@@ -106,18 +106,25 @@ const GalleryContainer = (props) => {
       let cardWidthPerc = (cardWidth * 100) / card.width;
       cardHeight = (card.height * cardWidthPerc) / 100 + 'px';
     }
+    const imgAltText =
+      card.infoTitle + ' | ' + card.infoUsername + "' card - " + card.id;
     return (
       <div
         className="card-p card-gutter"
         key={card.infoDate}
         style={{ width: cardWidth + 'px' }}
       >
-        <NavLink to={'' + href} className="card-link" tabIndex={100 + index}>
+        <NavLink
+          to={'' + href}
+          className="card-link"
+          tabIndex={100 + index}
+          title={card.infoUsername + "'s card"}
+        >
           <div className="card-p-top">
             <img
               src={card.fileURL}
-              alt={card.fileURL}
-              style={{ height: cardHeight, width: cardWidth + 'px' }}
+              alt={imgAltText}
+              style={{ minHeight: cardHeight, minWidth: cardWidth + 'px' }}
             />
           </div>
           <div className="card-p-bottom">

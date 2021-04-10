@@ -1,0 +1,26 @@
+.cd {
+  &-black {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--blackTransparent);
+    z-index: 20;
+  }
+  &-container {
+    width: 500px;
+    height: 250px;
+    background-color: var(--white);
+  }
+  &-text {
+    width: 450px;
+    height: 100px;
+    p {
+      text-align: center;
+    }
+  }
+  &-actions {
+    width: 325px;
+  }
+}

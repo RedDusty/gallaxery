@@ -1,4 +1,9 @@
-import { CA_CARD_INFO, CA_CARD_LOAD, CA_GET_ISLIKED } from '../types';
+import {
+  CA_CARD_INFO,
+  CA_CARD_LOAD,
+  CA_GET_ISLIKED,
+  CA_CARD_DELETE,
+} from '../types';
 
 const initialState = {
   fileInfo: {
@@ -68,6 +73,19 @@ export default function cardReducer(state = initialState, action) {
         ...state,
         ...{ cardInfo: action.payload.card },
       };
+    }
+    case CA_CARD_DELETE: {
+      if (!action.payload.process) {
+        return {
+          ...initialState,
+          ...{ deleteProcess: false },
+        };
+      } else {
+        return {
+          ...state,
+          ...{ deleteProcess: true },
+        };
+      }
     }
     default:
       return {

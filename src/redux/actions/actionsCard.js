@@ -2,11 +2,12 @@ import {
   CA_CARD_INFO,
   CA_CARD_LOAD,
   CA_GET_ISLIKED,
-  CA_LIKES_LOAD,
+  CA_CARD_DELETE,
 } from '../types';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/storage';
 
 export const getCardInfo = (key, uid) => {
   return async (dispatch) => {
@@ -137,5 +138,67 @@ export const getCardIsLiked = (card, uid) => {
         card,
       },
     });
+  };
+};
+
+export const deleteCard = (key, uid, history) => {
+  return async (dispatch) => {
+    dispatch({ type: CA_CARD_DELETE, payload: { process: true } });
+    const cardData = await firebase
+      .firestore()
+      .collection('usersImages')
+      .doc('image' + key)
+      .get();
+
+    const deleteCardLikes = await firebase
+      .firestore()
+      .collection('usersImages')
+      .doc('image' + key)
+      .collection('likesInfo')
+      .get();
+    deleteCardLikes.docs.forEach((doc) => {
+      doc.ref.delete();
+    });
+
+    const fileRef = firebase
+      .storage()
+      .ref()
+      .child(
+        '/usersImages/' +
+          '__CARD__' +
+          cardData.data().id +
+          '__TIME__' +
+          cardData.data().infoDate +
+          '__NAME__' +
+          cardData.data().fileName
+      );
+    fileRef.delete();
+
+    const deleteCard = await firebase
+      .firestore()
+      .collection('usersImages')
+      .doc('image' + key)
+      .delete();
+
+    const getUser = await firebase
+      .firestore()
+      .collection('users')
+      .doc(uid)
+      .get();
+
+    const newCardId = getUser.data().cardId;
+    newCardId.splice(newCardId.indexOf(key), 1);
+
+    const userCardIdUpdate = await firebase
+      .firestore()
+      .collection('users')
+      .doc(uid)
+      .update({
+        cardId: newCardId,
+      });
+
+    history.push('/profile/' + uid);
+
+    dispatch({ type: CA_CARD_DELETE, payload: { process: false } });
   };
 };

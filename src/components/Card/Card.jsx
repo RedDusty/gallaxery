@@ -4,10 +4,17 @@ import CardInfo from './CardInfo';
 
 import loadingSvg from '../../images/loading.svg';
 
-const Card = ({ cardInfo, userInfo, fileInfo, cardTags, isLoading }) => {
+const Card = ({
+  cardInfo,
+  cardUserInfo,
+  fileInfo,
+  cardTags,
+  isLoading,
+  cardDelete,
+}) => {
   let loadingCard = <></>;
 
-  if (isLoading) {
+  if (isLoading || cardDelete) {
     loadingCard = (
       <div className="cv-loading fja">
         <img src={loadingSvg} alt="Loading" className="cv-loading-svg br100" />
@@ -22,7 +29,7 @@ const Card = ({ cardInfo, userInfo, fileInfo, cardTags, isLoading }) => {
           <CardImage fileInfo={fileInfo} />
           <CardInfo
             cardInfo={cardInfo}
-            userInfo={userInfo}
+            cardUserInfo={cardUserInfo}
             cardTags={cardTags}
           />
         </div>

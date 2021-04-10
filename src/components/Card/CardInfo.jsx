@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import CardActionsContainer from './CardActions/CardActionsContainer';
 
-const CardInfo = ({ cardInfo, userInfo, cardTags }) => {
+const CardInfo = ({ cardInfo, cardUserInfo, cardTags }) => {
   let description = cardInfo.infoDescription;
   let title = cardInfo.infoTitle;
   description =
@@ -34,16 +34,16 @@ const CardInfo = ({ cardInfo, userInfo, cardTags }) => {
           .replace(/\//g, '.');
   let userProfile = (
     <NavLink
-      to={'/profile/' + userInfo.uid}
+      to={'/profile/' + cardUserInfo.uid}
       className="cvpci-sub-l btn-core btn-fill fja br25 mtop"
       tabIndex="20"
-      title={userInfo.infoUsername + "'s profile"}
+      title={cardUserInfo.infoUsername + "'s profile"}
     >
-      <img className="br100" src={userInfo.infoPhotoURL}></img>
-      <p className="cvpci-sub-lu fW500">{userInfo.infoUsername}</p>
+      <img className="br100" src={cardUserInfo.infoPhotoURL}></img>
+      <p className="cvpci-sub-lu fW500">{cardUserInfo.infoUsername}</p>
     </NavLink>
   );
-  if (userInfo.uid === undefined || userInfo.uid === '') {
+  if (cardUserInfo.uid === undefined || cardUserInfo.uid === '') {
     userProfile = <></>;
   }
   return (
