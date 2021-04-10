@@ -196,7 +196,6 @@
       background-color: var(--transparent);
       border: none;
       outline: none;
-      margin-right: 5px;
       &:hover svg path:nth-child(1),
       &:focus svg path:nth-child(1) {
         animation: blinkLikeFill 2.5s infinite linear;
@@ -206,40 +205,79 @@
         animation: blinkLikeBorder 2.5s infinite linear;
       }
       svg {
-        width: 50px;
-        height: 50px;
+        width: 35px;
+        height: 35px;
         cursor: pointer;
+      }
+      &-liked {
+        &:hover svg path:nth-child(1),
+        &:focus svg path:nth-child(1) {
+          animation: blinkLikeFillLiked 2.5s infinite linear;
+        }
+        &:hover svg path:nth-child(2),
+        &:focus svg path:nth-child(2) {
+          animation: blinkLikeBorderLiked 2.5s infinite linear;
+        }
       }
     }
     &-count {
       margin: 0;
-      font-size: 45px;
+      font-size: 35px;
       font-weight: 500;
+      &-liked {
+        color: #2db315;
+      }
     }
+  }
+  &-loading-svg {
+    background-color: var(--bgLightTransparent);
+    width: 35px;
+    height: 35px;
   }
 }
 
 @keyframes blinkLikeFill {
   0% {
-    // background-color: #d82525;
-    fill: #ffdcdc;
+    fill: #ffc7e3;
   }
   50% {
-    fill: #fcacac;
+    fill: #e7c291;
   }
   100% {
-    fill: #ffdcdc;
+    fill: #ffc7e3;
   }
 }
 @keyframes blinkLikeBorder {
   0% {
-    // background-color: #d82525;
-    fill: #c74141;
+    fill: #ff6392;
   }
   50% {
-    fill: #f10606;
+    fill: #ff8614;
   }
   100% {
-    fill: #c74141;
+    fill: #ff6392;
+  }
+}
+
+@keyframes blinkLikeFillLiked {
+  0% {
+    fill: #b3ff93;
+  }
+  50% {
+    fill: #75d692;
+  }
+  100% {
+    fill: #b3ff93;
+  }
+}
+@keyframes blinkLikeBorderLiked {
+  0% {
+    fill: #2fe20f;
+  }
+  50% {
+    fill: #00be39;
+  }
+  100% {
+    fill: #2fe20f;
   }
 }

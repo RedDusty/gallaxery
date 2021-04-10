@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-// import CardActionsContainer from './CardActionsContainer';
+import CardActionsContainer from './CardActions/CardActionsContainer';
 
 const CardInfo = ({ cardInfo, userInfo, cardTags }) => {
   let description = cardInfo.infoDescription;
@@ -54,7 +54,7 @@ const CardInfo = ({ cardInfo, userInfo, cardTags }) => {
         <p className="cvpci-sub-time mtop fW500">{time}</p>
       </div>
       <div className="cvpci-tags-container bgHighAlt br25">{cardTags}</div>
-      {/* <CardActionsContainer cardInfo={cardInfo} /> */}
+      <CardActionsContainer />
     </div>
   );
 };

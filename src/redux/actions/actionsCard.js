@@ -1,4 +1,9 @@
-import { CA_CARD_INFO, CA_CARD_LOAD, CA_CARD_LIKE } from '../types';
+import {
+  CA_CARD_INFO,
+  CA_CARD_LOAD,
+  CA_GET_ISLIKED,
+  CA_LIKES_LOAD,
+} from '../types';
 
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -34,16 +39,6 @@ export const getCardInfo = (key, uid) => {
         payload: { card },
       });
     } else {
-      // const cardLikeData = await firebase
-      //   .firestore()
-      //   .collection('usersImages')
-      //   .doc('image' + key)
-      //   .collection('likesInfo')
-      //   .doc(uid)
-      //   .get();
-
-      // console.log(cardLikeData.data().isLiked);
-
       card = {
         fileName: cardData.data().fileName,
         fileSize: cardData.data().fileSize,
@@ -68,8 +63,79 @@ export const getCardInfo = (key, uid) => {
   };
 };
 
-export const setCardLike = (key, uid) => {
+export const setCardLike = (card, uid) => {
   return async (dispatch) => {
-    dispatch({ type: CA_CARD_LIKE, payload: {} });
+    const cardLikeCountRef = await firebase
+      .firestore()
+      .collection('usersImages')
+      .doc('image' + card.id);
+
+    cardLikeCountRef.get().then((doc) => {
+      if (doc.data().likesCount !== undefined) {
+        if (card.isLiked === false) {
+          cardLikeCountRef.update({
+            likesCount: doc.data().likesCount + 1,
+          });
+          Object.assign(card, { likesCount: doc.data().likesCount + 1 });
+        } else {
+          cardLikeCountRef.update({
+            likesCount: doc.data().likesCount - 1,
+          });
+          Object.assign(card, { likesCount: doc.data().likesCount - 1 });
+        }
+      } else {
+        cardLikeCountRef.update({
+          likesCount: 1,
+        });
+        Object.assign(card, { likesCount: 1 });
+      }
+    });
+
+    const setCardLikeData = await firebase
+      .firestore()
+      .collection('usersImages')
+      .doc('image' + card.id)
+      .collection('likesInfo')
+      .doc(uid)
+      .set({ isLiked: !card.isLiked });
+
+    const getCardLikeData = await firebase
+      .firestore()
+      .collection('usersImages')
+      .doc('image' + card.id)
+      .collection('likesInfo')
+      .doc(uid)
+      .get();
+
+    Object.assign(card, { isLiked: getCardLikeData.data().isLiked });
+
+    dispatch({ type: CA_GET_ISLIKED, payload: { card } });
+  };
+};
+
+export const getCardIsLiked = (card, uid) => {
+  return async (dispatch) => {
+    const getCardLikeData = await firebase
+      .firestore()
+      .collection('usersImages')
+      .doc('image' + card.id)
+      .collection('likesInfo')
+      .doc(uid)
+      .get();
+
+    if (getCardLikeData.data() !== undefined) {
+      Object.assign(card, { isLiked: getCardLikeData.data().isLiked });
+    } else if (getCardLikeData.data() === undefined) {
+      Object.assign(card, { isLiked: false });
+    } else {
+      Object.assign(card, { isLiked: 'Load error' });
+    }
+
+    dispatch({
+      type: CA_GET_ISLIKED,
+      payload: {
+        card,
+      },
+    });
   };
 };

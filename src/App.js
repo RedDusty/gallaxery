@@ -34,7 +34,7 @@ function App(props) {
         console.log('Logged out from Google');
       })
       .catch((error) => {
-        console.log(error.message);
+        console.log('Oops! Something is went wrong!');
       });
   };
 

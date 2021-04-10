@@ -1,4 +1,4 @@
-import { CA_CARD_INFO, CA_CARD_LOAD } from '../types';
+import { CA_CARD_INFO, CA_CARD_LOAD, CA_GET_ISLIKED } from '../types';
 
 const initialState = {
   fileInfo: {
@@ -28,6 +28,10 @@ export default function cardReducer(state = initialState, action) {
   switch (action.type) {
     case CA_CARD_INFO:
       const cardData = action.payload.card;
+      const getLikesCount =
+        action.payload.card.likesCount === undefined
+          ? 0
+          : action.payload.card.likesCount;
       const newState = {
         fileInfo: {
           fileName: cardData.fileName,
@@ -46,6 +50,7 @@ export default function cardReducer(state = initialState, action) {
           infoTags: cardData.infoTags,
           infoTitle: cardData.infoTitle,
           id: cardData.id,
+          likesCount: getLikesCount,
         },
         isLoadingCard: false,
       };
@@ -58,7 +63,12 @@ export default function cardReducer(state = initialState, action) {
         ...state,
         ...{ isLoadingCard: true },
       };
-
+    case CA_GET_ISLIKED: {
+      return {
+        ...state,
+        ...{ cardInfo: action.payload.card },
+      };
+    }
     default:
       return {
         ...state,

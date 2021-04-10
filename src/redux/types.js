@@ -32,4 +32,5 @@ export const PR_CARDS_NEWLOAD = 'PR_CARDS_NEWLOAD';
 // Card
 export const CA_CARD_INFO = 'CA_CARD_INFO';
 export const CA_CARD_LOAD = 'CA_CARD_LOAD';
-export const CA_CARD_LIKE = 'CA_CARD_LIKE';
+export const CA_SET_LIKE = 'CA_SET_LIKE';
+export const CA_GET_ISLIKED = 'CA_GET_ISLIKED';
