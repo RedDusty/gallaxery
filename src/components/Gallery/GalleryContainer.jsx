@@ -94,7 +94,7 @@ const GalleryContainer = (props) => {
     let cardHeight = 0;
     let cardWidth = 250;
     if (isMobile) {
-      cardWidth = deviceWidth / 2 - 10;
+      cardWidth = deviceWidth / 2 - 16;
       let cardWidthPerc = (cardWidth * 100) / card.width;
       cardHeight = (card.height * cardWidthPerc) / 100 + 'px';
     } else {
