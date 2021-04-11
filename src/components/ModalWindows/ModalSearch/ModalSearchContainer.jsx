@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   tagSearchDelete,
   tagParserOnKeyDown,
   tagParserOnKeyUp,
-  tagSearchRemove,
-  tagSearchAdd,
+  tagCleaner,
+  tagParseOnButton,
+  tagParseDate,
 } from '../../../redux/actions/actionsHeader';
 import ModalSearch from './ModalSearch';
 import './modalSearch.scss';
 
 import tagDelIcon from '../../../images/search/tagDelete.svg';
-import tagAddIcon from '../../../images/search/tagAdd.svg';
-import tagRemoveIcon from '../../../images/search/tagRemove.svg';
 
 function ModalSearchContainer(props) {
   const setIsOpen = props.setIsOpen;
   const isOpen = props.isOpen;
   const [query, setQuery] = useState([]);
+  const dateRef = useRef(null);
+
+  useEffect(() => {}, [props.searchBy]);
 
   function queryUpdater(e = '') {
     setQuery(props.searchTags);
@@ -29,14 +31,12 @@ function ModalSearchContainer(props) {
     queryUpdater();
   }
 
-  function btnSearchRemove(tagId) {
-    props.tagSearchRemove(tagId);
-    queryUpdater();
+  function btnParseButton(inputRef) {
+    props.tagParseOnButton(inputRef);
   }
 
-  function btnSearchAdd(tagId) {
-    props.tagSearchAdd(tagId);
-    queryUpdater();
+  function dateParseButton(inputRef) {
+    props.tagParseDate(inputRef);
   }
 
   const querySearchTags = props.searchTags
@@ -46,10 +46,10 @@ function ModalSearchContainer(props) {
       if (!tag.removed) {
         return (
           <div
-            className={`tag-container-${styleTag} tag-container fa br25`}
+            className="tag-container-standard tag-container fa br25"
             key={index}
           >
-            <p className={`tag-text tag-text-${styleTag} fW500`}>{tag.tag}</p>
+            <p className="tag-text tag-text-standard fW500">{tag}</p>
             <button
               className="tag-delete btn-img-core btn-img-fill"
               onClick={() => {
@@ -57,47 +57,6 @@ function ModalSearchContainer(props) {
               }}
             >
               <img src={tagDelIcon} data-alt="✖" />
-            </button>
-            <button
-              className="tag-exclude btn-img-core btn-img-fill"
-              onClick={() => {
-                btnSearchRemove(index);
-              }}
-            >
-              <img src={tagRemoveIcon} data-alt="➖" />
-            </button>
-          </div>
-        );
-      }
-      return [];
-    });
-
-  const queryExcludeTags = props.searchTags
-    .filter((tag) => tag !== undefined)
-    .map((tag, index) => {
-      const styleTag = tag.removed === true ? 'removed' : 'standard';
-      if (tag.removed) {
-        return (
-          <div
-            className={`tag-container-${styleTag} tag-container  fa br25`}
-            key={index}
-          >
-            <p className={`tag-text tag-text-${styleTag} fW500`}>{tag.tag}</p>
-            <button
-              className="tag-delete btn-img-core btn-img-fill"
-              onClick={() => {
-                btnSearchDelete(index);
-              }}
-            >
-              <img src={tagDelIcon} data-alt="✖" />
-            </button>
-            <button
-              className="tag-add btn-img-core btn-img-fill"
-              onClick={() => {
-                btnSearchAdd(index);
-              }}
-            >
-              <img src={tagAddIcon} data-alt="➕" />
             </button>
           </div>
         );
@@ -107,11 +66,18 @@ function ModalSearchContainer(props) {
 
   const vars = {
     querySearchTags,
-    queryExcludeTags,
     setIsOpen,
     isOpen,
+    searchBy: props.searchBy,
+    setSearchBy: props.setSearchBy,
+    searchInput: props.searchInput,
+    dateRef,
   };
-  const functions = {};
+  const functions = {
+    tagCleaner: props.tagCleaner,
+    btnParseButton,
+    dateParseButton,
+  };
 
   return <ModalSearch vars={vars} functions={functions} />;
 }
@@ -126,8 +92,9 @@ const mapDispatchToProps = {
   tagParserOnKeyDown,
   tagParserOnKeyUp,
   tagSearchDelete,
-  tagSearchRemove,
-  tagSearchAdd,
+  tagCleaner,
+  tagParseOnButton,
+  tagParseDate,
 };
 
 export default connect(

@@ -4,15 +4,17 @@ import Gallery from './Gallery';
 import {
   getGalleryCards,
   updateGalleryCards,
+  getSearchedCards,
+  setIsSearch,
+  setLoading,
 } from '../../redux/actions/actionsGallery';
 import { connect } from 'react-redux';
 
 import { NavLink } from 'react-router-dom';
 import loadingSvg from '../../images/loading.svg';
-import GallaryActions from './GallaryActions';
+import GalleryActions from './GalleryActions';
 
 const GalleryContainer = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [deviceWidth, setDeviceWidth] = useState(window.screen.width);
   const [scrollPercent, setScrollPercent] = useState(false);
@@ -21,8 +23,12 @@ const GalleryContainer = (props) => {
 
   function refresh() {
     props.updateGalleryCards();
-    props.getGalleryCards();
+    props.getGalleryCards([], '');
   }
+
+  useEffect(() => {
+    props.setLoading(true);
+  }, [props.searchedCards, props.isSearch]);
 
   useEffect(() => {
     if (!props.endLoadData) {
@@ -38,10 +44,17 @@ const GalleryContainer = (props) => {
           scrollPercent === 'NaN' ||
           scrollPercent === false
         ) {
-          if (!isLoading) {
-            props.getGalleryCards(props.cards, props.lastKey);
+          if (props.isLoadingCards) {
+            if (!props.isSearch) {
+              props.getGalleryCards(props.cards, props.lastKey);
+            } else {
+              props.getSearchedCards(
+                props.cards,
+                props.searchedCards,
+                props.lastKey
+              );
+            }
           }
-          setIsLoading(props.isLoadingCards);
         }
       }, 1000);
 
@@ -139,7 +152,13 @@ const GalleryContainer = (props) => {
   return (
     <>
       <Gallery allCards={allCards} checker={checker} />
-      <GallaryActions refresh={refresh} isLoading={props.isLoadingCards} />
+      <GalleryActions
+        refresh={refresh}
+        isLoading={props.isLoadingCards}
+        isSearch={props.isSearch}
+        setIsSearch={props.setIsSearch}
+        updateGalleryCards={props.updateGalleryCards}
+      />
     </>
   );
 };
@@ -147,15 +166,20 @@ const GalleryContainer = (props) => {
 const mapStateToProps = (state) => {
   return {
     cards: state.galleryReducer.cards,
+    searchedCards: state.galleryReducer.searchedCards,
     lastKey: state.galleryReducer.lastKey,
     isLoadingCards: state.galleryReducer.isLoadingCards,
     endLoadData: state.galleryReducer.endLoadData,
+    isSearch: state.galleryReducer.isSearch,
   };
 };
 
 const mapDispatchToProps = {
   getGalleryCards,
   updateGalleryCards,
+  getSearchedCards,
+  setIsSearch,
+  setLoading,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GalleryContainer);

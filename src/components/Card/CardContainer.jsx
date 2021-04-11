@@ -20,7 +20,7 @@ function CardContainer(props) {
         className={`tag-container-standard tag-container fa br25`}
         key={index}
       >
-        <p className={`tag-text tag-text-standard fW500`}>{tag.tag}</p>
+        <p className={`tag-text tag-text-standard fW500`}>{tag}</p>
       </div>
     );
   });

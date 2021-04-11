@@ -31,6 +31,10 @@ function Header(props) {
         setModalSearchIsOpen={setModalSearchIsOpen}
         btnOnKeyUp={btnOnKeyUp}
         btnOnKeyDown={btnOnKeyDown}
+        searchStart={props.functions.searchStart}
+        searchInput={props.vars.searchInput}
+        searchBy={props.vars.searchBy}
+        isLoadingCards={props.vars.isLoadingCards}
       />
       <div className="actions fa">
         <button
@@ -75,6 +79,9 @@ function Header(props) {
       <ModalSearchContainer
         isOpen={modalSearchIsOpen}
         setIsOpen={setModalSearchIsOpen}
+        searchBy={props.vars.searchBy}
+        setSearchBy={props.vars.setSearchBy}
+        searchInput={props.vars.searchInput}
       />
     </section>
   );

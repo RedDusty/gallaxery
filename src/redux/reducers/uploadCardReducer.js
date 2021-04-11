@@ -39,14 +39,12 @@ export default function uploadCardReducer(state = initialState, action) {
               ) {
                 let canPush = true;
                 for (let index = 0; index < state.uc_tags.length; index++) {
-                  if (state.uc_tags[index].tag === tag) {
+                  if (state.uc_tags[index] === tag) {
                     canPush = false;
                   }
                 }
                 if (canPush) {
-                  queryReturn.push({
-                    tag,
-                  });
+                  queryReturn.push(tag);
                 }
               }
             });

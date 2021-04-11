@@ -3,8 +3,8 @@ import {
   HDR_TAG_PARSE_ONKEYDOWN,
   HDR_TAG_PARSE_ONKEYUP,
   MS_TAG_SEARCH_DELETE,
-  MS_TAG_SEARCH_REMOVE,
-  MS_TAG_SEARCH_ADD,
+  HDR_TAG_PARSE_ONBUTTON,
+  HDR_TAG_CLEANER,
 } from '../types';
 
 const initialState = {
@@ -17,6 +17,11 @@ export default function searchReducer(state = initialState, action) {
       return state;
     }
     case HDR_TAG_PARSE_ONKEYDOWN: {
+      if (state.tags.length == 10) {
+        return {
+          ...state,
+        };
+      }
       const { e } = action.payload;
       let queryReturn = [];
       if (e !== '') {
@@ -32,15 +37,12 @@ export default function searchReducer(state = initialState, action) {
               ) {
                 let canPush = true;
                 for (let index = 0; index < state.tags.length; index++) {
-                  if (state.tags[index].tag === tag) {
+                  if (state.tags[index] === tag) {
                     canPush = false;
                   }
                 }
                 if (canPush) {
-                  queryReturn.push({
-                    tag: tag,
-                    removed: false,
-                  });
+                  queryReturn.push(tag);
                 }
               }
             });
@@ -65,23 +67,31 @@ export default function searchReducer(state = initialState, action) {
         ...state,
       };
     }
+    case HDR_TAG_PARSE_ONBUTTON: {
+      const inputRef = action.payload.inputRef;
+      if (inputRef.current.value === '') {
+        return {
+          ...state,
+        };
+      }
+      let queryReturn = [];
+      queryReturn.push(inputRef.current.value);
+      inputRef.current.value = '';
+      const newState = [...new Set(state.tags.concat(queryReturn))];
+      return {
+        ...state,
+        tags: newState,
+      };
+    }
+    case HDR_TAG_CLEANER: {
+      return {
+        ...state,
+        ...{ tags: [] },
+      };
+    }
     case MS_TAG_SEARCH_DELETE: {
       const { tagId } = action.payload;
       state.tags.splice(tagId, 1);
-      return {
-        ...state,
-      };
-    }
-    case MS_TAG_SEARCH_REMOVE: {
-      const { tagId } = action.payload;
-      state.tags[tagId].removed = true;
-      return {
-        ...state,
-      };
-    }
-    case MS_TAG_SEARCH_ADD: {
-      const { tagId } = action.payload;
-      state.tags[tagId].removed = false;
       return {
         ...state,
       };

@@ -1,10 +1,18 @@
-import { GLR_CARD_LOAD, GLR_GET_CARDS, GLR_CARD_NEWLOAD } from '../types';
+import {
+  GLR_CARD_LOAD,
+  GLR_GET_CARDS,
+  GLR_CARD_NEWLOAD,
+  GLR_SEARCH_CARDS,
+  GLR_SEARCH_SET,
+} from '../types';
 
 const initialState = {
   cards: [],
+  searchedCards: [],
   lastKey: '',
   isLoadingCards: true,
   endLoadData: false,
+  isSearch: false,
 };
 
 export default function galleryReducer(state = initialState, action) {
@@ -19,16 +27,37 @@ export default function galleryReducer(state = initialState, action) {
       const newState = {
         cards: concatedCards,
         lastKey: lastKey,
-        isLoadingCards: false,
+        isLoadingCards: true,
         endLoadData: endLoadData,
       };
       return { ...state, ...newState };
     }
     case GLR_CARD_LOAD: {
-      return { ...state, ...{ isLoadingCards: true } };
+      const isLoad =
+        action.payload === undefined ? true : action.payload.isLoad;
+      return { ...state, ...{ isLoadingCards: isLoad } };
     }
     case GLR_CARD_NEWLOAD: {
-      return { ...initialState };
+      return {
+        ...state,
+        cards: [],
+        searchedCards: [],
+        lastKey: '',
+        isLoadingCards: false,
+        endLoadData: false,
+      };
+    }
+    case GLR_SEARCH_CARDS: {
+      return {
+        ...state,
+        ...{ searchedCards: action.payload.queryResult },
+      };
+    }
+    case GLR_SEARCH_SET: {
+      return {
+        ...state,
+        ...{ isSearch: action.payload.isSearch },
+      };
     }
     default: {
       return { ...state };

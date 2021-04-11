@@ -47,7 +47,7 @@ function UploadCardContainer(props) {
   function queryUpdater(e = '') {
     props.ucTagParse(e, tags);
     tags = props.ucTags.length;
-    if (tags < 2 || tags >= 25) {
+    if (tags < 2 || tags >= 10) {
       document.documentElement.style.setProperty('--cinfoLenTags', 'block');
     } else {
       document.documentElement.style.setProperty('--cinfoLenTags', 'none');
@@ -55,8 +55,8 @@ function UploadCardContainer(props) {
   }
 
   function tagKeyDown(e) {
-    if (!(e.target.value.length > 25)) {
-      if (tags < 25 && !(tags >= 25)) {
+    if (!(e.target.value.length > 10)) {
+      if (tags < 10 && !(tags >= 10)) {
         if (tags < 2) {
           document.documentElement.style.setProperty('--cinfoLenTags', 'block');
         } else {
@@ -71,7 +71,7 @@ function UploadCardContainer(props) {
   }
   function tagKeyUp(e) {
     tags = props.ucTags.length;
-    if (tags < 2 || tags >= 25) {
+    if (tags < 2 || tags >= 10) {
       document.documentElement.style.setProperty('--cinfoLenTags', 'block');
     } else {
       document.documentElement.style.setProperty('--cinfoLenTags', 'none');
@@ -120,7 +120,7 @@ function UploadCardContainer(props) {
           className={`tag-container-standard tag-container fa br25`}
           key={index}
         >
-          <p className={`tag-text tag-text-standard fW500`}>{tag.tag}</p>
+          <p className={`tag-text tag-text-standard fW500`}>{tag}</p>
           <button
             className="btn-img-core btn-img-fill"
             onClick={(e) => {
@@ -139,7 +139,7 @@ function UploadCardContainer(props) {
     if (
       fileInfo.fileCode.length !== 0 &&
       props.ucTags.length > 1 &&
-      props.ucTags.length < 26
+      props.ucTags.length < 11
     ) {
       if (!isUploading) {
         setIsUploading(true);

@@ -90,6 +90,21 @@ export const ucCreateCard = (data, history) => {
   return async (dispatch) => {
     let lastId = '';
     let imageURL = '';
+    let infoDateStr = '';
+
+    function formatDate(date) {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+
+      return [year, month, day].join('-');
+    }
+
+    infoDateStr = formatDate(Date.now());
 
     // Get lastId
     const getLastId = await firebase
@@ -144,6 +159,7 @@ export const ucCreateCard = (data, history) => {
         fileName: fileInfo.fileName,
         fileSize: fileInfo.fileSize,
         fileType: fileInfo.fileType,
+        infoDateStr: infoDateStr,
         infoDate: currentTime,
         uid: userInfo.uid,
         infoUsername: userInfo.username,
