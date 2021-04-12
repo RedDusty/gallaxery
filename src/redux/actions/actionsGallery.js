@@ -64,7 +64,6 @@ export const getSearchedCards = (currentCards, searchedCards, lastKey = '') => {
       type: GLR_CARD_LOAD,
     });
     let cards = [];
-
     let lastKeyChecker = lastKey === '' ? 0 : lastKey;
 
     let lastId = lastKeyChecker;

@@ -42,7 +42,8 @@ const GalleryContainer = (props) => {
         if (
           scrollPercent >= 60 ||
           scrollPercent === 'NaN' ||
-          scrollPercent === false
+          scrollPercent === false ||
+          !(document.body.scrollHeight > document.body.clientHeight)
         ) {
           if (props.isLoadingCards) {
             if (!props.isSearch) {
