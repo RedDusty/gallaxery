@@ -9,7 +9,7 @@
   height: 100%;
   &-input-tags {
     height: 25px;
-    border: 2px solid var(--btnBr);
+    border: 0px solid var(--transparent);
     padding: 2px;
   }
   &-a {
@@ -215,10 +215,10 @@
 @media screen and (max-width: 532px) {
   .ucp {
     &-actions {
-      width: calc(100% - 1%);
+      width: 100%;
       border-radius: 0;
-      margin-bottom: 0;
-      padding: 0 1%;
+      margin: 4px 0;
+      padding: 0;
     }
     &-container {
       width: 100%;
@@ -253,6 +253,7 @@
         &-error {
           width: 100%;
           margin: 0;
+          padding: 0;
           border-radius: 0;
         }
       }

@@ -69,7 +69,7 @@ const CardInfo = ({ userInfo, textareaAction, cardTags }) => {
       </div>
       <div className="ucpci-tags-container bgHighAlt br25">{cardTags}</div>
       <p className="ucpci-error-tags ucpci-error ucpci-error-show br15">
-        There should be 2-10 tags.
+        There should be 2-25 tags. Max tag characters - 24.
       </p>
       <div className="uc-a-likes">
         <button className="uc-a-likes-img" tabIndex="21" title="Add like">

@@ -34,12 +34,12 @@ const UploadCard = (props) => {
       {uploadSvg}
       <div className="ucp-actions bgLightAlt fa br25">
         <input
-          className="input-fill brd uc-input-tags bgHigh br25 fS16"
+          className="input-fill brd uc-input-tags bgLight br25 fS16"
           placeholder="Add tags to find this..."
           onChange={props.functions.tagKeyDown}
           onKeyUp={props.functions.tagKeyUp}
           minLength="1"
-          maxLength="20"
+          maxLength="24"
         ></input>
         <button className="btn-core btn-fill fS16 fW600">Create</button>
       </div>
