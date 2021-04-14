@@ -189,7 +189,13 @@
   background-color: var(--transparent);
   margin: 5px;
   padding: 5px;
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  &-act {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
   &-likes {
     display: flex;
     align-items: center;

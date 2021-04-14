@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getCardInfo } from '../../redux/actions/actionsCard';
 import NotFound from '../NotFound';
@@ -6,6 +6,7 @@ import Card from './Card';
 import './card.scss';
 
 function CardContainer(props) {
+  const [isComments, setIsComments] = useState(false);
   useEffect(() => {
     props.getCardInfo(window.location.pathname.substring(6));
   }, []);
@@ -34,6 +35,8 @@ function CardContainer(props) {
         cardTags={cardTags}
         isLoading={props.isLoading}
         cardDelete={props.cardDelete}
+        setIsComments={setIsComments}
+        isComments={isComments}
       />
     </>
   );

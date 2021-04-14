@@ -170,7 +170,7 @@ export const ucCreateCard = (data, history) => {
         id: id,
         height: ucCard.height,
         width: ucCard.width,
-        likeCount: 0,
+        likesCount: 0,
       });
 
     // add card id to profile

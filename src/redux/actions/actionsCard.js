@@ -3,6 +3,11 @@ import {
   CA_CARD_LOAD,
   CA_GET_ISLIKED,
   CA_CARD_DELETE,
+  CA_CARD_COMMENTS,
+  CA_CARD_COMMENTS_LOAD,
+  CA_CARD_COMMENT_DELETE,
+  CA_CARD_TEXTAREA,
+  CA_CARD_COMMENTS_SEND,
 } from '../types';
 
 import firebase from 'firebase/app';
@@ -66,6 +71,7 @@ export const getCardInfo = (key, uid) => {
 
 export const setCardLike = (card, uid) => {
   return async (dispatch) => {
+    dispatch({ type: CA_GET_ISLIKED, payload: { card, type: 'load' } });
     const cardLikeCountRef = await firebase
       .firestore()
       .collection('usersImages')
@@ -110,12 +116,19 @@ export const setCardLike = (card, uid) => {
 
     Object.assign(card, { isLiked: getCardLikeData.data().isLiked });
 
-    dispatch({ type: CA_GET_ISLIKED, payload: { card } });
+    dispatch({ type: CA_GET_ISLIKED, payload: { card, type: 'endLoad' } });
   };
 };
 
 export const getCardIsLiked = (card, uid) => {
   return async (dispatch) => {
+    dispatch({
+      type: CA_GET_ISLIKED,
+      payload: {
+        card,
+        type: 'load',
+      },
+    });
     const getCardLikeData = await firebase
       .firestore()
       .collection('usersImages')
@@ -136,6 +149,7 @@ export const getCardIsLiked = (card, uid) => {
       type: CA_GET_ISLIKED,
       payload: {
         card,
+        type: 'endLoad',
       },
     });
   };
@@ -200,5 +214,158 @@ export const deleteCard = (key, uid, history) => {
     history.push('/profile/' + uid);
 
     dispatch({ type: CA_CARD_DELETE, payload: { process: false } });
+  };
+};
+
+export const getCardComments = (
+  currentComments,
+  cardId,
+  commentsLastKey = ''
+) => {
+  return async (dispatch) => {
+    dispatch({
+      type: CA_CARD_COMMENTS_LOAD,
+    });
+
+    let comments = [];
+    let newLastKey = commentsLastKey;
+    let endCommentsLoadData = false;
+
+    const data = await firebase
+      .firestore()
+      .collection('usersImages')
+      .doc('image' + cardId)
+      .collection('comments')
+      .orderBy('id', 'desc')
+      .startAfter(commentsLastKey)
+      .limit(6)
+      .get();
+
+    data.forEach((doc) => {
+      comments.push({
+        comment: doc.data().comment,
+        id: doc.data().id,
+        infoDate: doc.data().infoDate,
+        infoDateStr: doc.data().infoDateStr,
+        infoPhotoURL: doc.data().infoPhotoURL,
+        infoUsername: doc.data().infoUsername,
+        uid: doc.data().uid,
+      });
+      newLastKey = doc.data().id;
+    });
+    if (comments.length === 0) {
+      endCommentsLoadData = true;
+    } else {
+      endCommentsLoadData = false;
+    }
+    dispatch({
+      type: CA_CARD_COMMENTS,
+      payload: {
+        comments,
+        currentComments,
+        cardId,
+        commentsLastKey: newLastKey,
+        endCommentsLoadData,
+      },
+    });
+  };
+};
+
+export const ccTextArea = (textareaRef, textareaContRef, symbolCountRef) => ({
+  type: CA_CARD_TEXTAREA,
+  payload: {
+    textareaRef,
+    textareaContRef,
+    symbolCountRef,
+  },
+});
+
+export const ccSend = (
+  comment,
+  user,
+  cardId,
+  textareaRef,
+  comments,
+  symbolCountRef,
+  textareaContRef
+) => {
+  return async (dispatch) => {
+    textareaRef.current.value = '';
+    function formatDate(date) {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+
+      return [year, month, day].join('-');
+    }
+    const cardCommentsRef = await firebase
+      .firestore()
+      .collection('usersImages')
+      .doc('image' + cardId)
+      .collection('comments');
+    let getLastId = (await cardCommentsRef.orderBy('id', 'desc').limit(1).get())
+      .docs[0];
+
+    if (getLastId === undefined) {
+      getLastId = 1;
+    } else {
+      getLastId = getLastId.data().id + 1;
+    }
+
+    const newComment = {
+      id: getLastId,
+      comment: comment.slice(0, 250),
+      infoDate: Date.now(),
+      infoDateStr: formatDate(Date.now()),
+      infoPhotoURL: user.photoURL,
+      infoUsername: user.displayName,
+      uid: user.uid,
+    };
+
+    const setNewComment = cardCommentsRef
+      .doc('comment' + getLastId)
+      .set(newComment);
+
+    comments.push(newComment);
+
+    const newCommentsArray = comments;
+
+    dispatch({
+      type: CA_CARD_COMMENTS_SEND,
+      payload: {
+        comments: newCommentsArray,
+        refs: {
+          textareaRef,
+          textareaContRef,
+          symbolCountRef,
+        },
+      },
+    });
+  };
+};
+export const ccDelete = (comment, cardId, comments) => {
+  return async (dispatch) => {
+    dispatch({
+      type: CA_CARD_COMMENT_DELETE,
+      payload: { comments: comments, commentId: comment.id },
+    });
+    const frfrfrf = await firebase
+      .firestore()
+      .collection('usersImages')
+      .doc('image' + cardId)
+      .collection('comments')
+      .doc('comment' + comment.id)
+      .get();
+    const deleteComment = await firebase
+      .firestore()
+      .collection('usersImages')
+      .doc('image' + cardId)
+      .collection('comments')
+      .doc('comment' + comment.id)
+      .delete();
   };
 };

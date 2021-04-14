@@ -11,6 +11,7 @@ const CardActions = ({
   confirmDelete,
   isOpenDelete,
   deleteCardCheck,
+  setIsComments,
 }) => {
   let editBtn = <></>;
   if (userInfo.uid === cardUserInfo.uid) {
@@ -27,14 +28,24 @@ const CardActions = ({
     );
   }
   return (
-    <div className="c-a fa">
-      <CardLike cardInfo={cardInfo} setLike={setLike} userInfo={userInfo} />
-      {editBtn}
-      <CardDelete
-        isOpenDelete={isOpenDelete}
-        confirmDelete={confirmDelete}
-        deleteCardCheck={deleteCardCheck}
-      />
+    <div className="c-a">
+      <div className="c-a-act">
+        <CardLike cardInfo={cardInfo} setLike={setLike} userInfo={userInfo} />
+        {editBtn}
+        <CardDelete
+          isOpenDelete={isOpenDelete}
+          confirmDelete={confirmDelete}
+          deleteCardCheck={deleteCardCheck}
+        />
+      </div>
+      <button
+        className="btn-core btn-fill btn-big"
+        onClick={() => {
+          setIsComments(true);
+        }}
+      >
+        Switch to comments
+      </button>
     </div>
   );
 };

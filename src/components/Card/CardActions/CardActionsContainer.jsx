@@ -27,7 +27,9 @@ function CardActionsContainer(props) {
   }
 
   function setLike(card, uid) {
-    props.setCardLike(card, uid);
+    if (props.likeBlock === false) {
+      props.setCardLike(card, uid);
+    }
   }
 
   return (
@@ -39,6 +41,7 @@ function CardActionsContainer(props) {
       confirmDelete={confirmDelete}
       isOpenDelete={isOpenDelete}
       deleteCardCheck={deleteCardCheck}
+      setIsComments={props.setIsComments}
     />
   );
 }
@@ -48,6 +51,7 @@ const mapStateToProps = (state) => {
     userInfo: state.userReducer,
     cardInfo: state.cardReducer.cardInfo,
     cardUserInfo: state.cardReducer.userInfo,
+    likeBlock: state.cardReducer.likeBlock,
   };
 };
 

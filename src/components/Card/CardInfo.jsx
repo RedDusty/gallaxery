@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import CardActionsContainer from './CardActions/CardActionsContainer';
 
-const CardInfo = ({ cardInfo, cardUserInfo, cardTags }) => {
+const CardInfo = ({ cardInfo, cardUserInfo, cardTags, setIsComments }) => {
   let description = cardInfo.infoDescription;
   let title = cardInfo.infoTitle;
   description =
@@ -55,7 +55,7 @@ const CardInfo = ({ cardInfo, cardUserInfo, cardTags }) => {
         <p className="cvpci-sub-time mtop fW500">{time}</p>
       </div>
       <div className="cvpci-tags-container bgHighAlt br25">{cardTags}</div>
-      <CardActionsContainer />
+      <CardActionsContainer setIsComments={setIsComments} />
     </div>
   );
 };
