@@ -25,10 +25,7 @@ const CardComments = (props) => {
   } else {
     commentsSection = <></>;
   }
-  if (
-    // props.vars.currentUser.uid !== ''
-    true
-  ) {
+  if (props.vars.currentUser.uid !== '') {
     sendSection = (
       <CommentCreator
         refs={{
