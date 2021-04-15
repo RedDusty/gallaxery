@@ -32,6 +32,7 @@ const CardActions = ({
     <div className="c-a">
       <div className="c-a-act">
         <CardLike cardInfo={cardInfo} setLike={setLike} userInfo={userInfo} />
+        {delBtn}
         <button
           className="btn-img-core btn-img-fill btn-img-big"
           onClick={() => {
@@ -45,7 +46,6 @@ const CardActions = ({
             data-btn="btn-icon"
           />
         </button>
-        {delBtn}
         <CardDelete
           isOpenDelete={isOpenDelete}
           confirmDelete={confirmDelete}
