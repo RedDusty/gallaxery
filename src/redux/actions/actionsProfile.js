@@ -45,7 +45,7 @@ export const getProfileUserCards = (uid, lastKey, currentCards) => {
       .where('uid', '==', uid)
       .get();
 
-    let cardIdArray = getCardIdArray.docs[0].data().cardId.reverse();
+    let cardIdArray = getCardIdArray.docs[0].data().cardId;
     let lastId = lastKey;
     const endIndex = lastKey + 4;
     let outOfBounds = false;

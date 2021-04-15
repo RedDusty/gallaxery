@@ -87,12 +87,9 @@ export default function cardReducer(state = initialState, action) {
         ...{ isLoadingCard: true },
       };
     case CA_GET_ISLIKED: {
-      console.log(action.payload.type);
       if (action.payload.type == 'load') {
-        console.log('aa');
         return { ...state, ...{ likeBlock: true } };
       } else if (action.payload.type == 'endLoad') {
-        console.log('bb');
         return {
           ...state,
           ...{ cardInfo: action.payload.card },
@@ -115,6 +112,13 @@ export default function cardReducer(state = initialState, action) {
       }
     }
     case CA_CARD_COMMENTS: {
+      function reverseArr(input) {
+        var ret = new Array();
+        for (var i = input.length - 1; i >= 0; i--) {
+          ret.push(input[i]);
+        }
+        return ret;
+      }
       const currentComments = action.payload.currentComments;
       const comments = action.payload.comments;
       const commentsLastKey = action.payload.commentsLastKey;
@@ -129,7 +133,7 @@ export default function cardReducer(state = initialState, action) {
       concatedComments = concatedComments.sort((a, b) => {
         return a.id - b.id;
       });
-      concatedComments = concatedComments.reverse();
+
       const newState = {
         comments: concatedComments,
         commentsLastKey: commentsLastKey,
@@ -228,7 +232,7 @@ export default function cardReducer(state = initialState, action) {
         ...state,
         ...{
           commentsInfo: {
-            comments: concatedComments.reverse(),
+            comments: concatedComments,
             endCommentsLoadData: state.commentsInfo.endCommentsLoadData,
             isLoadingCardComments: state.commentsInfo.isLoadingCardComments,
             commentsLastKey: state.commentsInfo.commentsLastKey,

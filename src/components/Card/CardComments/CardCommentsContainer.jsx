@@ -28,7 +28,7 @@ function CardCommentsContainer(props) {
         const scrolled = (winScroll / height) * 100;
         setScrollPercent(scrolled.toFixed(0));
         if (
-          scrollPercent <= 60 ||
+          scrollPercent <= 40 ||
           scrollPercent === 'NaN' ||
           scrollPercent === false ||
           !(document.body.scrollHeight > document.body.clientHeight)
@@ -51,11 +51,17 @@ function CardCommentsContainer(props) {
 
   function commentDelete(comment) {
     if (comment.uid === props.userInfo.uid) {
-      props.ccDelete(comment, props.cardId, props.commentsInfo.comments);
+      props.ccDelete(comment, props.cardId, props.comments);
     }
   }
 
-  const comments = props.commentsInfo.comments.reverse().map((comment) => {
+  let commentsArray = props.comments;
+
+  commentsArray = commentsArray.sort((a, b) => {
+    return a.infoDate - b.infoDate;
+  });
+
+  const comments = props.comments.map((comment) => {
     return (
       <Comment
         comment={comment}
@@ -126,6 +132,7 @@ function CardCommentsContainer(props) {
 
 const mapStateToProps = (state) => {
   return {
+    comments: state.cardReducer.commentsInfo.comments,
     commentsInfo: state.cardReducer.commentsInfo,
     commentInput: state.cardReducer.commentInput,
     userInfo: state.userReducer,

@@ -16,8 +16,7 @@
     width: 100%;
     height: max-content;
     overflow-y: auto;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+    border-radius: 25px;
   }
   &-switch {
     margin-bottom: 4px;
@@ -75,17 +74,20 @@
 }
 
 .cc-cr {
-  position: sticky;
-  z-index: 2;
-  top: 0;
   width: calc(100% - 12px);
   display: flex;
   justify-content: space-between;
   background-color: var(--bgComment);
   margin: 6px;
+  &-cont {
+    position: sticky;
+    z-index: 2;
+    bottom: 0;
+    padding: 4px 0;
+  }
   &-input-cont {
     width: 94%;
-    height: 44px;
+    height: 50px;
     background-color: var(--white);
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
@@ -100,12 +102,13 @@
   }
   &-input {
     position: relative;
-    width: calc(100% - 8px);
+    width: calc(100% - 14px);
     height: 36px;
     word-break: break-all;
     overflow: hidden;
     border: 2px solid var(--transparent);
     z-index: 2;
+    padding: 6px;
     background-color: var(--transparent);
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;

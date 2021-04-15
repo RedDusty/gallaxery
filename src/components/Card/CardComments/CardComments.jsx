@@ -25,7 +25,10 @@ const CardComments = (props) => {
   } else {
     commentsSection = <></>;
   }
-  if (props.vars.currentUser.uid !== '') {
+  if (
+    // props.vars.currentUser.uid !== ''
+    true
+  ) {
     sendSection = (
       <CommentCreator
         refs={{
@@ -50,12 +53,12 @@ const CardComments = (props) => {
         Switch to card info
       </button>
       <div className="cc-fill bgHighAlt" ref={props.vars.crFill}>
-        {sendSection}
         <div className="cc-section-comments">
+          {props.functions.checker()}
           {commentsSection}
           {props.vars.comments}
-          {props.functions.checker()}
         </div>
+        {sendSection}
       </div>
     </div>
   );
