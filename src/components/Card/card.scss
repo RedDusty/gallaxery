@@ -34,6 +34,7 @@
     max-width: 1366px;
     margin: 10px 0;
     display: flex;
+    box-shadow: 0 0 10px 1px #66669a;
     &-border {
       display: flex;
       justify-content: space-between;
@@ -240,12 +241,6 @@
     background-color: var(--bgLightTransparent);
     width: 35px;
     height: 35px;
-  }
-  &-del {
-    img {
-      width: 45px;
-      height: 45px;
-    }
   }
 }
 

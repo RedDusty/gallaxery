@@ -31,12 +31,18 @@
     margin: 25px 10px 10px 10px;
   }
   &-p {
+    background-color: var(--white);
     width: 250px;
     height: auto;
     cursor: zoom-in;
     outline: none;
-    &:hover .card-p-top img {
-      filter: brightness(75%);
+    box-shadow: 0 0 20px 0px var(--blackTransparent);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    &:hover {
+      filter: brightness(80%);
     }
     &-top {
       img {
@@ -60,6 +66,7 @@
         white-space: nowrap;
         overflow: hidden;
         position: relative;
+        border-bottom-right-radius: 10px;
         &::after {
           content: '';
           position: absolute;
@@ -70,7 +77,7 @@
           background: linear-gradient(
             to right,
             rgba(255, 255, 255, 0),
-            rgb(255, 255, 255) 100%
+            var(--white) 100%
           );
         }
       }

@@ -2,6 +2,7 @@ import React from 'react';
 import CardLike from './CardLike';
 import delSvg from '../../../images/uploadCard/cardUploadDel.svg';
 import CardDelete from '../../ModalWindows/CardDelete/CardDelete';
+import commentsSvg from '../../../images/gallery/comments.svg';
 
 const CardActions = ({
   cardInfo,
@@ -13,11 +14,11 @@ const CardActions = ({
   deleteCardCheck,
   setIsComments,
 }) => {
-  let editBtn = <></>;
+  let delBtn = <></>;
   if (userInfo.uid === cardUserInfo.uid) {
-    editBtn = (
+    delBtn = (
       <button
-        className="btn-img-core btn-img-fill c-a-del"
+        className="btn-img-core btn-img-fill btn-img-big"
         title="Delete card"
         onClick={() => {
           confirmDelete();
@@ -31,21 +32,26 @@ const CardActions = ({
     <div className="c-a">
       <div className="c-a-act">
         <CardLike cardInfo={cardInfo} setLike={setLike} userInfo={userInfo} />
-        {editBtn}
+        <button
+          className="btn-img-core btn-img-fill btn-img-big"
+          onClick={() => {
+            setIsComments(true);
+          }}
+        >
+          <img
+            src={commentsSvg}
+            alt="Comments"
+            title="Switch to comments"
+            data-btn="btn-icon"
+          />
+        </button>
+        {delBtn}
         <CardDelete
           isOpenDelete={isOpenDelete}
           confirmDelete={confirmDelete}
           deleteCardCheck={deleteCardCheck}
         />
       </div>
-      <button
-        className="btn-core btn-fill btn-big"
-        onClick={() => {
-          setIsComments(true);
-        }}
-      >
-        Switch to comments
-      </button>
     </div>
   );
 };

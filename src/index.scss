@@ -97,6 +97,13 @@
   font-size: 16px;
 }
 
+.btn-img-big {
+  img {
+    width: 45px;
+    height: 45px;
+  }
+}
+
 .btn-img-core {
   background-color: var(--transparent);
   min-height: 30px;

@@ -2,6 +2,7 @@ import React from 'react';
 import Comment from './Comment';
 import CommentCreator from './CommentCreator';
 import galIcon from '../../../images/favicon.svg';
+import backSvg from '../../../images/back.svg';
 
 const CardComments = (props) => {
   let commentsSection = <></>;
@@ -42,12 +43,13 @@ const CardComments = (props) => {
   return (
     <div className="cc">
       <button
-        className="btn-core btn-fill btn-big cc-switch"
+        className="btn-img-core btn-img-fill cc-switch btn-img-big"
         onClick={() => {
           props.functions.setIsComments(false);
         }}
+        title="Back to card info"
       >
-        Switch to card info
+        <img src={backSvg} alt="Back" data-btn="btn-icon" />
       </button>
       <div className="cc-fill bgHighAlt" ref={props.vars.crFill}>
         <div className="cc-section-comments">

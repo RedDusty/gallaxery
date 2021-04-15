@@ -55,12 +55,6 @@ function CardCommentsContainer(props) {
     }
   }
 
-  let commentsArray = props.comments;
-
-  commentsArray = commentsArray.sort((a, b) => {
-    return a.infoDate - b.infoDate;
-  });
-
   const comments = props.comments.map((comment) => {
     return (
       <Comment
