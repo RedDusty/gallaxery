@@ -109,6 +109,12 @@ export const searchCards = (searchEnter, searchBy = 'byTags') => {
         queryResult.push(doc.data().id);
       });
     }
-    dispatch({ type: GLR_SEARCH_CARDS, payload: { queryResult } });
+    queryResult = queryResult.sort((a, b) => {
+      return a - b;
+    });
+    dispatch({
+      type: GLR_SEARCH_CARDS,
+      payload: { queryResult: queryResult.reverse() },
+    });
   };
 };

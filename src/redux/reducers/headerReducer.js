@@ -42,7 +42,7 @@ export default function searchReducer(state = initialState, action) {
                   }
                 }
                 if (canPush) {
-                  queryReturn.push(tag);
+                  queryReturn.push(tag.toLowerCase());
                 }
               }
             });
