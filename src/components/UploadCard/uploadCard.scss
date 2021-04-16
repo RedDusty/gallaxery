@@ -51,15 +51,18 @@
   width: calc(100% - 55px);
   max-width: 1366px;
   height: 50px;
-  margin: 5px;
+  margin: 16px 0;
   padding: 0 15px;
   justify-content: space-between;
+  box-shadow: 0 0 10px 1px #66669a;
 }
 
 .ucp {
   &-container {
+    margin: 16px 0;
     width: calc(100% - 25px);
     max-width: 1366px;
+    box-shadow: 0 0 10px 1px #66669a;
     &-border {
       justify-content: space-between;
       align-items: flex-start;
@@ -217,10 +220,13 @@
     &-actions {
       width: 100%;
       border-radius: 0;
-      margin: 4px 0;
+      margin: 4px 0 0 0;
       padding: 0;
+      box-shadow: none;
     }
     &-container {
+      box-shadow: none;
+      margin-top: 0;
       width: 100%;
       border-radius: 0;
       &-border {

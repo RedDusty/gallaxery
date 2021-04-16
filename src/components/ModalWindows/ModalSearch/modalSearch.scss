@@ -38,32 +38,13 @@
     align-items: flex-start;
     margin: 5px;
   }
-  &-tags {
-    &-panel {
-      margin: 10px;
-      display: flex;
-      flex-flow: row wrap;
-    }
-    &-col {
-      display: flex;
-      flex-flow: column;
-      border-radius: 10px;
-      min-width: 100px;
-      width: auto;
-      margin: 5px;
-    }
-    &-title {
-      margin-top: 2px;
-      margin-bottom: 0;
-      outline: none;
-      padding: 2px;
-    }
-    &-query {
-      margin: 0px 0px 2px 0px;
-      max-height: 50vh;
-      overflow-y: auto;
-      padding: 5px;
-    }
+  &-tags-panel {
+    background-color: var(--bgHighAlt);
+    padding: 5px;
+    margin: 10px;
+    width: max-content;
+    display: flex;
+    flex-flow: row wrap;
   }
   &-search {
     flex-flow: row wrap;

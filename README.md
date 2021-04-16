@@ -1,12 +1,18 @@
-# Pinterest clone
+# Pinterest clone - ReactJS && Firebase
 
-https://gallaxery.vercel.app/
+#### Features:
 
-# Next updates:
+- Google OAUTH
+- Profiles
+- Search
+  - by user
+  - by date
+  - by tags
+- Cards (Pins)
+  - title
+  - description
+  - tags
+  - comments
+  - likes
 
-- `comments?`
-- `API`
-
-### `yarn start`
-
-### `yarn build`
+**Link to production build - [gallaxery.vercel.app](https://gallaxery.vercel.app/)**
