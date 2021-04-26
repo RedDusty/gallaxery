@@ -33,7 +33,7 @@ function UploadCardContainer(props) {
   const { getRootProps, getInputProps, open } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles) => {
-      if (acceptedFiles[0].size > 5242880) {
+      if (acceptedFiles[0].size > 16777216) {
         return <div>Too large!</div>;
       } else {
         props.ucFileUpload(acceptedFiles[0]);
@@ -196,5 +196,5 @@ const mapDispatchToProps = {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(UploadCardContainer);

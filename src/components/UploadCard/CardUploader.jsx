@@ -15,7 +15,7 @@ const CardUploader = ({
           <div className="ucpc-inner fcj br25 fW500">
             <input className="ucpc-input" {...getInputProps()} />
             <p>Drag 'n' drop files here or click "Upload" to choose</p>
-            <p>The file must be 5 MB or less.</p>
+            <p>The file must be 16 MB or less.</p>
             <button
               type="button"
               onClick={open}
